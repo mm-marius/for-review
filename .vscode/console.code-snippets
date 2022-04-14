@@ -1,0 +1,34 @@
+{
+    "Print to console": {
+      "prefix": [
+        "cl",
+        "co",
+        "con",
+        "cons",
+        "conso",
+        "consol",
+        "console",
+        "console.l",
+        "console.lo",
+        "console.log"
+      ],
+      "body": ["console.log($1)"],
+      "description": "Log output to console"
+    },
+    "Print echo": {
+      "prefix": ["ec", "ech", "echo"],
+      "body": ["echo"],
+      "description": "echo console"
+    },
+    "Printr": {
+      "prefix": ["pr", "pri", "prin", "print", "print_", "print_r"],
+      "body": ["print_r($1);"],
+      "description": "console php"
+    },
+    "Echo pre": {
+      "prefix": ["epre"],
+      "body": ["echo '<pre>' . print_r($1, true) . '</pre>';"],
+      "description": "pre php" 
+    }
+  }
+  
