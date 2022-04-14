@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'ed21a8ccbbc72b5c804db14c7d4fec5fae56c6c9',
+        'reference' => '245ebd6a7a54c287d2a302590e9ca3ecc16f2c7f',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,16 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'ed21a8ccbbc72b5c804db14c7d4fec5fae56c6c9',
+            'reference' => '245ebd6a7a54c287d2a302590e9ca3ecc16f2c7f',
+            'dev_requirement' => false,
+        ),
+        'components/font-awesome' => array(
+            'pretty_version' => '6.1.0',
+            'version' => '6.1.0.0',
+            'type' => 'component',
+            'install_path' => __DIR__ . '/../components/font-awesome',
+            'aliases' => array(),
+            'reference' => '9ab1bb955c819daacb3a56ccfacb10fa40b7b50c',
             'dev_requirement' => false,
         ),
         'doctrine/annotations' => array(
@@ -1046,6 +1055,15 @@
             'reference' => 'e80f87d2c9495966768310fc531b487ce64237a2',
             'dev_requirement' => false,
         ),
+        'twbs/bootstrap' => array(
+            'pretty_version' => 'v4.0.0',
+            'version' => '4.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../twbs/bootstrap',
+            'aliases' => array(),
+            'reference' => '8a628b943cf31ca0a002c08af661a95772480225',
+            'dev_requirement' => false,
+        ),
         'twig/extra-bundle' => array(
             'pretty_version' => 'v3.3.8',
             'version' => '3.3.8.0',
@@ -1063,6 +1081,12 @@
             'aliases' => array(),
             'reference' => '8442df056c51b706793adf80a9fd363406dd3674',
             'dev_requirement' => false,
+        ),
+        'twitter/bootstrap' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v4.0.0',
+            ),
         ),
         'webmozart/assert' => array(
             'pretty_version' => '1.10.0',

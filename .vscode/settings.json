@@ -1,60 +1,59 @@
 {
-    "workbench.iconTheme": "material-icon-theme",
-    "window.openFilesInNewWindow": "default",
-    "emmet.showSuggestionsAsSnippets": true,
-    "html.autoClosingTags": true,
-    "editor.minimap.scale": 3,
-    "eslint.migration.2_x": "off",
-    "editor.quickSuggestions": {
-      "comments": true
+  "workbench.iconTheme": "material-icon-theme",
+  "window.openFilesInNewWindow": "default",
+  "emmet.showSuggestionsAsSnippets": true,
+  "html.autoClosingTags": true,
+  "editor.minimap.scale": 3,
+  "eslint.migration.2_x": "off",
+  "editor.quickSuggestions": {
+    "comments": true
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "git.confirmSync": false,
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/public/css"
+    }
+  ],
+  "editor.formatOnSave": true,
+  "todo-tree.tree.showScanModeButton": false,
+  "sonarlint.rules": {
+    "php:S1142": {
+      "level": "off"
     },
-    "emmet.triggerExpansionOnTab": true,
-    "git.confirmSync": false,
-    "liveSassCompile.settings.formats": [
-      {
-        "format": "expanded",
-        "extensionName": ".css",
-        "savePath": "/booking/html/public/css"
-      }
-    ],
-    "editor.formatOnSave": true,
-    "todo-tree.tree.showScanModeButton": false,
-    "sonarlint.rules": {
-      "php:S1142": {
-        "level": "off"
-      },
-      "php:S1448": {
-        "level": "off"
-      }
-    },
-    "files.watcherExclude": {
-      "**/docker/**": true,
-      "**/booking/docker/**": true,
-      "**/booking/html/var/**": true,
-      "**/booking/development/**": true,
-      "**/media/**": true
-    },
-    "[php]": {
-      "editor.defaultFormatter": "kokororin.vscode-phpfmt"
-    },
-    "[scss]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[html]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[twig]": {
-      "editor.defaultFormatter": "mblode.twig-language-2"
-    },
-    "compile-hero.disable-compile-files-on-did-save-code": true
-  }
-  
+    "php:S1448": {
+      "level": "off"
+    }
+  },
+  "files.watcherExclude": {
+    "**/docker/**": true,
+    "**/booking/docker/**": true,
+    "**/booking/html/var/**": true,
+    "**/booking/development/**": true,
+    "**/media/**": true
+  },
+  "[php]": {
+    "editor.defaultFormatter": "kokororin.vscode-phpfmt"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[twig]": {
+    "editor.defaultFormatter": "mblode.twig-language-2"
+  },
+  "compile-hero.disable-compile-files-on-did-save-code": true
+}

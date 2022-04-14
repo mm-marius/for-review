@@ -579,7 +579,13 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
     );
 
     public static $classMap = array (
+        'App\\Controller\\Main\\MainController' => __DIR__ . '/../..' . '/src/Controller/Main/MainController.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
+        'App\\Services\\MobileDetector' => __DIR__ . '/../..' . '/src/Services/MobileDetector.php',
+        'App\\Services\\RoutingService' => __DIR__ . '/../..' . '/src/Services/RoutingService.php',
+        'App\\Services\\SettingService' => __DIR__ . '/../..' . '/src/Services/SettingService.php',
+        'App\\Twig\\TemplateRuntime' => __DIR__ . '/../..' . '/src/Twig/TemplateRuntime.php',
+        'App\\Twig\\TwigExtension' => __DIR__ . '/../..' . '/src/Twig/TwigExtension.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
