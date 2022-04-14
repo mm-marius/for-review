@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '49ffbf894e4bd81c00f8525f31a855dd1b3eb1fb',
+        'reference' => 'ed21a8ccbbc72b5c804db14c7d4fec5fae56c6c9',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '49ffbf894e4bd81c00f8525f31a855dd1b3eb1fb',
+            'reference' => 'ed21a8ccbbc72b5c804db14c7d4fec5fae56c6c9',
             'dev_requirement' => false,
         ),
         'doctrine/annotations' => array(
