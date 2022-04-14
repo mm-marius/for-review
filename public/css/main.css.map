@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,IAAI,CAAC;EACH,gBAAgB,EAAE,GAAG;CACtB",
+    "sources": [
+        "../../templates/StyleGeneral/main.scss",
+        "../../templates/Main/Style/_landingPage.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}
