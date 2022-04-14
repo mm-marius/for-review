@@ -6,7 +6,13 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controller\\Main\\MainController' => $baseDir . '/src/Controller/Main/MainController.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
+    'App\\Services\\MobileDetector' => $baseDir . '/src/Services/MobileDetector.php',
+    'App\\Services\\RoutingService' => $baseDir . '/src/Services/RoutingService.php',
+    'App\\Services\\SettingService' => $baseDir . '/src/Services/SettingService.php',
+    'App\\Twig\\TemplateRuntime' => $baseDir . '/src/Twig/TemplateRuntime.php',
+    'App\\Twig\\TwigExtension' => $baseDir . '/src/Twig/TwigExtension.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Collator' => $vendorDir . '/symfony/intl/Resources/stubs/Collator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
