@@ -8,11 +8,22 @@
 			{% endblock %}
 		</title>
 		{# <link rel="icon" href="{{absolute_url(asset('Assets/General/images/websalesfav.png'))}}"> #}
-		{{ include('styles.html.twig') }}
-		{{ include('Scripts/scriptsHeader.html.twig') }}
+		{% if deployed_status %}
+			{{ include('stylesDeployed.html.twig') }}
+			{{ include('Scripts/scriptsHeaderDeployed.html.twig') }}
+		{% else %}
+			{{ include('styles.html.twig') }}
+			{{ include('Scripts/scriptsHeader.html.twig') }}
+		{% endif %}
+
 	</head>
 	<body>
 		{% block body %}{% endblock %}
-		{{ include('Scripts/scriptsFooter.html.twig') }}
+		{% if deployed_status %}
+			{{ include('Scripts/scriptsFooterDeployed.html.twig') }}
+		{% else %}
+			{{ include('Scripts/scriptsFooter.html.twig') }}
+		{% endif %}
+
 	</body>
 </html>
