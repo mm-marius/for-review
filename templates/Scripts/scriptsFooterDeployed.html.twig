@@ -1,0 +1,11 @@
+{{ include('Scripts/scriptRoutes.html.twig') }}
+<script src="{{ absolute_url(asset('public/Assets/LandingPage/Scripts/script.js?v=' ~ build_version)) }}"></script>
+
+<script src="{{ absolute_url(asset('public/Assets/Vendors/AnyPicker/src/anypicker.js?v=' ~ build_version)) }}"></script>
+<script src="{{ absolute_url(asset('public/Assets/Vendors/AnyPicker/src/i18n/anypicker-i18n.js?v=' ~ build_version)) }}"></script>
+
+<script>
+	$j(function () {
+$j(document).trigger("_page_ready");
+});
+</script>
