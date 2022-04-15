@@ -10,7 +10,7 @@ use Doctrine\DBAL\Schema\AbstractAsset;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\Generator\Exception\NoChangesDetected;
-use Doctrine\Migrations\Provider\SchemaProvider;
+use Doctrine\Migrations\Provider\SchemaProviderInterface;
 
 use function preg_match;
 use function strpos;
@@ -24,32 +24,35 @@ use function substr;
  */
 class DiffGenerator
 {
-    private DBALConfiguration $dbalConfiguration;
+    /** @var DBALConfiguration */
+    private $dbalConfiguration;
 
-    /** @var AbstractSchemaManager<AbstractPlatform> */
-    private AbstractSchemaManager $schemaManager;
+    /** @var AbstractSchemaManager */
+    private $schemaManager;
 
-    private SchemaProvider $schemaProvider;
+    /** @var SchemaProviderInterface */
+    private $schemaProvider;
 
-    private AbstractPlatform $platform;
+    /** @var AbstractPlatform */
+    private $platform;
 
-    private Generator $migrationGenerator;
+    /** @var Generator */
+    private $migrationGenerator;
 
-    private SqlGenerator $migrationSqlGenerator;
+    /** @var SqlGenerator */
+    private $migrationSqlGenerator;
 
-    private SchemaProvider $emptySchemaProvider;
+    /** @var SchemaProviderInterface */
+    private $emptySchemaProvider;
 
-    /**
-     * @param AbstractSchemaManager<AbstractPlatform> $schemaManager
-     */
     public function __construct(
         DBALConfiguration $dbalConfiguration,
         AbstractSchemaManager $schemaManager,
-        SchemaProvider $schemaProvider,
+        SchemaProviderInterface $schemaProvider,
         AbstractPlatform $platform,
         Generator $migrationGenerator,
         SqlGenerator $migrationSqlGenerator,
-        SchemaProvider $emptySchemaProvider
+        SchemaProviderInterface $emptySchemaProvider
     ) {
         $this->dbalConfiguration     = $dbalConfiguration;
         $this->schemaManager         = $schemaManager;
@@ -64,7 +67,7 @@ class DiffGenerator
      * @throws NoChangesDetected
      */
     public function generate(
-        string $fqcn,
+        string $versionNumber,
         ?string $filterExpression,
         bool $formatted = false,
         int $lineLength = 120,
@@ -89,21 +92,15 @@ class DiffGenerator
 
         $toSchema = $this->createToSchema();
 
-        $comparator = $this->schemaManager->createComparator();
-
-        $upSql = $comparator->compareSchemas($fromSchema, $toSchema)->toSql($this->platform);
-
         $up = $this->migrationSqlGenerator->generate(
-            $upSql,
+            $fromSchema->getMigrateToSql($toSchema, $this->platform),
             $formatted,
             $lineLength,
             $checkDbPlatform
         );
 
-        $downSql = $comparator->compareSchemas($toSchema, $fromSchema)->toSql($this->platform);
-
         $down = $this->migrationSqlGenerator->generate(
-            $downSql,
+            $fromSchema->getMigrateFromSql($toSchema, $this->platform),
             $formatted,
             $lineLength,
             $checkDbPlatform
@@ -114,7 +111,7 @@ class DiffGenerator
         }
 
         return $this->migrationGenerator->generateMigration(
-            $fqcn,
+            $versionNumber,
             $up,
             $down
         );

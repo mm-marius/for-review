@@ -11,20 +11,25 @@ use Doctrine\DBAL\Schema\Schema;
  *
  * @internal
  *
- * @see Doctrine\Migrations\DbalMigrator
- * @see Doctrine\Migrations\Version\DbalExecutor
+ * @see Doctrine\Migrations\Migrator
+ * @see Doctrine\Migrations\Version\Executor
  */
 class MigratorConfiguration
 {
-    private bool $dryRun = false;
+    /** @var bool */
+    private $dryRun = false;
 
-    private bool $timeAllQueries = false;
+    /** @var bool */
+    private $timeAllQueries = false;
 
-    private bool $noMigrationException = false;
+    /** @var bool */
+    private $noMigrationException = false;
 
-    private bool $allOrNothing = false;
+    /** @var bool */
+    private $allOrNothing = false;
 
-    private ?Schema $fromSchema = null;
+    /** @var Schema|null */
+    private $fromSchema;
 
     public function isDryRun(): bool
     {

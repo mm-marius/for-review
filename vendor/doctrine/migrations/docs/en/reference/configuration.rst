@@ -24,103 +24,62 @@ Now, in the root of your project place a file named ``migrations.php``, ``migrat
         <?php
 
         return [
-            'table_storage' => [
-                'table_name' => 'doctrine_migration_versions',
-                'version_column_name' => 'version',
-                'version_column_length' => 1024,
-                'executed_at_column_name' => 'executed_at',
-                'execution_time_column_name' => 'execution_time',
-            ],
-
-            'migrations_paths' => [
-                'MyProject\Migrations' => '/data/doctrine/migrations/lib/MyProject/Migrations',
-                'MyProject\Component\Migrations' => './Component/MyProject/Migrations',
-            ],
-
+            'name' => 'My Project Migrations',
+            'migrations_namespace' => 'MyProject\Migrations',
+            'table_name' => 'doctrine_migration_versions',
+            'column_name' => 'version',
+            'column_length' => 14,
+            'executed_at_column_name' => 'executed_at',
+            'migrations_directory' => '/data/doctrine/migrations-docs-example/lib/MyProject/Migrations',
             'all_or_nothing' => true,
-            'transactional' => true,
             'check_database_platform' => true,
-            'organize_migrations' => 'none',
-            'connection' => null,
-            'em' => null,
         ];
 
     .. code-block:: yaml
 
-        table_storage:
-           table_name: doctrine_migration_versions
-           version_column_name: version
-           version_column_length: 1024
-           executed_at_column_name: executed_at
-           execution_time_column_name: execution_time
-
-        migrations_paths:
-           'MyProject\Migrations': /data/doctrine/migrations/lib/MyProject/Migrations
-           'MyProject\Component\Migrations': ./Component/MyProject/Migrations
-
+        name: "My Project Migrations"
+        migrations_namespace: "MyProject\\Migrations"
+        table_name: "doctrine_migration_versions"
+        column_name: "version"
+        column_length: 14
+        executed_at_column_name: "executed_at"
+        migrations_directory: "/data/doctrine/migrations-docs-example/lib/MyProject/Migrations"
         all_or_nothing: true
-        transactional: true
         check_database_platform: true
-        organize_migrations: none
-
-        connection: null
-        em: null
 
     .. code-block:: xml
 
         <?xml version="1.0" encoding="UTF-8"?>
-        <doctrine-migrations xmlns="http://doctrine-project.org/schemas/migrations/configuration/3.0"
+        <doctrine-migrations xmlns="http://doctrine-project.org/schemas/migrations/configuration"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://doctrine-project.org/schemas/migrations/configuration/3.0
-                            http://doctrine-project.org/schemas/migrations/configuration-3.0.xsd">
+              xsi:schemaLocation="http://doctrine-project.org/schemas/migrations/configuration
+                            http://doctrine-project.org/schemas/migrations/configuration.xsd">
 
-            <connection>default</connection>
-            <em>default</em>
+            <name>My Project Migrations</name>
 
-            <storage>
-                <table-storage
-                        table-name="doctrine_migration_versions"
-                        version-column-name="version"
-                        version-column-length="1024"
-                        executed-at-column-name="executed_at"
-                        execution-time-column-name="execution_time"
-                />
-            </storage>
-            <migrations-paths>
-                <path namespace="MyProject\Migrations">/data/doctrine/migrations/lib/MyProject/Migrations</path>
-                <path namespace="MyProject\Component\Migrations">./Component/MyProject/Migrations</path>
-            </migrations-paths>
+            <migrations-namespace>MyProject\Migrations</migrations-namespace>
+
+            <table name="doctrine_migration_versions" column="version" column_length="14" executed_at_column="executed_at" />
+
+            <migrations-directory>/data/doctrine/migrations-docs-example/lib/MyProject/Migrations</migrations-directory>
 
             <all-or-nothing>true</all-or-nothing>
-            <transactional>true</transactional>
 
             <check-database-platform>true</check-database-platform>
-            <organize_migrations>none</organize_migrations>
         </doctrine-migrations>
 
     .. code-block:: json
 
         {
-            "table_storage": {
-               "table_name": "doctrine_migration_versions",
-               "version_column_name": "version",
-               "version_column_length": 1024,
-               "executed_at_column_name": "executed_at",
-               "execution_time_column_name": "execution_time"
-            },
-
-            "migrations_paths": {
-               "MyProject\\Migrations": "/data/doctrine/migrations/lib/MyProject/Migrations",
-               "MyProject\\Component\\Migrations": "./Component/MyProject/Migrations"
-            },
-
+            "name": "My Project Migrations",
+            "migrations_namespace": "MyProject\Migrations",
+            "table_name": "doctrine_migration_versions",
+            "column_name": "version",
+            "column_length": 14,
+            "executed_at_column_name": "executed_at",
+            "migrations_directory": "/data/doctrine/migrations-docs-example/lib/MyProject/Migrations",
             "all_or_nothing": true,
-            "transactional": true,
-            "check_database_platform": true,
-            "organize_migrations": "none",
-
-            "connection": null,
-            "em": null
+            "check_database_platform": true
         }
 
 Please note that if you want to use the YAML configuration option, you will need to install the ``symfony/yaml`` package with composer:
@@ -134,41 +93,25 @@ Here are details about what each configuration option does:
 +----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
 | Name                       | Required   | Default                      | Description                                                                      |
 +============================+============+==============================+==================================================================================+
-| migrations_paths<string, string>       | yes        | null             | The PHP namespace your migration classes are located under and the path to a directory where to look for migration classes.                     |
+| name                       | no         | Doctrine Database Migrations | The name that shows at the top of the migrations console application.            |
 +----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| table_storage              | no         |                              | Used by doctrine migrations to track the currently executed migrations           |
+| migrations_namespace       | yes        | null                         | The PHP namespace your migration classes are located under.                      |
++----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
+| table_name                 | no         | doctrine_migration_versions  | The name of the table to track executed migrations in.                           |
++----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
+| column_name                | no         | version                      | The name of the column which stores the version name.                            |
++----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
+| column_length              | no         | 14                           | The length of the column which stores the version name.                          |
++----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
+| executed_at_column_name    | no         | executed_at                  | The name of the column which stores the date that a migration was executed.      |
++----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
+| migrations_directory       | yes        | null                         | The path to a directory where to look for migration classes.                     |
 +----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
 | all_or_nothing             | no         | false                        | Whether or not to wrap multiple migrations in a single transaction.              |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| transactional              | no         | true                         | Whether or not to wrap migrations in a single transaction.                       |
-|                            |            |                              |                                                                                  |
 +----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
 | migrations                 | no         | []                           | Manually specify the array of migration versions instead of finding migrations.  |
 +----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
 | check_database_platform    | no         | true                         | Whether to add a database platform check at the beginning of the generated code. |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| organize_migrations        | no         | ``none``                     | Whether to organize migration classes under year (``year``) or year and month (``year_and_month``) subdirectories. |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| connection                 | no         | null                         | The named connection to use (available only when ConnectionRegistryConnection is used). |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| em                         | no         | null                         | The named entity manager to use (available only when ManagerRegistryEntityManager is used). |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-
-
-Here the possible options for ``table_storage``:
-
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| Name                       | Required   | Default                      | Description                                                                      |
-+============================+============+==============================+==================================================================================+
-| table_name                 | no         | doctrine_migration_versions  | The name of the table to track executed migrations in.                           |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| version_column_name        | no         | version                      | The name of the column which stores the version name.                            |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| version_column_length      | no         | 1024                         | The length of the column which stores the version name.                          |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| executed_at_column_name    | no         | executed_at                  | The name of the column which stores the date that a migration was executed.      |
-+----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
-| execution_time_column_name | no         | execution_time               | The name of the column which stores how long a migration took (milliseconds).    |
 +----------------------------+------------+------------------------------+----------------------------------------------------------------------------------+
 
 Manually Providing Migrations
@@ -187,7 +130,10 @@ classes using the ``migrations`` configuration setting:
             // ..
 
             'migrations' => [
-                'MyProject\Migrations\NewMigration',
+                'migration1' => [
+                    'version' => '1',
+                    'class' => 'MyProject\Migrations\NewMigration',
+                ],
             ],
         ];
 
@@ -196,7 +142,9 @@ classes using the ``migrations`` configuration setting:
         // ...
 
         migrations:
-            - "MyProject\Migrations\NewMigration"
+            migration1:
+                version: "1"
+                class: "MyProject\Migrations\NewMigration"
 
     .. code-block:: xml
 
@@ -209,7 +157,7 @@ classes using the ``migrations`` configuration setting:
             // ...
 
             <migrations>
-                <migration class="MyProject\Migrations\NewMigration" />
+                <migration class="MyProject\Migrations\NewMigration" version="1" />
             </migrations>
         </doctrine-migrations>
 
@@ -218,9 +166,13 @@ classes using the ``migrations`` configuration setting:
         {
             // ...
 
-            "migrations": [
-                "DoctrineMigrations\NewMigration"
-            ]
+            "migrations": {
+                    "migration1": {
+                        "version": 1,
+                        "class": "DoctrineMigrations\NewMigration"
+                    }
+                }
+            }
         }
 
 All or Nothing Transaction
@@ -232,13 +184,6 @@ All or Nothing Transaction
 
 When using the ``all_or_nothing`` option, multiple migrations ran at the same time will be wrapped in a single
 transaction. If one migration fails, all migrations will be rolled back
-
-Using or not using transactions
--------------------------------
-
-By default, migrations are transactional, meaning code in a migration
-is wrapped in a transaction.
-Setting ``transactional`` to ``false`` will disable that.
 
 From the Command Line
 ~~~~~~~~~~~~~~~~~~~~~
@@ -287,23 +232,6 @@ the following command:
 
     $ mysqladmin create migrations_docs_example
 
-
-If you have already a DBAL connection available in your application, ``migrations-db.php`` can return it directly:
-
-.. code-block:: php
-
-    <?php
-    use Doctrine\DBAL\DriverManager;
-
-    return DriverManager::getConnection([
-        'dbname' => 'migrations_docs_example',
-        'user' => 'root',
-        'password' => '',
-        'host' => 'localhost',
-        'driver' => 'pdo_mysql',
-    ]);
-
-
 Advanced
 ~~~~~~~~
 
@@ -321,16 +249,16 @@ out of the root of your project.
     require 'vendor/autoload.php';
 
     use Doctrine\DBAL\DriverManager;
-    use Doctrine\Migrations\Configuration\Connection\ExistingConnection;
-    use Doctrine\Migrations\Configuration\Migration\PhpFile;
-    use Doctrine\Migrations\DependencyFactory;
+    use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
+    use Symfony\Component\Console\Helper\HelperSet;
 
-    $config = new PhpFile('migrations.php'); // Or use one of the Doctrine\Migrations\Configuration\Configuration\* loaders
+    $dbParams = include 'migrations-db.php';
 
-    $conn = DriverManager::getConnection(['driver' => 'pdo_sqlite', 'memory' => true]);
+    $connection = DriverManager::getConnection($dbParams);
 
-    return DependencyFactory::fromConnection($config, new ExistingConnection($conn));
-
+    return new HelperSet([
+        'db' => new ConnectionHelper($connection),
+    ]);
 
 The above setup assumes you are not using the ORM. If you want to use the ORM, first require it in your project
 with composer:
@@ -347,20 +275,24 @@ Now update your ``cli-config.php`` in the root of your project to look like the 
 
     require 'vendor/autoload.php';
 
-    use Doctrine\ORM\EntityManager;
+    use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
+    use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
     use Doctrine\ORM\Tools\Setup;
-    use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
-    use Doctrine\Migrations\DependencyFactory;
-
-    $config = new PhpFile('migrations.php'); // Or use one of the Doctrine\Migrations\Configuration\Configuration\* loaders
+    use Doctrine\ORM\EntityManager;
+    use Symfony\Component\Console\Helper\HelperSet;
 
     $paths = [__DIR__.'/lib/MyProject/Entities'];
     $isDevMode = true;
 
-    $ORMconfig = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-    $entityManager = EntityManager::create(['driver' => 'pdo_sqlite', 'memory' => true], $ORMconfig);
+    $dbParams = include 'migrations-db.php';
 
-    return DependencyFactory::fromEntityManager($config, new ExistingEntityManager($entityManager));
+    $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+    $entityManager = EntityManager::create($dbParams, $config);
+
+    return new HelperSet([
+        'em' => new EntityManagerHelper($entityManager),
+        'db' => new ConnectionHelper($entityManager->getConnection()),
+    ]);
 
 Make sure to create the directory where your ORM entities will be located:
 

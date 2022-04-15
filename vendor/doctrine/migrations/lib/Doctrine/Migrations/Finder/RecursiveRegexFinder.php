@@ -16,19 +16,8 @@ use const DIRECTORY_SEPARATOR;
 /**
  * The RecursiveRegexFinder class recursively searches the given directory for migrations.
  */
-final class RecursiveRegexFinder extends Finder
+final class RecursiveRegexFinder extends Finder implements MigrationDeepFinder
 {
-    private string $pattern;
-
-    public function __construct(?string $pattern = null)
-    {
-        $this->pattern = $pattern ?? sprintf(
-            '#^.+\\%s[^\\%s]+\\.php$#i',
-            DIRECTORY_SEPARATOR,
-            DIRECTORY_SEPARATOR
-        );
-    }
-
     /**
      * @return string[]
      */
@@ -56,7 +45,11 @@ final class RecursiveRegexFinder extends Finder
 
     private function getPattern(): string
     {
-        return $this->pattern;
+        return sprintf(
+            '#^.+\\%sVersion[^\\%s]{1,255}\\.php$#i',
+            DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR
+        );
     }
 
     /**

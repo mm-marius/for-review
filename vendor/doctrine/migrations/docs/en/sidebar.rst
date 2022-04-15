@@ -11,5 +11,3 @@
    reference/version-numbers
    reference/integrations
    reference/custom-integration
-
-   explanation/implicit-commits
