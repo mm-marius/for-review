@@ -7,12 +7,10 @@ namespace Doctrine\Migrations;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Migrations\Generator\FileBuilder;
-use Doctrine\Migrations\Query\Query;
-use Psr\Log\LoggerInterface;
 
 use function file_put_contents;
 use function is_dir;
-use function realpath;
+use function sprintf;
 
 /**
  * The FileQueryWriter class is responsible for writing migration SQL queries to a file on disk.
@@ -21,20 +19,22 @@ use function realpath;
  */
 final class FileQueryWriter implements QueryWriter
 {
-    private FileBuilder $migrationFileBuilder;
+    /** @var OutputWriter|null */
+    private $outputWriter;
 
-    private LoggerInterface $logger;
+    /** @var FileBuilder */
+    private $migrationFileBuilder;
 
     public function __construct(
-        FileBuilder $migrationFileBuilder,
-        LoggerInterface $logger
+        OutputWriter $outputWriter,
+        FileBuilder $migrationFileBuilder
     ) {
+        $this->outputWriter         = $outputWriter;
         $this->migrationFileBuilder = $migrationFileBuilder;
-        $this->logger               = $logger;
     }
 
     /**
-     * @param array<string,Query[]> $queriesByVersion
+     * @param mixed[] $queriesByVersion
      */
     public function write(
         string $path,
@@ -42,14 +42,18 @@ final class FileQueryWriter implements QueryWriter
         array $queriesByVersion,
         ?DateTimeInterface $now = null
     ): bool {
-        $now ??= new DateTimeImmutable();
+        $now = $now ?? new DateTimeImmutable();
 
         $string = $this->migrationFileBuilder
             ->buildMigrationFile($queriesByVersion, $direction, $now);
 
         $path = $this->buildMigrationFilePath($path, $now);
 
-        $this->logger->info('Writing migration file to "{path}"', ['path' => $path]);
+        if ($this->outputWriter !== null) {
+            $this->outputWriter->write(
+                "\n" . sprintf('Writing migration file to "<info>%s</info>"', $path)
+            );
+        }
 
         return file_put_contents($path, $string) !== false;
     }

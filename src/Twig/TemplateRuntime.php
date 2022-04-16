@@ -19,6 +19,7 @@ class TemplateRuntime implements RuntimeExtensionInterface
     private $route;
 
     const SESSION_LOGO = 'logoEvent';
+    const SESSION_CLIENT_CODE = 'clientCode';
 
     public function __construct(ManagerRegistry $doctrine, RequestStack $request, RoutingService $router, ParameterBagInterface $params)
     {

@@ -43,17 +43,17 @@ the ORM. To test this functionality, create a new ``User`` entity located at ``l
             $this->id = $id;
         }
 
-        public function getId(): ?int
+        public function getId() : ?int
         {
             return $this->id;
         }
 
-        public function setUsername(string $username): void
+        public function setUsername(string $username) : void
         {
             $this->username = $username;
         }
 
-        public function getUsername(): ?string
+        public function getUsername() : ?string
         {
             return $this->username;
         }
@@ -66,9 +66,9 @@ Now when you run the ``diff`` command it will generate a migration which will cr
     $ ./vendor/bin/doctrine-migrations diff
     Generated new migration class to "/data/doctrine/migrations-docs-example/lib/MyProject/Migrations/Version20180601215504.php"
 
-    To run just this migration for testing purposes, you can use migrations:execute --up 'MyProject\Migrations\Version20180601215504'
+    To run just this migration for testing purposes, you can use migrations:execute --up 20180601215504
 
-    To revert the migration you can use migrations:execute --down 'MyProject\Migrations\Version20180601215504'
+    To revert the migration you can use migrations:execute --down 20180601215504
 
 Take a look at the generated migration:
 
@@ -95,12 +95,12 @@ Take a look at the generated migration:
      */
     final class Version20180601215504 extends AbstractMigration
     {
-        public function getDescription(): string
+        public function getDescription() : string
         {
             return '';
         }
 
-        public function up(Schema $schema): void
+        public function up(Schema $schema) : void
         {
             // this up() migration is auto-generated, please modify it to your needs
             $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
@@ -109,7 +109,7 @@ Take a look at the generated migration:
             $this->addSql('DROP TABLE example_table');
         }
 
-        public function down(Schema $schema): void
+        public function down(Schema $schema) : void
         {
             // this down() migration is auto-generated, please modify it to your needs
             $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
@@ -129,9 +129,9 @@ Now you are ready to execute your diff migration:
 
 
     WARNING! You are about to execute a database migration that could result in schema changes and data loss. Are you sure you wish to continue? (y/n)y
-    Migrating up to MyProject\Migrations\Version20180601215504 from MyProject\Migrations\Version20180601193057
+    Migrating up to 20180601215504 from 20180601193057
 
-      ++ migrating MyProject\Migrations\Version20180601215504
+      ++ migrating 20180601215504
 
          -> CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB
          -> DROP TABLE example_table
@@ -216,10 +216,9 @@ It simply takes a schema object to its constructor and returns it from ``createS
     $provider->createSchema() === $schema; // true
 
 By default the Doctrine Migrations command line tool will only add the diff command if the ORM is present.
-Without the ORM, you'll have to add the diff command to your console application manually and set your
-custom schema provider to the dependency factory, which will be passed to the the diff command's constructor.
-Take a look at the :ref:`Custom Integration <custom-integration>` chapter for information on how to setup a
-custom console application.
+Without the ORM, you'll have to add the diff command to your console application manually, passing in your schema
+provider implementation to the diff command's constructor. Take a look at the :ref:`Custom Integration <custom-integration>`
+chapter for information on how to setup a custom console application.
 
 .. code-block:: php
 
@@ -228,10 +227,9 @@ custom console application.
     use Doctrine\Migrations\Tools\Console\Command\DiffCommand;
 
     $schemaProvider = new CustomSchemaProvider();
-    $dependencyFactory->setDefinition(SchemaProvider::class, static fn () => $schemaProvider);
 
     /** @var Symfony\Component\Console\Application */
-    $cli->add(new DiffCommand($dependencyFactory);
+    $cli->add(new DiffCommand($schemaProvider));
 
     // ...
 
@@ -245,11 +243,11 @@ Formatted SQL
 -------------
 
 You can optionally pass the ``--formatted`` option if you want the dumped SQL to be formatted. This option uses
-the ``doctrine/sql-formatter`` package so you will need to install this package for it to work:
+the ``jdorn/sql-formatter`` package so you will need to install this package for it to work:
 
 .. code-block:: sh
 
-    $ composer require doctrine/sql-formatter
+    $ composer require jdorn/sql-formatter
 
 Ignoring Custom Tables
 ----------------------

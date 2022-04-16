@@ -6,13 +6,10 @@ namespace Doctrine\Migrations\Generator;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\Migrations\Configuration\Configuration;
-use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
-use Doctrine\SqlFormatter\NullHighlighter;
-use Doctrine\SqlFormatter\SqlFormatter;
+use SqlFormatter;
 
 use function array_unshift;
 use function count;
-use function get_class;
 use function implode;
 use function sprintf;
 use function stripos;
@@ -27,9 +24,11 @@ use function var_export;
  */
 class SqlGenerator
 {
-    private Configuration $configuration;
+    /** @var Configuration */
+    private $configuration;
 
-    private AbstractPlatform $platform;
+    /** @var AbstractPlatform */
+    private $platform;
 
     public function __construct(Configuration $configuration, AbstractPlatform $platform)
     {
@@ -46,12 +45,8 @@ class SqlGenerator
     ): string {
         $code = [];
 
-        $storageConfiguration = $this->configuration->getMetadataStorageConfiguration();
         foreach ($sql as $query) {
-            if (
-                $storageConfiguration instanceof TableMetadataStorageConfiguration
-                && stripos($query, $storageConfiguration->getTableName()) !== false
-            ) {
+            if (stripos($query, $this->configuration->getMigrationsTableName()) !== false) {
                 continue;
             }
 
@@ -59,7 +54,7 @@ class SqlGenerator
                 $maxLength = $lineLength - 18 - 8; // max - php code length - indentation
 
                 if (strlen($query) > $maxLength) {
-                    $query = (new SqlFormatter(new NullHighlighter()))->format($query);
+                    $query = SqlFormatter::format($query, false);
                 }
             }
 
@@ -67,20 +62,14 @@ class SqlGenerator
         }
 
         if (count($code) !== 0 && $checkDbPlatform && $this->configuration->isDatabasePlatformChecked()) {
-            $currentPlatform = '\\' . get_class($this->platform);
+            $currentPlatform = $this->platform->getName();
 
             array_unshift(
                 $code,
                 sprintf(
-                    <<<'PHP'
-$this->abortIf(
-    !$this->connection->getDatabasePlatform() instanceof %s,
-    "Migration can only be executed safely on '%s'."
-);
-PHP
-                    ,
-                    $currentPlatform,
-                    $currentPlatform
+                    '$this->abortIf($this->connection->getDatabasePlatform()->getName() !== %s, %s);',
+                    var_export($currentPlatform, true),
+                    var_export(sprintf("Migration can only be executed safely on '%s'.", $currentPlatform), true)
                 ),
                 ''
             );
