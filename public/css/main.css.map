@@ -1,9 +1,10 @@
 {
     "version": 3,
-    "mappings": "ACAA,AAAA,IAAI,CAAC;EACH,gBAAgB,EAAE,GAAG;CACtB",
+    "mappings": "",
     "sources": [
         "../../templates/StyleGeneral/main.scss",
-        "../../templates/Main/Style/_landingPage.scss"
+        "../../templates/StyleGeneral/colorConfig.scss",
+        "../../templates/StyleGeneral/generalConfig.scss"
     ],
     "names": [],
     "file": "main.css"
