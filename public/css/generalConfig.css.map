@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../templates/StyleGeneral/generalConfig.scss"
+    ],
+    "names": [],
+    "file": "generalConfig.css"
+}

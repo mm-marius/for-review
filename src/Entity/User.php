@@ -193,7 +193,7 @@ class User implements UserInterface
         $user->setState($isData ? ($request['state'] ?? 'Italia') : $request->request->get('state', 'Italia'));
         $user->setZipCode($isData ? $request['zipCode'] : $request->request->get('zipCode'));
         $user->setPhone($isData ? $request['phone'] : $request->request->get('phone'));
-        $user->setNationCode($isData ? ($request['nationCode'] ?? 'IT') : $request->request->get('nationCode', 'IT'));
+        // $user->setNationCode($isData ? ($request['nationCode'] ?? 'IT') : $request->request->get('nationCode', 'IT'));
         $user->setIsAgency($isData ? ($request['isAgency'] ?: false): ($request->request->get('isAgency') ?: false));
         $clientCode = $isData ? ($request['clientCode'] ?? true) : $request->request->get('clientCode') ?? null;
         $clientCode && $user->setClientCode($clientCode);
@@ -242,7 +242,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_ADMIN';
 
         return array_unique($roles);
     }
@@ -526,17 +526,17 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNationCode(): ?string
-    {
-        return $this->nationCode;
-    }
+    // public function getNationCode(): ?string
+    // {
+    //     return $this->nationCode;
+    // }
 
-    public function setNationCode(string $nationCode): self
-    {
-        $this->nationCode = $nationCode;
+    // public function setNationCode(string $nationCode): self
+    // {
+    //     $this->nationCode = $nationCode;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getClientCode(SettingService $settings): ?string
     {

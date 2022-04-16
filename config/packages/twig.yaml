@@ -3,6 +3,11 @@ twig:
     globals:
         build_version: "1.0.0"
         deployed_status: false
+        env_languages:
+            - code: "ro"
+              label: Romanian
+            - code: "en"
+              label: "english"
 when@test:
     twig:
         strict_variables: true

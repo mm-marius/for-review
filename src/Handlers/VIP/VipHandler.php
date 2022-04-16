@@ -2,10 +2,10 @@
 
 namespace App\Handlers\VIP;
 
+use App\Entity\FormField\Settings;
 use App\Entity\User;
 use App\Handlers\VIP\Models\UserVIP;
 use App\Services\ClientCall;
-use App\Services\Helpers\LogHelper;
 use App\Services\ResponseReq;
 use App\Services\SettingService;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -29,40 +29,6 @@ class VipHandler
         $this->host = $dataConnection['host'] . '/standard-atlante-plus/rest/';
         $this->urls = [
             // self::URL_SEARCH_HOTELS => $this->host . 'ricercaListini/ricercaHOT',
-            // self::URL_SEARCH_SERVICES => $this->host . 'ricercaListini/ricercaSER',
-            // self::URL_HOTEL_DETAILS => $this->host . 'ricercaListini/prelevaDatiStaticiHOT',
-            // self::URL_HOTEL_SERVICES => $this->host . 'ricercaListini/prelevaCaratteristicheHOT',
-            // self::URL_HOTEL_TYPES => $this->host . 'hotel/getStruttureHotel',
-            // self::URL_CANCELLATION_POLICY => $this->host . 'ricercaListini/prelevaCancellationPolicyHOT',
-            // self::URL_TRANSFER_PICK_UP => $this->host . 'ricercaListini/prelevaPuntiPickUpDropOff',
-            // self::URL_EXTRAS => $this->host . 'ricercaListini/valorizzaSuppFacHOT',
-            // self::URL_MANAGE_USER => $this->host . 'clienti/gestioneClienti',
-            // self::URL_GET_PRIVACY_FLAGS => $this->host . 'privacy/retrieveFlags',
-            // self::URL_DOSSIER_HANDLE => $this->host . 'prenotaListini/gestionePratica',
-            // self::URL_DOSSIER_MODIFY => $this->host . 'operazioniSuPratiche/modificaStatoPratica',
-            // self::URL_NOTA_CONTABILE => $this->host . 'pratiche/gestioneIncassi',
-            // self::URL_PRINT_DOC => $this->host . 'pratiche/stampaDocPratica',
-            // self::URL_PRINT_QUOTATION => $this->host . 'preventivoVIP/pdfPreventivo',
-            // self::URL_CONTRACTS => $this->host . 'elencoContratti/ricercaContratto',
-            // self::URL_DOSSIERS_READ => $this->host . 'apptour/monitor',
-            // self::URL_DOSSIERS_DOCUMENTS => $this->host . 'documents/list',
-            // self::URL_DOSSIERS_DOCUMENTS_DOWNLOAD => $this->host . 'documents/download',
-            // self::URL_DOSSIERS_DOCUMENTS_UPLOAD => $this->host . 'caricaDocumento/caricaExtraInPratica',
-            // //PK
-            // self::URL_PK_DESTINATIONS => $this->host . 'pacchetti/destinazioni',
-            // self::URL_PK_SEARCH_DATE => $this->host . 'ricercaPacProd/ricercaDatePubConDisp',
-            // self::URL_PK_SEARCH_PACKAGES => $this->host . 'pacchetti/ricerca',
-            // self::URL_PK_PRICE_DETAIL => $this->host . 'pacchetti/dettaglioPrezzo',
-            // self::URL_PK_EXTRA => $this->host . 'pacchetti/extraInfo',
-            // self::URL_PK_PRICE_LIST => $this->host . 'pacchetti/prezzi',
-            // self::URL_PK_VALORIZATION => $this->host . 'pacchetti/costo',
-            // self::URL_PK_INSURANCE => $this->host . 'pacchetti/assicurazioni',
-            // self::URL_PK_TRAVEL_PROGRAM => $this->host . 'pacchetti/programmaDiViaggio',
-            // self::URL_PK_AGE_CATEGORIES => $this->host . 'pacchetti/regole',
-            // self::URL_PK_BUS_MAP => $this->host . 'pacchetti/mappaPullman',
-            // self::URL_TAX_CODE_MUNICIPALITY => $this->host . 'elenchiGenerici/elencoCodiciComuniCodFisc',
-
-            // self::URL_ALLOTMENT => $this->host . 'allotment/dettaglioPerido',
         ];
         $this->doctrine = $doctrine;
     }
@@ -110,8 +76,9 @@ class VipHandler
             }
         }
         $searchObj = new UserVIP($usrSettings, $user, $this->settings, UserVIP::ACTION_INSERIMENTO_PURO);
-        LogHelper::writeOnLog(self::URL_MANAGE_USER, json_encode($searchObj), $this->urls[self::URL_MANAGE_USER]);
-        $val = ClientCall::call('POST', $this->urls[self::URL_MANAGE_USER], $searchObj);
+        // LogHelper::writeOnLog(self::URL_MANAGE_USER, json_encode($searchObj), $this->urls[self::URL_MANAGE_USER]);
+        // $val = ClientCall::call('POST', $this->urls[self::URL_MANAGE_USER], $searchObj);
+        $val = "";
         if (!$val) {
             // LogHelper::writeVIPResponse(self::URL_MANAGE_USER);
             return ResponseReq::showResponse(null);
@@ -138,7 +105,8 @@ class VipHandler
         $usrSettings->auth = $this->getAuth();
         $searchObj = new UserVIP($usrSettings, $user, $this->settings, UserVip::ACTION_CONSULTAZIONE);
         // LogHelper::writeVIPRequest(self::URL_MANAGE_USER, json_encode($searchObj), $this->urls[self::URL_MANAGE_USER]);
-        $val = ClientCall::call('POST', $this->urls[self::URL_MANAGE_USER], $searchObj);
+        // $val = ClientCall::call('POST', $this->urls[self::URL_MANAGE_USER], $searchObj);
+        $val = "";
         if (!$val) {
             // LogHelper::writeVIPResponse(self::URL_MANAGE_USER);
             return ['success' => false, 'data' => null, 'error' => null, 'responseSuccess' => null];

@@ -45,8 +45,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function supports(Request $request): ?bool
     {
-        $validRoutes = ['webLogin', 'webLoginLang'];
-        $validRegister = ['webLoginRegister', 'webLoginRegisterLang'];
+        $validRoutes = ['app_login', 'app_login_lang'];
+        $validRegister = ['app_registration', 'app_registration_lang'];
         return (in_array($this->route, $validRoutes) ||
             (in_array($this->route, $validRegister) && !$request->request->get('registration_form')))
         && $request->isMethod('POST');
@@ -98,13 +98,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($this->returnTo) {
             return new RedirectResponse($this->urlGenerator->generate($this->returnTo));
         }
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate('dashboard'));
     }
     protected function getLoginUrl()
     {
         $route = $this->route;
         $params = $this->returnTo ? ['returnTo' => $this->returnTo] : [];
-        $route = 'webLogin';
+        $route = 'app_login';
         return $this->urlGenerator->generate($route, $params);
     }
     public function supportsRememberMe()

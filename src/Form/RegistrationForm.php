@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\User;
-use App\Form\Type\CaptchaType;
 use App\Form\Type\PrivacyType;
 use App\Services\Helpers\FormHelper;
 use App\Services\Helpers\IconHelper;
@@ -32,23 +31,9 @@ class RegistrationForm extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options[self::PLUGIN]) {
-            $builder->add('username', TextType::class, [
-                FormHelper::LABEL => 'registration.fields.username',
-                FormHelper::ATTR => [
-                    'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 ',
-                    FormHelper::ICON => IconHelper::USER],
-                FormHelper::CONSTRAINTS => [
-                    new NotBlank(),
-                ],
-            ]);
-        }
+
         $builder
-            ->add('publicAdministration', CheckboxType::class, [
-                FormHelper::LABEL => 'registration.fields.pa',
-                // FormHelper::ATTR => $attr,
-                FormHelper::REQUIRED => true])
+
             ->add('email', EmailType::class, [
                 FormHelper::LABEL => 'email',
                 FormHelper::ATTR => [
@@ -85,101 +70,87 @@ class RegistrationForm extends AbstractType
                     ]),
                 ],
             ]);
-        if (!$options[self::BUSINESS] && !$options[self::AGENCY]) {
-            $builder->add('firstName', TextType::class, [
-                FormHelper::LABEL => 'registration.fields.name',
-                FormHelper::ATTR => [
-                    'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                    FormHelper::ICON => IconHelper::USER],
-                FormHelper::CONSTRAINTS => [
-                    new NotBlank(),
-                ],
-            ])
-                ->add('lastName', TextType::class, [
-                    FormHelper::LABEL => 'registration.fields.lastName',
-                    FormHelper::ATTR => [
-                        'class' => 'form-control',
-                        FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                        FormHelper::ICON => IconHelper::USER],
-                    FormHelper::CONSTRAINTS => [
-                        new NotBlank(),
-                    ],
-                ])
-                ->add('taxCode', TextType::class, [
-                    FormHelper::LABEL => 'registration.fields.taxCode',
-                    FormHelper::ATTR => [
-                        'class' => 'form-control',
-                        FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                        FormHelper::ICON => IconHelper::TAXCODE,
-                    ],
-                    FormHelper::CONSTRAINTS => [
-                        new Length([
-                            'max' => 16,
-                            'min' => 16,
-                            'maxMessage' => 'tax.length',
-                        ]),
-                    ],
-                ]);
+        // if (!$options[self::BUSINESS] && !$options[self::AGENCY]) {
+        //     $builder->add('firstName', TextType::class, [
+        //         FormHelper::LABEL => 'registration.fields.name',
+        //         FormHelper::ATTR => [
+        //             'class' => 'form-control',
+        //             FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+        //             FormHelper::ICON => IconHelper::USER],
+        //         FormHelper::CONSTRAINTS => [
+        //             new NotBlank(),
+        //         ],
+        //     ])
+        //         ->add('lastName', TextType::class, [
+        //             FormHelper::LABEL => 'registration.fields.lastName',
+        //             FormHelper::ATTR => [
+        //                 'class' => 'form-control',
+        //                 FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+        //                 FormHelper::ICON => IconHelper::USER],
+        //             FormHelper::CONSTRAINTS => [
+        //                 new NotBlank(),
+        //             ],
+        //         ])
+        //         ->add('taxCode', TextType::class, [
+        //             FormHelper::LABEL => 'registration.fields.taxCode',
+        //             FormHelper::ATTR => [
+        //                 'class' => 'form-control',
+        //                 FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+        //                 FormHelper::ICON => IconHelper::TAXCODE,
+        //             ],
+        //             FormHelper::CONSTRAINTS => [
+        //                 new Length([
+        //                     'max' => 16,
+        //                     'min' => 16,
+        //                     'maxMessage' => 'tax.length',
+        //                 ]),
+        //             ],
+        //         ]);
 
-        } else {
-            $builder->add('businessName', TextType::class, [
-                FormHelper::LABEL => 'registration.fields.businessName',
-                FormHelper::ATTR => [
-                    'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                    FormHelper::ICON => IconHelper::BUSINESS],
-                FormHelper::CONSTRAINTS => [
-                    new NotBlank(),
-                ],
-            ])
-                ->add('taxCode', TextType::class, [
-                    FormHelper::REQUIRED => false,
-                    FormHelper::LABEL => 'registration.fields.taxCode',
-                    FormHelper::ATTR => [
-                        'class' => 'form-control',
-                        FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                        FormHelper::ICON => IconHelper::TAXCODE],
-                    FormHelper::CONSTRAINTS => [
-                        new Length([
-                            'max' => 16,
-                            'min' => 16,
-                            'maxMessage' => 'tax.length',
-                        ]),
-                    ],
-                ])
-                ->add('vatCode', TextType::class, [
-                    FormHelper::REQUIRED => false,
-                    FormHelper::LABEL => 'registration.fields.vatCode',
-                    FormHelper::ATTR => [
-                        'class' => 'form-control',
-                        FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                        FormHelper::ICON => IconHelper::TAG],
-                ])
-                ->add('pec', EmailType::class, [
-                    FormHelper::REQUIRED => false,
-                    FormHelper::LABEL => 'registration.fields.pec',
-                    FormHelper::ATTR => [
-                        'class' => 'form-control',
-                        FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                        FormHelper::ICON => IconHelper::EMAIL],
-                    FormHelper::CONSTRAINTS => [
-                        new Email([
-                            'mode' => 'html5',
-                            'message' => "pec.notValid",
-                        ]),
-                    ],
-                ])
-                ->add('uniqueCode', TextType::class, [
-                    FormHelper::REQUIRED => false,
-                    FormHelper::LABEL => 'registration.fields.uniqueCode',
-                    FormHelper::ATTR => [
-                        'class' => 'form-control',
-                        FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                        FormHelper::ICON => IconHelper::TAG,
-                    ],
-                ]);
-        }
+        // } else {
+        $builder->add('businessName', TextType::class, [
+            FormHelper::LABEL => 'registration.fields.businessName',
+            FormHelper::ATTR => [
+                'class' => 'form-control',
+                FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+                FormHelper::ICON => IconHelper::BUSINESS],
+            FormHelper::CONSTRAINTS => [
+                new NotBlank(),
+            ],
+        ]);
+        // ->add('taxCode', TextType::class, [
+        //     FormHelper::REQUIRED => false,
+        //     FormHelper::LABEL => 'registration.fields.taxCode',
+        //     FormHelper::ATTR => [
+        //         'class' => 'form-control',
+        //         FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+        //         FormHelper::ICON => IconHelper::TAXCODE],
+        //     FormHelper::CONSTRAINTS => [
+        //         new Length([
+        //             'max' => 16,
+        //             'min' => 16,
+        //             'maxMessage' => 'tax.length',
+        //         ]),
+        //     ],
+        // ])
+        // ->add('vatCode', TextType::class, [
+        //     FormHelper::REQUIRED => false,
+        //     FormHelper::LABEL => 'registration.fields.vatCode',
+        //     FormHelper::ATTR => [
+        //         'class' => 'form-control',
+        //         FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+        //         FormHelper::ICON => IconHelper::TAG],
+        // ])
+        // ->add('uniqueCode', TextType::class, [
+        //     FormHelper::REQUIRED => false,
+        //     FormHelper::LABEL => 'registration.fields.uniqueCode',
+        //     FormHelper::ATTR => [
+        //         'class' => 'form-control',
+        //         FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+        //         FormHelper::ICON => IconHelper::TAG,
+        //     ],
+        // ]);
+        // }
         $builder->add('phone', TextType::class, [
             FormHelper::LABEL => 'registration.fields.phone',
             //FormHelper::REQUIRED => false,
@@ -247,10 +218,7 @@ class RegistrationForm extends AbstractType
                 ],
             ]);
         }
-        $builder->add('captcha', CaptchaType::class, [
-            FormHelper::LABEL => false,
-            'mapped' => false,
-        ])->add('submit', SubmitType::class, [
+        $builder->add('submit', SubmitType::class, [
             FormHelper::LABEL => 'signUp',
             FormHelper::ATTR => ['class' => 'btn btnCenter btnSecondary',
                 FormHelper::RESPONSIVE => 'col-md-12'],

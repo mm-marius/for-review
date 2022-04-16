@@ -2,6 +2,9 @@
     "components/font-awesome": {
         "version": "6.1.0"
     },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -514,6 +517,9 @@
     },
     "symfony/yaml": {
         "version": "v5.4.3"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.10.0"
     },
     "twbs/bootstrap": {
         "version": "v4.0.0"

@@ -1,6 +1,7 @@
 <?php
 namespace App\Handlers\VIP\Models;
 
+use App\Entity\FormField\Settings;
 use App\Entity\User;
 use App\Services\SettingService;
 
@@ -59,8 +60,8 @@ class DatiGeneraliVIP
         $this->numeroTel1 = $user->getPhone();
         $this->numeroTel2 = $user->getMobilePhone();
         // $this->numeroFax = ''; //needed?
-        $this->codiceNazione = $user->getNationCode();
-        $this->codNazCodFiscale = $user->getNationCode(); //why?
+        // $this->codiceNazione = $user->getNationCode();
+        // $this->codNazCodFiscale = $user->getNationCode(); //why?
         $this->email = $user->getEmail();
         //$this->annullamento = ''; //?
         $this->sesso = $user->getSex();

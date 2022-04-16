@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9abb91e0462b36939578665797a82559f443c8ec',
+        'reference' => '45927a113d9a9239d9d9caecc17dc628cbec319c',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9abb91e0462b36939578665797a82559f443c8ec',
+            'reference' => '45927a113d9a9239d9d9caecc17dc628cbec319c',
             'dev_requirement' => false,
         ),
         'components/font-awesome' => array(
@@ -1068,6 +1068,15 @@
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),
             'reference' => 'e80f87d2c9495966768310fc531b487ce64237a2',
+            'dev_requirement' => false,
+        ),
+        'symfonycasts/verify-email-bundle' => array(
+            'pretty_version' => 'v1.10.0',
+            'version' => '1.10.0.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfonycasts/verify-email-bundle',
+            'aliases' => array(),
+            'reference' => '7b9b1f59093dd260afa91eb6b3a220906a0fe0e2',
             'dev_requirement' => false,
         ),
         'twbs/bootstrap' => array(

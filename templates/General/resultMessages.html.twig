@@ -1,0 +1,8 @@
+<div class="resultMessagesContainer">
+	{% for message in messages %}
+		<div class="resultMessageBox error">
+			<div class="resultMessage">{{message}}</div>
+			<div class="remove" onclick="this.parentElement.remove()">x</div>
+		</div>
+	{% endfor %}
+</div>

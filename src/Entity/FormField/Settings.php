@@ -6,7 +6,7 @@ use App\Services\Helpers\SettingHelper;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SettingRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SettingsRepository")
  */
 class Settings extends FormField
 {
@@ -132,7 +132,7 @@ class Settings extends FormField
         $this->roles = [];
     }
 
-    public function update(Setting $setting)
+    public function update(Settings $setting)
     {
         $this->value = $setting->getValue();
     }
