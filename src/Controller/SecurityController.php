@@ -36,8 +36,11 @@ class SecurityController extends AbstractController
         $data = ["email" => $lastUsername];
         $form = $this->createForm(LoginForm::class, $data);
         $returnUrl = $request->query->get("returnTo");
-        return $this->render('security/index.html.twig', ['form' => $form->createView(), 'error' => $error,
-            'returnUrl' => $returnUrl]);
+        return $this->render('Security/login.html.twig', [
+            'form' => $form->createView(),
+            'error' => $error,
+            'returnUrl' => $returnUrl,
+        ]);
     }
 
     /**
