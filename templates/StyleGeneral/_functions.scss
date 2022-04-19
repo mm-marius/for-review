@@ -1,0 +1,88 @@
+@mixin center-elements {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin roundIconGeneral {
+  @include center-elements();
+  background-color: $primary-color;
+  width: 40px;
+  height: 40px;
+  color: $primary-text-color;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@mixin cardGeneral($colo: red) {
+  padding: 10px;
+  box-shadow: 0px 0px 18px -5px rgba(0, 0, 0, 0.2);
+  background-color: $colo;
+  /*  box-shadow: 10px 10px 63px -17px rgba(0, 0, 0, 0.75); */
+  border-radius: 25px;
+  overflow: hidden;
+}
+@mixin cardExtraGeneral($colo: red) {
+  font-size: 11pt;
+  background-color: $colo;
+  /*color: $primary-text-color;*/
+  border-radius: 30px;
+  padding-bottom: 5px;
+}
+@mixin buttonGeneral($colo: red, $width: 200px) {
+  background-color: $colo;
+  border-radius: 20px;
+  color: $primary-text-color;
+  width: $width;
+  max-width: 100%;
+  box-shadow: 1px 3px 5px 0px #d7d7d7;
+  font-weight: 450;
+}
+@mixin buttonPrimary {
+  @include buttonGeneral();
+  background-color: $primary-color;
+  color: $primary-text-color;
+}
+@mixin buttonDelete {
+  @include buttonGeneral();
+  background-color: $error-color;
+  color: $primary-text-color;
+}
+@mixin buttonHover($colo: red) {
+  background-color: $colo;
+  color: $secondary-text-color;
+}
+
+@mixin disable {
+  pointer-events: none;
+  opacity: 0.8;
+  background-color: rgba($color: #ddd, $alpha: 0.55);
+}
+@mixin enable {
+  background-color: inherit;
+  pointer-events: auto;
+  opacity: 1;
+}
+@mixin fontSizeWeight {
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+@mixin dropdownLabel($width) {
+  background-color: white;
+  border-radius: 20px;
+  border: none;
+  color: black;
+  min-width: $width;
+}
+@mixin dropdownMenuItems($height) {
+  padding: 5px;
+  border-radius: 20px;
+  border: none;
+  color: black;
+  overflow: hidden;
+  max-height: $height;
+}
+@mixin dropdownContainerItems($height) {
+  overflow: auto;
+  max-height: $height;
+}

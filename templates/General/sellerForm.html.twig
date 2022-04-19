@@ -1,6 +1,6 @@
-<div class="websale-form-group">
+<div class="seller-form-group {{ class is defined ? class : '' }}">
 	{% set formAttr = noValidate is not defined or noValidate != 'false' ? {'attr': {'novalidate': 'novalidate'}} : {} %}
 	{{form_start(form, formAttr)}}
-	{{form_widget(form)}}
+	{{ include('Form/Type/baseTemplate.html.twig',{form:form}) }}
 	{{form_end(form)}}
 </div>

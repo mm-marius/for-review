@@ -1,3 +1,37 @@
 @import "colorConfig";
+@import "functions";
 @import "generalConfig";
-// @import "../Main/Style/landingPage";
+@import "formConfig";
+
+// GENERAL STYLES
+@import "../General/Style/loader";
+
+// LOGIN
+@import "../Security/Style/login";
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: $scrollbar-color transparent;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 10pt;
+  &.overflowHiddenBody {
+    overflow: hidden;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px $scrollbar-color;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  box-shadow: inset 1px 1px 6px $scrollbar-color;
+  background-color: #32324e80;
+}

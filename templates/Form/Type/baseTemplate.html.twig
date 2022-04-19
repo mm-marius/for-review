@@ -1,0 +1,34 @@
+{% for child in form.children %}
+	{% if not child.rendered  %}
+		{% set class = child.vars['row_attr']['class'] is defined ? child.vars['row_attr']['class'] : '' %}
+		<div class="{{ child.vars['attr']['data-responsive'] ?? child.vars['row_attr']['data-responsive'] |default(class)}}">
+			{% block input %}
+				{% if ("checkbox" not in child.vars.block_prefixes and ("choice" not in child.vars.block_prefixes  or not child.vars.expanded)) and ("collection" not in child.vars.block_prefixes or (child.vars.attr["multilanguage"] is defined and child.vars.attr["multilanguage"]))  %}
+					<div class="group" data-icon="{{ child.vars['attr']['data-icon'] |default('')}}">
+						{% if child.vars['attr']['data-icon'] is defined %}
+							<i class="{{child.vars['attr']['data-icon']}}"></i>
+						{% endif %}
+						{% if "choice" in child.vars.block_prefixes %}
+							{{ form_label(child) }}
+							{{ form_widget(child) }}
+						{% else %}
+							{{ form_row(child)}}
+						{% endif %}
+						{% block extraGroup %}{% endblock %}
+					</div>
+				{% else %}
+					{% if not form.vars.valid and child.vars.errors is defined %}
+						<div class="errorInput">
+						{% endif %}
+						{{ form_widget(child) }}
+						{{ form_label(child) }}
+						{{ form_errors(child) }}
+						{% if not form.vars.valid and child.vars.errors is defined %}
+						</div>
+					{% endif %}
+				{% endif %}
+			{% endblock %}
+			{% block extra %}{% endblock %}
+		</div>
+	{% endif %}
+{% endfor %}

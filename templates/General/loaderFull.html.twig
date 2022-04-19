@@ -1,0 +1,15 @@
+<div class="loadingDataFull">
+	<div class="d-flex flex-column">
+		<div class="loadTitle mx-auto text-center">{{'loading'|trans({},'general')}}</div>
+		{% if hasProgressBar is defined and hasProgressBar %}
+			<div class="progressBar mb-2">
+				<div class="loaded">
+					<div class="loadEffect"></div>
+				</div>
+			</div>
+		{% endif %}
+		<div class="mx-auto text-center mt-3">
+			<i class="far fa-compass fa-spin"></i>
+		</div>
+	</div>
+</div>

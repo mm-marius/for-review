@@ -1,2 +1,20 @@
 login:
   logInTitle: Log In - Seller App
+  rememberMe: Remember me
+  button: Log In
+  notSignUp: Don't have yet an account?
+signUp:
+  button: Sign Up
+fields:
+  email: Email
+  password: Password
+email:
+  notFound: Email not found
+errors:
+  email:
+    empty: Email doesen't have to be empty
+    notValid: Email it's not correct
+  password:
+    empty: Password it's empty
+    length: Password must contains at least 6 characters
+
