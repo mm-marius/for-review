@@ -2,11 +2,11 @@
 
 namespace App\Form;
 
-use App\Form\Type\CheckBoxUpdateType;
 use App\Services\Helpers\FormHelper;
 use App\Services\Helpers\IconHelper;
 use App\Services\Helpers\TranslationHelper;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -55,7 +55,7 @@ class LoginForm extends AbstractType
                     ]),
                 ],
             ])
-            ->add('_remember_me' . ($options['box'] ? '_box' : ''), CheckBoxUpdateType::class, [
+            ->add('_remember_me' . ($options['box'] ? '_box' : ''), CheckboxType::class, [
                 FormHelper::LABEL => 'login.rememberMe',
                 FormHelper::REQUIRED => false,
                 FormHelper::ROW_ATTR => [
