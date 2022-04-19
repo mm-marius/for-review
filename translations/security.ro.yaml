@@ -1,2 +1,19 @@
 login:
   logInTitle: Autentificare - Seller App
+  rememberMe: Pastreaza-ma autentificat
+  button: Autentificare
+  notSignUp: Nu aveti cont?
+signUp:
+  button: Inregistrare
+fields:
+  email: Email
+  password: Parola
+email:
+  notFound: Email negasit
+errors:
+  email:
+    empty: Adresa de email necompletata
+    notValid: Adresa de email este incorecta
+  password:
+    empty: Parola este necompletata
+    length: Parola trebuie sa contina minim 6 caractere

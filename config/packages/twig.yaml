@@ -8,6 +8,11 @@ twig:
               label: Romanian
             - code: "en"
               label: "english"
+    form_themes:
+      [
+        "Form/Type/checkBoxUpdate.html.twig",
+        # "Form/Type/baseTemplate.html.twig",
+      ]
 when@test:
     twig:
         strict_variables: true

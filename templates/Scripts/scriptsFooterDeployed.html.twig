@@ -1,4 +1,6 @@
 {{ include('Scripts/scriptRoutes.html.twig') }}
+<script src="{{ absolute_url(asset('Assets/General/js/helper.js?v=' ~ build_version)) }}"></script>
+<script src="{{ absolute_url(asset('Assets/General/js/login.js?v=' ~ build_version)) }}"></script>
 <script src="{{ absolute_url(asset('public/Assets/LandingPage/Scripts/script.js?v=' ~ build_version)) }}"></script>
 
 <script src="{{ absolute_url(asset('public/Assets/Vendors/AnyPicker/src/anypicker.js?v=' ~ build_version)) }}"></script>
