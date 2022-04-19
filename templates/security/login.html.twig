@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	{% set backgrounImage = deployed_status ? '' : asset('Img/login.jpg') %}
+	{% set backgrounImage = deployed_status ? absolute_url(asset('Img/login.jpg')) : asset('Img/login.jpg') %}
 	<div class="bgImg" data-image="{{ backgrounImage }}"></div>
 	<div class="mt-5 {{ is_mobile() ? 'p-3' : 'p-5 d-flex justify-content-center' }} loginContainer">
 		<div class="cardExtra {{ is_mobile() ? '' : 'col-9 pt-3' }}">
