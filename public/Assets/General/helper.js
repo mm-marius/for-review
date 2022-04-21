@@ -102,6 +102,23 @@ const helper = {
     const $parent = $elem.parent();
     $parent.toggleClass("errorInput");
   },
+  anafCall: function (elem) {
+    let vatCode = elem.val();
+    let url = anafApiRoute;
+    $j.post(url, { vatCode }, function (result) {
+      if (result.success && result.errorMsg == "") {
+        $j.each(fieldsHelper.user(), function (k, v) {
+          let $elem = $j("[id$='_" + v + "']");
+          if ($elem.length) {
+            $elem.val(eval("result.content." + v));
+            $elem.closest(".group").addClass("filled");
+          }
+        });
+      } else {
+        console.log(result);
+      }
+    });
+  },
 };
 // function setMessageAnimation() {
 //   $j(".messageBox").each(function (index) {

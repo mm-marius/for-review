@@ -33,7 +33,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function supports(Request $request)
     {
-        return 'apiHotelCancellation' !== $this->route && 'hotelExtra' !== $this->route && !$request->headers->has('X-AUTHORIZATION');
+        //TODO imbunatateste call-ul la api-uri (vezi blur la cif in registration)
+        // return 'apiAnafValidation' !== $this->route && 'hotelExtra' !== $this->route && !$request->headers->has('X-AUTHORIZATION');
+        return 'apiAnafValidation' !== $this->route && !$request->headers->has('X-AUTHORIZATION');
     }
 
     public function getCredentials(Request $request)

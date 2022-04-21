@@ -132,6 +132,10 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         array (
             'Laminas\\Code\\' => 13,
         ),
+        'I' => 
+        array (
+            'Itrack\\Anaf\\' => 12,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -512,6 +516,10 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-code/src',
         ),
+        'Itrack\\Anaf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/itrack/anaf/src',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
@@ -589,8 +597,10 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
     );
 
     public static $classMap = array (
+        'App\\Controller\\API\\Anaf' => __DIR__ . '/../..' . '/src/Controller/API/Anaf.php',
         'App\\Controller\\DashboardController' => __DIR__ . '/../..' . '/src/Controller/DashboardController.php',
         'App\\Controller\\JwtController' => __DIR__ . '/../..' . '/src/Controller/JwtController.php',
+        'App\\Controller\\PolicyPageController' => __DIR__ . '/../..' . '/src/Controller/PolicyPageController.php',
         'App\\Controller\\RegistrationController' => __DIR__ . '/../..' . '/src/Controller/RegistrationController.php',
         'App\\Controller\\SecurityController' => __DIR__ . '/../..' . '/src/Controller/SecurityController.php',
         'App\\Entity\\ApiToken' => __DIR__ . '/../..' . '/src/Entity/ApiToken.php',
@@ -608,11 +618,13 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'App\\Form\\LoginForm' => __DIR__ . '/../..' . '/src/Form/LoginForm.php',
         'App\\Form\\RegistrationForm' => __DIR__ . '/../..' . '/src/Form/RegistrationForm.php',
         'App\\Form\\ResetPasswordForm' => __DIR__ . '/../..' . '/src/Form/ResetPasswordForm.php',
+        'App\\Form\\Type\\CheckBoxUpdateType' => __DIR__ . '/../..' . '/src/Form/Type/CheckBoxUpdateType.php',
         'App\\Handlers\\VIP\\Models\\UserAccountingVIP' => __DIR__ . '/../..' . '/src/Handlers/VIP/Models/UserAccountingVIP.php',
         'App\\Handlers\\VIP\\Models\\UserStructureVIP' => __DIR__ . '/../..' . '/src/Handlers/VIP/Models/UserStructureVIP.php',
         'App\\Handlers\\VIP\\Models\\UserVIP' => __DIR__ . '/../..' . '/src/Handlers/VIP/Models/UserVIP.php',
         'App\\Handlers\\VIP\\VipHandler' => __DIR__ . '/../..' . '/src/Handlers/VIP/VipHandler.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
+        'App\\Models\\Anaf\\AnafUser' => __DIR__ . '/../..' . '/src/Models/Anaf/AnafUser.php',
         'App\\Models\\General\\DateRange' => __DIR__ . '/../..' . '/src/Models/General/DateRange.php',
         'App\\Models\\Response' => __DIR__ . '/../..' . '/src/Models/Response.php',
         'App\\Repository\\ApiTokenRepository' => __DIR__ . '/../..' . '/src/Repository/ApiTokenRepository.php',
@@ -623,6 +635,7 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'App\\Security\\LoginFormAuthenticator' => __DIR__ . '/../..' . '/src/Security/LoginFormAuthenticator.php',
         'App\\Security\\TokenAuthenticator' => __DIR__ . '/../..' . '/src/Security/TokenAuthenticator.php',
         'App\\Services\\AES' => __DIR__ . '/../..' . '/src/Services/AES.php',
+        'App\\Services\\AnafInterogation' => __DIR__ . '/../..' . '/src/Services/AnafInterogation.php',
         'App\\Services\\ClientCall' => __DIR__ . '/../..' . '/src/Services/ClientCall.php',
         'App\\Services\\Helpers\\FormHelper' => __DIR__ . '/../..' . '/src/Services/Helpers/FormHelper.php',
         'App\\Services\\Helpers\\IconHelper' => __DIR__ . '/../..' . '/src/Services/Helpers/IconHelper.php',
@@ -1826,6 +1839,15 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
         'IntlDateFormatter' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/IntlDateFormatter.php',
+        'Itrack\\Anaf\\Client' => __DIR__ . '/..' . '/itrack/anaf/src/Client.php',
+        'Itrack\\Anaf\\Exceptions\\LimitExceeded' => __DIR__ . '/..' . '/itrack/anaf/src/Exceptions/LimitExceeded.php',
+        'Itrack\\Anaf\\Exceptions\\RequestFailed' => __DIR__ . '/..' . '/itrack/anaf/src/Exceptions/RequestFailed.php',
+        'Itrack\\Anaf\\Exceptions\\ResponseFailed' => __DIR__ . '/..' . '/itrack/anaf/src/Exceptions/ResponseFailed.php',
+        'Itrack\\Anaf\\Http' => __DIR__ . '/..' . '/itrack/anaf/src/Http.php',
+        'Itrack\\Anaf\\Models\\Company' => __DIR__ . '/..' . '/itrack/anaf/src/Models/Company.php',
+        'Itrack\\Anaf\\Models\\CompanyAddress' => __DIR__ . '/..' . '/itrack/anaf/src/Models/CompanyAddress.php',
+        'Itrack\\Anaf\\Models\\CompanyTVA' => __DIR__ . '/..' . '/itrack/anaf/src/Models/CompanyTVA.php',
+        'Itrack\\Anaf\\Parser' => __DIR__ . '/..' . '/itrack/anaf/src/Parser.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Laminas\\Code\\DeclareStatement' => __DIR__ . '/..' . '/laminas/laminas-code/src/DeclareStatement.php',
         'Laminas\\Code\\Exception\\BadMethodCallException' => __DIR__ . '/..' . '/laminas/laminas-code/src/Exception/BadMethodCallException.php',

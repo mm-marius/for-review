@@ -61,13 +61,16 @@ class LoginForm extends AbstractType
                 FormHelper::ROW_ATTR => [
                     'class' => 'd-flex justify-content-center',
                 ],
-            ])->add('submit', SubmitType::class, [
-            FormHelper::LABEL => 'login.button',
-            FormHelper::ATTR => [
-                'class' => 'btn btnCenter btnInfo buttonMargin',
-            ],
-            FormHelper::ROW_ATTR => [FormHelper::RESPONSIVE => 'cl-both w-100'],
-        ]);
+            ])
+            ->add('submit', SubmitType::class, [
+                FormHelper::LABEL => 'login.button',
+                FormHelper::ATTR => [
+                    'class' => 'btn btnCenter btnInfo buttonMargin',
+                ],
+                FormHelper::ROW_ATTR => [
+                    FormHelper::RESPONSIVE => 'cl-both w-100',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

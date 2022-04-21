@@ -3,10 +3,7 @@
 namespace App\Entity;
 
 use App\Handlers\VIP\VipHandler;
-use App\Models\General\DateRange;
 use App\Services\SettingService;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,10 +20,12 @@ class User implements UserInterface
      * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
+
     /**
      * @ORM\Column(type="string", unique=true, nullable=true)
      */
     private $apiToken;
+
     /**
      * @ORM\Column(type="boolean")
      */
@@ -36,18 +35,21 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $active = false;
+
+    /**
+     * @ORM\Column(type="string", unique=true, nullable=true)
+     */
+    private $clientCode;
+
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $username;
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     /**
      * @var string The hashed password
@@ -69,23 +71,12 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $vatCode;
-    /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
-    private $taxCode;
-    /**
-     * @ORM\Column(type="string", length=60, nullable=true)
-     */
-    private $uniqueCode;
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $businessName;
 
-    /**
-     * @ORM\Column(type="string", length=180, nullable=true)
-     */
-    private $pec;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -95,11 +86,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $province;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -122,54 +108,14 @@ class User implements UserInterface
     private $mobilePhone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="json")
      */
-    private $birthPlace;
+    private $roles = [];
 
     /**
-     * @ORM\Column(type="datetime", nullable=true, nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $birthDate;
-    private $birthDatePicker;
-
-    /**
-     * @ORM\Column(type="string", length=1, nullable=true)
-     */
-    private $sex;
-
-    /**
-     * @ORM\Column(type="string", unique=true, nullable=true)
-     */
-    private $clientCode;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $publicAdministration;
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $cig;
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $cup;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $isAgency;
-
-    /**
-     * @var ArrayCollection $privacyFlags
-     * @ORM\OneToMany(targetEntity="PrivacyFlag", mappedBy="user" ,cascade={"persist","remove"})
-     */
-    private $privacyFlags;
-
-    public function __construct()
-    {
-        $this->privacyFlags = new ArrayCollection();
-    }
+    private $agreeTerms = false;
 
     public static function fromWP($request, $isData = false)
     {
@@ -183,31 +129,18 @@ class User implements UserInterface
         $user->setFirstName($isData ? $request['firstname'] : $request->request->get('firstname'));
         $user->setLastName($isData ? $request['lastname'] : $request->request->get('lastname'));
         $vatCode = $isData ? ($request['vatCode'] ?: ''): ($request->request->get('vatCode') ?: '');
-        $taxCode = $isData ? ($request['taxCode'] ?: ''): ($request->request->get('taxCode') ?: '');
         $user->setVatCode($vatCode);
-        $user->setTaxCode($taxCode);
         $user->setBusinessName($isData ? $request['businessName'] : $request->request->get('businessName'));
         $user->setAddress($isData ? $request['address'] : $request->request->get('address'));
         $user->setCity($isData ? $request['city'] : $request->request->get('city'));
-        $user->setProvince($isData ? $request['province'] : $request->request->get('province'));
         $user->setState($isData ? ($request['state'] ?? 'Italia') : $request->request->get('state', 'Italia'));
         $user->setZipCode($isData ? $request['zipCode'] : $request->request->get('zipCode'));
         $user->setPhone($isData ? $request['phone'] : $request->request->get('phone'));
-        // $user->setNationCode($isData ? ($request['nationCode'] ?? 'IT') : $request->request->get('nationCode', 'IT'));
-        $user->setIsAgency($isData ? ($request['isAgency'] ?: false): ($request->request->get('isAgency') ?: false));
         $clientCode = $isData ? ($request['clientCode'] ?? true) : $request->request->get('clientCode') ?? null;
         $clientCode && $user->setClientCode($clientCode);
         return $user;
     }
-    public function getIsAgency()
-    {
-        return $this->isAgency;
-    }
-    public function setIsAgency(bool $isAgency)
-    {
-        $this->isAgency = $isAgency;
-        return $this;
-    }
+
     public function getId(): ?string
     {
         return $this->id;
@@ -227,7 +160,6 @@ class User implements UserInterface
 
     /**
      * A visual identifier that represents this user.
-     *
      * @see UserInterface
      */
     public function getUsername(): string
@@ -322,18 +254,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTaxCode(): ?string
-    {
-        return $this->taxCode;
-    }
-
-    public function setTaxCode(string $taxCode): self
-    {
-        $this->taxCode = $taxCode;
-
-        return $this;
-    }
-
     public function getAddress(): ?string
     {
         return $this->address;
@@ -370,42 +290,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBirthPlace(): ?string
-    {
-        return $this->birthPlace;
-    }
-
-    public function setBirthPlace(string $birthPlace): self
-    {
-        $this->birthPlace = $birthPlace;
-
-        return $this;
-    }
-
-    public function getBirthDate(): ?\DateTimeInterface
-    {
-        return $this->birthDate;
-    }
-
-    public function setBirthDate(\DateTimeInterface $birthDate): self
-    {
-        $this->birthDate = $birthDate;
-
-        return $this;
-    }
-
-    public function getSex(): ?string
-    {
-        return $this->sex;
-    }
-
-    public function setSex(string $sex): self
-    {
-        $this->sex = $sex;
-
-        return $this;
-    }
-
     public function getMobilePhone(): ?string
     {
         return $this->mobilePhone;
@@ -426,18 +310,6 @@ class User implements UserInterface
     public function setCity(string $city): self
     {
         $this->city = $city;
-
-        return $this;
-    }
-
-    public function getProvince(): ?string
-    {
-        return $this->province;
-    }
-
-    public function setProvince(string $province): self
-    {
-        $this->province = $province;
 
         return $this;
     }
@@ -466,18 +338,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUniqueCode(): ?string
-    {
-        return $this->uniqueCode;
-    }
-
-    public function setUniqueCode(string $uniqueCode): self
-    {
-        $this->uniqueCode = $uniqueCode;
-
-        return $this;
-    }
-
     public function getBusinessName(): ?string
     {
         return $this->businessName;
@@ -486,18 +346,6 @@ class User implements UserInterface
     public function setBusinessName(string $businessName): self
     {
         $this->businessName = $businessName;
-
-        return $this;
-    }
-
-    public function getPec(): ?string
-    {
-        return $this->pec;
-    }
-
-    public function setPec(string $pec): self
-    {
-        $this->pec = $pec;
 
         return $this;
     }
@@ -526,18 +374,6 @@ class User implements UserInterface
         return $this;
     }
 
-    // public function getNationCode(): ?string
-    // {
-    //     return $this->nationCode;
-    // }
-
-    // public function setNationCode(string $nationCode): self
-    // {
-    //     $this->nationCode = $nationCode;
-
-    //     return $this;
-    // }
-
     public function getClientCode(SettingService $settings): ?string
     {
 
@@ -552,24 +388,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBirthDatePicker(): ?DateRange
-    {
-        $this->birthDatePicker || $this->birthDatePicker = new DateRange($this->birthDate);
-        return $this->birthDatePicker;
-    }
-
-    public function setBirthDatePicker(?DateRange $birthDatePicker): self
-    {
-        $this->birthDatePicker = $birthDatePicker;
-        $this->birthDate = $birthDatePicker->datePickerDate;
-        return $this;
-    }
-
-    public function isBusiness($fakeParam = false/*Unused - do not remove unless you fix isBusiness form map (company registration)*/)
-    {
-        return $this->businessName != null;
-    }
-
     public function setUsername(?string $username): self
     {
         $this->username = $username;
@@ -577,71 +395,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPrivacyFlags()
+    public function getAgreeTerms(): ?bool
     {
-        return $this->privacyFlags;
+        return $this->agreeTerms;
     }
 
-    public function getPrivacyFlagByAtlId(int $atlId): ?PrivacyFlag
+    public function setAgreeTerms(bool $agreeTerms): self
     {
-        /** @var PrivacyFlag $privacyFlag */
-        foreach ($this->privacyFlags as $privacyFlag) {
-            if ($privacyFlag->getAtlId() == $atlId) {
-                return $privacyFlag;
-            }
-        }
-        return null;
-    }
-
-    public function addPrivacyFlag(PrivacyFlag $privacyFlag)
-    {
-        $this->privacyFlags[] = $privacyFlag;
-    }
-
-    public function setPrivacyFlags($privacyFlags)
-    {
-        $this->privacyFlags = $privacyFlags;
-    }
-
-    public function removePrivacyFlag(PrivacyFlag $privacyFlag): self
-    {
-        if ($this->privacyFlags->contains($privacyFlag)) {
-            $this->privacyFlags->removeElement($privacyFlag);
-            // set the owning side to null (unless already changed)
-            if ($privacyFlag->getUser() === $this) {
-                $privacyFlag->setUser(null);
-            }
-        }
-        return $this;
-    }
-
-    public function getCig()
-    {
-        return $this->cig;
-    }
-    public function setCig($cig): self
-    {
-        $this->cig = $cig;
-
-        return $this;
-    }
-    public function getCup()
-    {
-        return $this->cup;
-    }
-    public function setCup($cup): self
-    {
-        $this->cup = $cup;
-
-        return $this;
-    }
-    public function getPublicAdministration()
-    {
-        return $this->publicAdministration;
-    }
-    public function setPublicAdministration($publicAdministration): self
-    {
-        $this->publicAdministration = $publicAdministration;
+        $this->agreeTerms = $agreeTerms;
 
         return $this;
     }

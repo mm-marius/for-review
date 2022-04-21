@@ -5,9 +5,18 @@ login:
   notSignUp: Don't have yet an account?
 signUp:
   button: Sign Up
+  signUpTitle: Sign Up - Seller App
 fields:
   email: Email
   password: Password
+  repeat_password: Repeat passowrd
+  businessName: Business name
+  vatCode: VAT Code
+  firstName: First name
+  lastName: Last name
+  phone: Phone
+  readFullPolicy: Read the full policy
+  acceptPolicy: Accept full policy
 email:
   notFound: Email not found
 errors:
@@ -17,4 +26,5 @@ errors:
   password:
     empty: Password it's empty
     length: Password must contains at least 6 characters
+    invalid_message: The password fields must match
 

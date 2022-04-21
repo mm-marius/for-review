@@ -15,6 +15,10 @@ class VipHandler
     const DEFAULT_LANGUAGE = "ro";
     const URL_MANAGE_USER = 'ManageUser';
 
+    const NAME_URL_ANAF = 'urlAnaf';
+
+    const URL_ANAF = 'https://webservicesp.anaf.ro/AsynchWebService/api/v6/ws/tva';
+
     private $doctrine;
     private $settings;
     private $language;
@@ -28,6 +32,7 @@ class VipHandler
         $dataConnection = $this->getConnectionData();
         $this->host = $dataConnection['host'] . '/standard-atlante-plus/rest/';
         $this->urls = [
+            self::NAME_URL_ANAF => self::URL_ANAF,
             // self::URL_SEARCH_HOTELS => $this->host . 'ricercaListini/ricercaHOT',
         ];
         $this->doctrine = $doctrine;
@@ -206,4 +211,8 @@ class VipHandler
         return ['data' => 'map', 'result' => $result];
     }
 
+    public function getUrl($key)
+    {
+        return $this->urls[$key];
+    }
 }
