@@ -23,7 +23,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         api:
-            pattern: ^api/plugin/
+            pattern: ^/api/
+            anonymous: true
+            stateless: true
             guard:
                 authenticators:
                     - App\Security\ApiTokenAuthenticator
@@ -36,6 +38,7 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+                    
                 entry_point: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
@@ -56,7 +59,7 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
-    access_control:
+    access_control:        
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
