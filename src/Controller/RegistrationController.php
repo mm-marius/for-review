@@ -41,8 +41,8 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationForm::class, $user, [
             FormHelper::LOCALE => $lang,
-            // RegistrationForm::HAS_AGREE_TERMS => !empty($privacies),
-            // RegistrationForm::PRIVACY_READ_TEXT => $translator->trans('read', [], 'security')
+            RegistrationForm::HAS_AGREE_TERMS => true,
+            RegistrationForm::PRIVACY_READ_TEXT => $translator->trans('fields.readFullPolicy', [], 'security')
         ]);
         $form->handleRequest($request);
 
@@ -105,8 +105,9 @@ class RegistrationController extends AbstractController
 
             // $user->setBirthDatePicker($user->getBirthDatePicker());
         }
-        return $this->render('registration/index.html.twig', [
+        return $this->render('registration/registration.html.twig', [
             'registrationForm' => $form->createView(),
+            'policyPage' => $this->get('router')->generate('policyPage'),
         ]);
 
     }

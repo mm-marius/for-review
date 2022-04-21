@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '45927a113d9a9239d9d9caecc17dc628cbec319c',
+        'reference' => '0326bba887d2251571f31c18265c59a622639d4c',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '45927a113d9a9239d9d9caecc17dc628cbec319c',
+            'reference' => '0326bba887d2251571f31c18265c59a622639d4c',
             'dev_requirement' => false,
         ),
         'components/font-awesome' => array(
@@ -197,6 +197,15 @@
             'install_path' => __DIR__ . '/../friendsofphp/proxy-manager-lts',
             'aliases' => array(),
             'reference' => 'c828ced1f932094ab79e4120a106a666565e4d9c',
+            'dev_requirement' => false,
+        ),
+        'itrack/anaf' => array(
+            'pretty_version' => '3.0.4',
+            'version' => '3.0.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../itrack/anaf',
+            'aliases' => array(),
+            'reference' => '36c13f3b21bff117f8698326eaf7066d647e7937',
             'dev_requirement' => false,
         ),
         'laminas/laminas-code' => array(

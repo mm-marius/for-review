@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b75114857a43206913741d9467c5cf5",
+    "content-hash": "e9eab7136852fef1253ff2230b816d02",
     "packages": [
         {
             "name": "components/font-awesome",
@@ -1609,6 +1609,65 @@
                 }
             ],
             "time": "2022-03-02T09:29:19+00:00"
+        },
+        {
+            "name": "itrack/anaf",
+            "version": "3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itrack/anaf.git",
+                "reference": "36c13f3b21bff117f8698326eaf7066d647e7937"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itrack/anaf/zipball/36c13f3b21bff117f8698326eaf7066d647e7937",
+                "reference": "36c13f3b21bff117f8698326eaf7066d647e7937",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=7.1 || >=8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5.20 || ^9.5.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Itrack\\Anaf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Stoica",
+                    "email": "0x01.alex+github@gmail.com"
+                }
+            ],
+            "description": "API ANAF pentru verificarea contribuabililor care sunt inregistrati conform art. 316 din Codul Fiscal",
+            "keywords": [
+                "api anaf",
+                "date firma",
+                "inregistrat tva",
+                "mfinante",
+                "verificare tva",
+                "webservie anaf"
+            ],
+            "support": {
+                "issues": "https://github.com/itrack/anaf/issues",
+                "source": "https://github.com/itrack/anaf/tree/3.0.4"
+            },
+            "time": "2022-01-09T11:42:03+00:00"
         },
         {
             "name": "laminas/laminas-code",
