@@ -52,8 +52,48 @@ class CompanyAddress
     /**
      * @return string
      */
-    public function getOthers(): string
+    public function getBloc(): string
     {
-        return $this->parser->getAddress()['others'];
+        return $this->parser->getAddress()[ParserAnaf::BLOC];
+    }
+
+    /**
+     * @return string
+     */
+    public function getScara(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::SCARA];
+    }
+
+    /**
+     * @return string
+     */
+    public function getEtaj(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::ETAJ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getApart(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::APART];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCam(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::CAM];
+    }
+
+    /**
+     * @return string
+     */
+    public function getSect(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::SECT];
     }
 }

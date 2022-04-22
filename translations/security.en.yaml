@@ -22,6 +22,9 @@ fields:
   readFullPolicy: Read the full policy
   acceptPolicy: Accept full policy
   agreeTerms: Please accept the Terms and conditions to continue
+vatCode:
+  fieldLength: Vat code length is incorrect
+  invalid: Vat code is not valid
 email:
   notFound: Email not found
 errors:

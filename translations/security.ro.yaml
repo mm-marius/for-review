@@ -22,6 +22,9 @@ fields:
   readFullPolicy: Citeste TERMENII SI CONDITIILE
   acceptPolicy: Accept Termenii si conditiile
   agreeTerms: Pentru a continua trebuie sa acceptati Termenii si Conditiile
+vatCode:
+  fieldLength: CIF incorect
+  invalid: CIF invalid
 email:
   notFound: Email negasit
 errors:

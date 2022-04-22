@@ -17,49 +17,101 @@ class Company
         $this->parser = $parser;
     }
 
-    /**
-     * @return string
-     */
     public function getCIF(): string
     {
         return $this->parser->getData()['cui'] ?? '';
     }
 
-    /**
-     * @return string
-     */
     public function getRegCom(): string
     {
         return $this->parser->getData()['nrRegCom'] ?? '';
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->parser->getData()['denumire'] ?? '';
     }
 
-    /**
-     * @return string
-     */
     public function getPhone(): string
     {
         return $this->parser->getData()['telefon'] ?? '';
     }
 
-    /**
-     * @return string
-     */
     public function getFullAddress(): string
     {
         return $this->parser->getData()['adresa'] ?? '';
     }
 
-    /**
-     * @return bool
-     */
+    public function getCounty(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::COUNTY] ?? "";
+    }
+
+    public function getCity(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::CITY] ?? "";
+    }
+
+    public function getStreet(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::STREET] ?? "";
+    }
+
+    public function getStreetNumber(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::STREET_NUMBER] ?? "";
+    }
+
+    public function getBloc()
+    {
+        return $this->parser->getAddress()[ParserAnaf::BLOC] ?? "";
+    }
+
+    public function getScara(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::SCARA] ?? "";
+    }
+
+    public function getEtaj(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::ETAJ] ?? "";
+    }
+
+    public function getApart(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::APART] ?? "";
+    }
+
+    public function getCam(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::CAM] ?? "";
+    }
+
+    public function getSector(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::SECT] ?? "";
+    }
+
+    public function getComuna(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::COMUNA] ?? "";
+    }
+
+    public function getSat(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::SAT] ?? "";
+    }
+
+    public function getOther(): string
+    {
+        return $this->parser->getAddress()[ParserAnaf::OTHER] ?? "";
+    }
+
+    public function getZipCode(): string
+    {
+        return $this->parser->getData()['codPostal'] ?? '';
+    }
+
     public function isActive(): bool
     {
         if (empty($this->parser->getData()['statusInactivi']) || !is_bool($this->parser->getData()['statusInactivi'])) {
@@ -69,49 +121,28 @@ class Company
         return !$this->parser->getData()['statusInactivi'];
     }
 
-    /**
-     * @return string
-     */
     public function getInactivationDate(): string
     {
         return $this->parser->getData()['dataInactivare'] ?? '';
     }
 
-    /**
-     * @return string
-     */
     public function getReactivationDate(): string
     {
         return $this->parser->getData()['dataReactivare'] ?? '';
     }
 
-    /**
-     * @return string
-     */
     public function getDeletionDate(): string
     {
         return $this->parser->getData()['dataRadiere'] ?? '';
     }
 
-    /**
-     * @return CompanyTVA
-     */
     public function getTVA(): CompanyTVA
     {
         return new CompanyTVA($this->parser);
     }
 
-    /**
-     * @return CompanyAddress
-     */
     public function getAddress(): CompanyAddress
     {
         return new CompanyAddress($this->parser);
     }
-
-    public function getSplitAddress()
-    {
-        return new CompanyAddress($this->parser);
-    }
-
 }

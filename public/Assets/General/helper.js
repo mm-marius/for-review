@@ -114,12 +114,31 @@ const helper = {
             $elem.closest(".group").addClass("filled");
           }
         });
+        helper.errorInput("[id$='_vatCode']", result.errorMsg);
+        helper.errorInput("[id$='_businessName']", result.errorMsg);
+        helper.errorInput("[id$='_phone']", result.errorMsg);
       } else {
-        console.log(result);
+        helper.errorInput("[id$='_vatCode']", result.errorMsg);
       }
     });
   },
+  errorInput: function (elem, message = "") {
+    var $parent = $j(elem).parent();
+    var $ul = $parent.find("ul");
+    if ($ul.length == 0) {
+      $ul = $j("<ul></ul>");
+      $parent.append($ul);
+    }
+    if (message) {
+      $parent.addClass("errorInput");
+      $ul.html("<li>" + message + "</li>");
+    } else {
+      $parent.removeClass("errorInput");
+      $ul.html("");
+    }
+  },
 };
+
 // function setMessageAnimation() {
 //   $j(".messageBox").each(function (index) {
 //     var $target = $j(this);

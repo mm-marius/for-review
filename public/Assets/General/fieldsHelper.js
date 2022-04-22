@@ -3,9 +3,20 @@ const fieldsHelper = {
     const fields = [
       "businessName",
       "phone",
-      "address",
+      "addressFull",
+      "county",
       "city",
-      "state",
+      "street",
+      "streetNumber",
+      "bloc",
+      "scara",
+      "etaj",
+      "apart",
+      "cam",
+      "sector",
+      "comuna",
+      "sat",
+      "other",
       "zipCode",
     ];
     return fields;

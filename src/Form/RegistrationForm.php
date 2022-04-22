@@ -9,6 +9,7 @@ use App\Services\Helpers\TranslationHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -122,6 +123,62 @@ class RegistrationForm extends AbstractType
                         'maxMessage' => 'phone.length',
                     ]),
                 ],
+            ])
+            ->add('county', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('city', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('street', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('streetNumber', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('bloc', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('scara', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('etaj', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('apart', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('cam', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('sector', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('comuna', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('sat', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('other', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('addressFull', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
             ]);
 
         if ($options[self::HAS_AGREE_TERMS]) {
@@ -159,8 +216,7 @@ class RegistrationForm extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             self::HAS_AGREE_TERMS => false,
-            FormHelper::LOCALE => 'it',
-            FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+            FormHelper::LOCALE => 'ro',
             FormHelper::CSRF_PROTECTION => true,
             FormHelper::CSRF_NAME => 'csfr_registration_token',
             FormHelper::CSRF_TOKEN_ID => 'registration_token_90ab5',
