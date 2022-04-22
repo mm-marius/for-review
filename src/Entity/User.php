@@ -80,7 +80,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $address;
+    private $county;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -90,7 +90,62 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $state;
+    private $street;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $streetNumber;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $bloc;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $scara;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $etaj;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $apart;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $cam;
+
+    /**
+     * @ORM\Column(type="string", length=1, nullable=true)
+     */
+    private $sector;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $comuna;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sat;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $other;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $addressFull;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
@@ -131,9 +186,9 @@ class User implements UserInterface
         $vatCode = $isData ? ($request['vatCode'] ?: ''): ($request->request->get('vatCode') ?: '');
         $user->setVatCode($vatCode);
         $user->setBusinessName($isData ? $request['businessName'] : $request->request->get('businessName'));
-        $user->setAddress($isData ? $request['address'] : $request->request->get('address'));
+        $user->setAddressFull($isData ? $request['addressFull'] : $request->request->get('addressFull'));
         $user->setCity($isData ? $request['city'] : $request->request->get('city'));
-        $user->setState($isData ? ($request['state'] ?? 'Italia') : $request->request->get('state', 'Italia'));
+        $user->setCounty($isData ? $request['county'] : $request->request->get('county'));
         $user->setZipCode($isData ? $request['zipCode'] : $request->request->get('zipCode'));
         $user->setPhone($isData ? $request['phone'] : $request->request->get('phone'));
         $clientCode = $isData ? ($request['clientCode'] ?? true) : $request->request->get('clientCode') ?? null;
@@ -254,14 +309,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getAddressFull(): ?string
     {
-        return $this->address;
+        return $this->addressFull;
     }
 
-    public function setAddress(string $address): self
+    public function setAddressFull(string $addressFull): self
     {
-        $this->address = $address;
+        $this->addressFull = $addressFull;
 
         return $this;
     }
@@ -314,14 +369,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getState(): ?string
+    public function getCounty(): ?string
     {
-        return $this->state;
+        return $this->county;
     }
 
-    public function setState(string $state): self
+    public function setCounty(string $county): self
     {
-        $this->state = $state;
+        $this->county = $county;
 
         return $this;
     }
@@ -403,6 +458,204 @@ class User implements UserInterface
     public function setAgreeTerms(bool $agreeTerms): self
     {
         $this->agreeTerms = $agreeTerms;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of street
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * Set the value of street
+     */
+    public function setStreet($street): self
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of streetNumber
+     */
+    public function getStreetNumber()
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * Set the value of streetNumber
+     */
+    public function setStreetNumber($streetNumber): self
+    {
+        $this->streetNumber = $streetNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of bloc
+     */
+    public function getBloc()
+    {
+        return $this->bloc;
+    }
+
+    /**
+     * Set the value of bloc
+     */
+    public function setBloc($bloc): self
+    {
+        $this->bloc = $bloc;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of scara
+     */
+    public function getScara()
+    {
+        return $this->scara;
+    }
+
+    /**
+     * Set the value of scara
+     */
+    public function setScara($scara): self
+    {
+        $this->scara = $scara;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of etaj
+     */
+    public function getEtaj()
+    {
+        return $this->etaj;
+    }
+
+    /**
+     * Set the value of etaj
+     */
+    public function setEtaj($etaj): self
+    {
+        $this->etaj = $etaj;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of apart
+     */
+    public function getApart()
+    {
+        return $this->apart;
+    }
+
+    /**
+     * Set the value of apart
+     */
+    public function setApart($apart): self
+    {
+        $this->apart = $apart;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cam
+     */
+    public function getCam()
+    {
+        return $this->cam;
+    }
+
+    /**
+     * Set the value of cam
+     */
+    public function setCam($cam): self
+    {
+        $this->cam = $cam;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sector
+     */
+    public function getSector()
+    {
+        return $this->sector;
+    }
+
+    /**
+     * Set the value of sector
+     */
+    public function setSector($sector): self
+    {
+        $this->sector = $sector;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of comuna
+     */
+    public function getComuna()
+    {
+        return $this->comuna;
+    }
+
+    /**
+     * Set the value of comuna
+     */
+    public function setComuna($comuna): self
+    {
+        $this->comuna = $comuna;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sat
+     */
+    public function getSat()
+    {
+        return $this->sat;
+    }
+
+    /**
+     * Set the value of sat
+     */
+    public function setSat($sat): self
+    {
+        $this->sat = $sat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of other
+     */
+    public function getOther()
+    {
+        return $this->other;
+    }
+
+    /**
+     * Set the value of other
+     */
+    public function setOther($other): self
+    {
+        $this->other = $other;
 
         return $this;
     }
