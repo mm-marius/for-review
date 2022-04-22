@@ -34,6 +34,7 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            anonymous: true
             # custom_authenticator: App\Security\LoginFormAuthenticator
             guard:
                 authenticators:

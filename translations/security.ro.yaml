@@ -8,8 +8,12 @@ signUp:
   signUpTitle: Inregistrare - Seller App
 fields:
   email: Email
+  emailNotValid: Adresa de email incorecta
+  emailEmpty: Adresa de email necompletata
   password: Parola
   repeat_password: Repeta parola
+  passwordEmpty: Parola necompletata
+  passwordLength: Parola trebuie sa contina minim 6 caractere
   businessName: Denumire companie
   vatCode: C.I.F
   firstName: Prenume
@@ -17,6 +21,7 @@ fields:
   phone: Telefon
   readFullPolicy: Citeste TERMENII SI CONDITIILE
   acceptPolicy: Accept Termenii si conditiile
+  agreeTerms: Pentru a continua trebuie sa acceptati Termenii si Conditiile
 email:
   notFound: Email negasit
 errors:
