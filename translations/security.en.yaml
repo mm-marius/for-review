@@ -3,6 +3,7 @@ login:
   rememberMe: Remember me
   button: Log In
   notSignUp: Don't have yet an account?
+  signInMessage: Do you have an account?  
 signUp:
   button: Sign Up
   signUpTitle: Sign Up - Seller App

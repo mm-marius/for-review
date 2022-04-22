@@ -481,6 +481,14 @@ select {
   opacity: 0.8;
 }
 
+.flagContainer.pr {
+  padding-right: 15px;
+}
+
+.flagContainer .languageBlock.active {
+  border: 1px solid;
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-color) transparent;

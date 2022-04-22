@@ -3,6 +3,7 @@ namespace App\Twig;
 
 use App\Services\MobileDetector;
 use App\Services\RoutingService;
+use App\Services\SettingService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -21,7 +22,7 @@ class TemplateRuntime implements RuntimeExtensionInterface
     const SESSION_LOGO = 'logoEvent';
     const SESSION_CLIENT_CODE = 'clientCode';
 
-    public function __construct(ManagerRegistry $doctrine, RequestStack $request, RoutingService $router, ParameterBagInterface $params)
+    public function __construct(ManagerRegistry $doctrine, RequestStack $request, RoutingService $router, ParameterBagInterface $params, SettingService $settings)
     {
         $this->doctrine = $doctrine;
         $request && $this->request = $request->getCurrentRequest();
@@ -29,6 +30,7 @@ class TemplateRuntime implements RuntimeExtensionInterface
         $this->language = $this->request->getLocale();
         $this->params = $params;
         $this->router = $router;
+        $this->settings = $settings;
     }
 
     public function isMobile()
@@ -52,5 +54,9 @@ class TemplateRuntime implements RuntimeExtensionInterface
     public function getUrl($name, $parameters = [], $isAbsolute = true)
     {
         return $this->router->getUrl($name, $parameters, $isAbsolute);
+    }
+    public function getEnvLanguages($languages)
+    {
+        return $this->settings->getAvailableLanguages($languages);
     }
 }

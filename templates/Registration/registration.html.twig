@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
 	{{ 'signUp.signUpTitle'|trans([], 'security') }}
 {% endblock %}
-
 {% block body %}
 	{% set backgrounImage = deployed_status ? absolute_url(asset('Img/login.jpg')) : asset('Img/login.jpg') %}
 	<div class="bgImg" data-image="{{ backgrounImage }}"></div>
@@ -11,20 +9,19 @@
 		<div class="cardExtra {{ is_mobile() ? '' : 'col-9 pt-3' }}">
 			<div class="cardBox d-flex justify-content-center">
 				<div class="col-md-10 col-lg-12 mt-3">
-					<h1 class="h3 mb-3 font-weight-normal text-center">{{ 'login.logInTitle'|trans([],'security') }}</h1>
+					{{ include('Form/Type/registrationFlags.html.twig') }}
+					<h1 class="h3 mb-3 font-weight-normal text-center">{{ 'signUp.signUpTitle'|trans([],'security') }}</h1>
 					{% if error is defined and error %}
 						{{ include('General/resultMessages.html.twig', { messages:error }) }}
 					{% endif %}
 					{{ include('General/sellerForm.html.twig',{ form: registrationForm}) }}
 				</div>
 			</div>
-			{# <div class="extraMessage d-flex justify-content-center pt-2">
-																			{{ 'login.notSignUp'|trans({},'security') }}
-																			&nbsp;&nbsp;
-																			<a href="{{ absolute_url(path('app_registration', { returnTo:returnUrl })) }}">{{ 'signUp.button'|trans({}, 'security') }}</a>
-																		</div> #}
+			<div class="extraMessage d-flex justify-content-center pt-2">
+				{{ 'login.signInMessage'|trans({},'security') }}
+				&nbsp;&nbsp;
+				<a href="{{ absolute_url(path('app_login')) }}">{{ 'login.button'|trans({}, 'security') }}</a>
+			</div>
 		</div>
 	</div>
-
-
 {% endblock %}
