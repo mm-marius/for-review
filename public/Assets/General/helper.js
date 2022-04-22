@@ -137,6 +137,19 @@ const helper = {
       $ul.html("");
     }
   },
+  changeLanguage: function (code, route) {
+    const url = languageApiRoute;
+    $j.post(url, { code, route }, function (result) {
+      let currentUrl = window.location.href;
+      currentUrl = currentUrl.replace("/en/", "/");
+      currentUrl = currentUrl.replace("/ro/", "/");
+      currentUrl = currentUrl.replace("#", "");
+      window.location = window.location.href;
+      return;
+    }).fail(function (error) {
+      console.log(error);
+    });
+  },
 };
 
 // function setMessageAnimation() {

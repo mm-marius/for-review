@@ -7,7 +7,7 @@
 		{{ form_label(formVars) }}
 		{{ form_widget(formVars) }}
 	{% else %}
-		{% if formVars.vars.name != "csfr_registration_token" %}
+		{% if formVars.vars.name != "csfr_registration_token" and formVars.vars.name != "csfr_login_token" %}
 			{{ form_label(formVars) }}
 		{% endif %}
 		{{ form_widget(formVars) }}

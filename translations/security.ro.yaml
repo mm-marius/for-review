@@ -3,6 +3,7 @@ login:
   rememberMe: Pastreaza-ma autentificat
   button: Autentificare
   notSignUp: Nu aveti cont?
+  signInMessage: Aveti cont?
 signUp:
   button: Inregistrare
   signUpTitle: Inregistrare - Seller App
