@@ -107,6 +107,7 @@ class RegistrationController extends AbstractController
         }
         return $this->render('registration/registration.html.twig', [
             'registrationForm' => $form->createView(),
+            'error' => $error,
             'policyPage' => $this->get('router')->generate('policyPage'),
         ]);
 

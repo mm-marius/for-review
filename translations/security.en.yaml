@@ -8,8 +8,12 @@ signUp:
   signUpTitle: Sign Up - Seller App
 fields:
   email: Email
+  emailNotValid: Incorect email address
+  emailEmpty: Email address is empty
   password: Password
   repeat_password: Repeat passowrd
+  passwordEmpty: Password is empty
+  passwordLength: Password length must be at least 6 characters
   businessName: Business name
   vatCode: VAT Code
   firstName: First name
@@ -17,6 +21,7 @@ fields:
   phone: Phone
   readFullPolicy: Read the full policy
   acceptPolicy: Accept full policy
+  agreeTerms: Please accept the Terms and conditions to continue
 email:
   notFound: Email not found
 errors:

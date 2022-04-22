@@ -92,7 +92,7 @@ const helper = {
   },
   clearLabelsForm: function () {
     const $target = $j(
-      ".seller-form-group input,.aeller-form-group select,.seller-form-group textarea"
+      ".seller-form-group input,.seller-form-group select,.seller-form-group textarea"
     );
     $target.each(function () {
       helper.formFocusClass($j(this));

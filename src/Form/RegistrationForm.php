@@ -18,19 +18,26 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationForm extends AbstractType
 {
-    const BUSINESS = 'isBusiness';
-    const AGENCY = 'isAgency';
-    const PLUGIN = 'isPlugin';
     const HAS_AGREE_TERMS = 'hasAgreeTerms';
     const PRIVACY_READ_TEXT = 'privacyReadText';
 
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('email', EmailType::class, [
                 FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
@@ -42,11 +49,11 @@ class RegistrationForm extends AbstractType
                     FormHelper::ICON => IconHelper::EMAIL],
                 FormHelper::CONSTRAINTS => [
                     new NotBlank([
-                        'message' => "email.empty",
+                        'message' => $this->translator->trans("fields.emailEmpty", [], 'security'),
                     ]),
                     new Email([
                         'mode' => 'html5',
-                        'message' => "email.notValid",
+                        'message' => $this->translator->trans("fields.emailNotValid", [], 'security'),
                     ]),
                 ],
             ])
@@ -69,11 +76,11 @@ class RegistrationForm extends AbstractType
                 'mapped' => false,
                 FormHelper::CONSTRAINTS => [
                     new NotBlank([
-                        'message' => 'password.empty',
+                        'message' => $this->translator->trans('fields.passwordEmpty', [], 'security'),
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'password.length',
+                        'minMessage' => $this->translator->trans('fields.passwordLength', [], 'security'),
                         'max' => 255,
                     ]),
                 ],
@@ -124,6 +131,11 @@ class RegistrationForm extends AbstractType
                 FormHelper::ATTR => [
                     FormHelper::RESPONSIVE => 'col-md-12 ml-3 text-center',
                     'class' => 'agreeTerms',
+                ],
+                FormHelper::CONSTRAINTS => [
+                    new IsTrue([
+                        "message" => $this->translator->trans('fields.agreeTerms', [], 'security')
+                    ])
                 ],
             ]);
         }

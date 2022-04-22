@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0326bba887d2251571f31c18265c59a622639d4c',
+        'reference' => 'c486a03ac4e2b20167533b210600088882b831a1',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0326bba887d2251571f31c18265c59a622639d4c',
+            'reference' => 'c486a03ac4e2b20167533b210600088882b831a1',
             'dev_requirement' => false,
         ),
         'components/font-awesome' => array(

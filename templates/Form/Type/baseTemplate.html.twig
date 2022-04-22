@@ -10,10 +10,10 @@
 				{% if ("checkbox" not in child.vars.block_prefixes and ("choice" not in child.vars.block_prefixes  or not child.vars.expanded)) and ("collection" not in child.vars.block_prefixes or (child.vars.attr["multilanguage"] is defined and child.vars.attr["multilanguage"]))  %}
 					{% if fieldName == "plainPassword" %}
 						{% for passFields in child.children %}
-							{{ include('Form/Type/duplicatePassword.html.twig',{formVars: passFields}) }}
+							{{ include('Form/Type/inputFields.html.twig',{formVars: passFields}) }}
 						{% endfor %}
 					{% else %}
-						{{ include('Form/Type/duplicatePassword.html.twig',{formVars: child, extraGroup: true}) }}
+						{{ include('Form/Type/inputFields.html.twig',{formVars: child, extraGroup: true}) }}
 					{% endif %}
 				{% else %}
 					{% if not form.vars.valid and child.vars.errors is defined %}
@@ -26,7 +26,6 @@
 						</div>
 					{% endif %}
 					{% if fieldName == "agreeTerms" %}
-						<br>
 						<a href="{{ policyUrl }}">({{ 'fields.readFullPolicy'|trans({}, 'security') }})</a>
 					{% endif %}
 				{% endif %}

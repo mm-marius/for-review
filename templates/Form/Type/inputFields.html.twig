@@ -1,0 +1,19 @@
+{% set errorInput = formVars.vars.errors is defined and not formVars.vars.valid ? 'errorInput' : '' %}
+<div class="group {{ errorInput }}" data-icon="{{ formVars.vars['attr']['data-icon'] |default('')}}">
+	{% if formVars.vars['attr']['data-icon'] is defined %}
+		<i class="{{formVars.vars['attr']['data-icon']}}"></i>
+	{% endif %}
+	{% if "choice" in formVars.vars.block_prefixes %}
+		{{ form_label(formVars) }}
+		{{ form_widget(formVars) }}
+	{% else %}
+		{{ form_label(formVars) }}
+		{{ form_widget(formVars) }}
+	{% endif %}
+	{% if formVars.vars.errors is defined and not formVars.vars.valid %}
+		{{ form_errors(formVars) }}
+	{% endif %}
+	{% if extraGroup is defined and extraGroup %}
+		{% block extraGroup %}{% endblock %}
+	{% endif %}
+</div>
