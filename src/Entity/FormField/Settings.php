@@ -72,12 +72,8 @@ class Settings extends FormField
 
     const NAME_VIP_DEFAULT_CLIENT = 'vip.defaultClient';
     const NAME_VIP_HOST = 'vip.host';
-    const NAME_VIP_OP_UNIT = 'vip.opUnit';
     const NAME_VIP_PASSWORD = 'vip.password';
-    const NAME_VIP_SOCIETY = 'vip.society';
     const NAME_VIP_USER = 'vip.user';
-    const NAME_VIP_OPUNIT_RULES = 'vip.opUnitRules';
-    const NAME_GENERATE_DOCUMENT = 'vip.generatedDoc';
 
     const TYPE_RULES_DEPOSIT = 'rules_deposit';
     const TYPE_RULES_OPUNIT = 'rules_opunit';

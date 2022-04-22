@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c486a03ac4e2b20167533b210600088882b831a1',
+        'reference' => 'a53863f2033c9c5bad80dd03f55838de73014dad',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c486a03ac4e2b20167533b210600088882b831a1',
+            'reference' => 'a53863f2033c9c5bad80dd03f55838de73014dad',
             'dev_requirement' => false,
         ),
         'components/font-awesome' => array(
@@ -591,6 +591,15 @@
             'install_path' => __DIR__ . '/../symfony/framework-bundle',
             'aliases' => array(),
             'reference' => '7520f553c7a7721652c1b7ac95c09dae62a1676e',
+            'dev_requirement' => false,
+        ),
+        'symfony/google-mailer' => array(
+            'pretty_version' => 'v5.4.3',
+            'version' => '5.4.3.0',
+            'type' => 'symfony-mailer-bridge',
+            'install_path' => __DIR__ . '/../symfony/google-mailer',
+            'aliases' => array(),
+            'reference' => 'fc813be25a9a58311a43ce26f423a0b177fdfed1',
             'dev_requirement' => false,
         ),
         'symfony/http-client' => array(

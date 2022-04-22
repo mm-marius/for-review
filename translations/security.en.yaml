@@ -7,6 +7,7 @@ login:
 signUp:
   button: Sign Up
   signUpTitle: Sign Up - Seller App
+  confirmAccount: Please confirm you account first. Check your email.
 fields:
   email: Email
   emailNotValid: Incorect email address
@@ -26,8 +27,10 @@ fields:
 vatCode:
   fieldLength: Vat code length is incorrect
   invalid: Vat code is not valid
+  exist: Vat code is allready register in our platform. PLease try another
 email:
   notFound: Email not found
+  notActive: First must validate your account. Check your email.
 errors:
   email:
     empty: Email doesen't have to be empty
