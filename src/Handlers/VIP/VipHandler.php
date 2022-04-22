@@ -42,8 +42,6 @@ class VipHandler
     {
         return [
             'host' => $this->settings->getSetting(Settings::NAME_VIP_HOST) ?: '',
-            'society' => $this->settings->getSetting(Settings::NAME_VIP_SOCIETY) ?: '',
-            'op_unit' => $this->settings->getSetting(Settings::NAME_VIP_OP_UNIT) ?: '',
             'default_client' => $this->settings->getSetting(Settings::NAME_VIP_DEFAULT_CLIENT) ?: '',
             'user' => $this->settings->getSetting(Settings::NAME_VIP_USER) ?: '',
             'password' => $this->settings->getSetting(Settings::NAME_VIP_PASSWORD) ?: '',

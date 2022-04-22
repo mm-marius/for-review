@@ -5,23 +5,49 @@ namespace App\Controller;
 use App\Entity\Jwt;
 use App\Entity\User;
 use App\Form\RegistrationForm;
-use App\Handlers\VIP\VipHandler;
 use App\Security\LoginFormAuthenticator;
 use App\Services\Helpers\FormHelper;
 use App\Services\JwtService;
-use App\Services\SettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Bridge\Google\Transport\GmailSmtpTransport;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
 class RegistrationController extends AbstractController
 {
+
+    /**
+     * @Route("/email", name="email")
+     */
+    public function testEmail(Request $request, Environment $twig)
+    {
+
+        $transport = new GmailSmtpTransport('miclean.marius88@gmail.com', 'Apocaliptica1');
+        $mailer = new Mailer($transport);
+
+        $htmlContents = $twig->render('Email/registration.html.twig', [
+            'url' => "jhgbjhgbjhb",
+        ]);
+
+        $email = (new Email())
+            ->from($_ENV['SMTP_EMAIL'])
+            ->to('miclean.marius@yahoo.com')
+            ->subject("teste subiect")
+            ->html($htmlContents);
+
+        $mailer->send($email);
+        return new Response();
+    }
 
     /**
      * @Route("/registration", name="app_registration")
@@ -31,11 +57,9 @@ class RegistrationController extends AbstractController
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
         LoginFormAuthenticator $authenticator,
-        MailerInterface $mailer,
         TranslatorInterface $translator,
         JwtService $jwtManager,
-        SettingService $settings): Response {
-        $vipHandler = new VipHandler($settings);
+        Environment $twig, EventDispatcherInterface $dispatcher): Response {
 
         $lang = $request->getLocale();
         $user = new User();
@@ -47,13 +71,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         $error = null;
-        // $destination = $user->getNationCodeDestination();
         if ($form->isSubmitted() && $form->isValid()) {
-            // if (!$destination || empty($destination->destinationsTarget)) {
-            //     $form->get('nationCodeDestination')->addError(new FormError($translator->trans('nation.empty', [], 'validators')));
-            //     $validTax = false;
-            // }
-
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -62,54 +80,51 @@ class RegistrationController extends AbstractController
             );
             $user->setRoles($user->getRoles());
 
-            // $result = $vipHandler->createUser($translator, $user);
-            // if ($result->success) {
-            // $clientCode = $result->data;
-            // $user->setClientCode($clientCode);
+            $clientCode = implode('-', str_split(substr(strtoupper(md5(time() . rand(1000, 9999))), 0, 20), 4));
+            $user->setClientCode($clientCode);
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             $jwt = $jwtManager->generateJwt(Jwt::TYPE_ACTIVATION, $user);
             $activationUrl = $this->generateUrl('checkJwt', ['jwt' => $jwt->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
-            // if ($user && $user->getEmail()) {
-            //     $emailData = EmailHelper::getData($doctrine, $translator, Email::TYPE_REGISTRATION, $request->getLocale(), $settings, ['user' => $user, 'activationUrl' => $activationUrl]);
-            // $email = (new TemplatedEmail())
-            //     ->from($_ENV['SMTP_EMAIL'])
-            //     ->to($user->getEmail())
-            //     ->subject($emailData['subject'])
-            //     ->htmlTemplate('Email/registration.email.twig')
-            //     //->textTemplate('Email/registration.text.twig')
-            //     ->context([
-            //         'content' => $emailData['content'],
-            //     ]);
-            //     try {
-            //         $mailer->send($email);
-            //     } catch (\Exception $ex) {
-            //         // LogHelper::sendToChat("*REGISTRATION SEND EMAIL*:\nTo: " . $user->getEmail() . "\nerror: " . $ex->getMessage() . "\n", __FILE__, __LINE__, null, $settings);
-            //         //TODO we need to handle the not a valid domain error
-            //         //Error: Expected response code "250/251/252" but got code "550", with message "550 5.1.1 ewlcnXcQbFqeSewlcnchpx prato.it dominio non valido / invalid destination domain".
-            //         $error[] = $translator->trans('NOT_A_VALID_EMAIL_ADDRESS', [], 'security');
-            //     }
-            // }
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'app_main'
-            );
-            // } else {
 
-            //     $error[] = print_r($result->errorMessage, true);
-            // }
+            if ($user && $user->getEmail()) {
+                $transport = new GmailSmtpTransport('miclean.marius88@gmail.com', 'Apocaliptica1');
+                $mailer = new Mailer($transport);
+                $htmlContents = $twig->render('Email/registration.html.twig', [
+                    'url' => $activationUrl,
+                ]);
+                $email = (new Email())
+                    ->from($_ENV['SMTP_EMAIL'])
+                    ->to($user->getEmail())
+                    ->subject("teste subiect")
+                    ->html($htmlContents);
+                try {
+                    $mailer->send($email);
+                } catch (\Exception $ex) {
+                    // LogHelper::sendToChat("*REGISTRATION SEND EMAIL*:\nTo: " . $user->getEmail() . "\nerror: " . $ex->getMessage() . "\n", __FILE__, __LINE__, null, $settings);
+                    //TODO we need to handle the not a valid domain error
+                    //Error: Expected response code "250/251/252" but got code "550", with message "550 5.1.1 ewlcnXcQbFqeSewlcnchpx prato.it dominio non valido / invalid destination domain".
+                    $error[] = $translator->trans('NOT_A_VALID_EMAIL_ADDRESS', [], 'security');
+                }
+            }
+            // return $guardHandler->authenticateUserAndHandleSuccess(
+            //     $user,
+            //     $request,
+            //     $authenticator,
+            //     'app_login'
+            // );
 
-            // $user->setBirthDatePicker($user->getBirthDatePicker());
+            $event = new SecurityEvents($request);
+            $dispatcher->dispatch($event, SecurityEvents::INTERACTIVE_LOGIN);
+            return $this->redirectToRoute('app_login', ['validateEmail' => '1']);
+
         }
         return $this->render('registration/registration.html.twig', [
             'registrationForm' => $form->createView(),
             'error' => $error,
             'policyPage' => $this->get('router')->generate('policyPage'),
         ]);
-
     }
 }

@@ -7,6 +7,7 @@ login:
 signUp:
   button: Inregistrare
   signUpTitle: Inregistrare - Seller App
+  confirmAccount: Pentru autentificare va rugam sa confirmati apasand link-ul primit pe adresa de email.
 fields:
   email: Email
   emailNotValid: Adresa de email incorecta
@@ -26,8 +27,10 @@ fields:
 vatCode:
   fieldLength: CIF incorect
   invalid: CIF invalid
+  exist: CIF existent in baza noastra de date. Va rugam incercati un altul.
 email:
   notFound: Email negasit
+  notActive: Contul nu a fost activat. Va rugam sa verificati adresa de email.
 errors:
   email:
     empty: Adresa de email necompletata

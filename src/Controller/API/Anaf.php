@@ -2,6 +2,7 @@
 namespace App\Controller\API;
 
 use App\Repository\GeneralRepository;
+use App\Repository\UserRepository;
 use App\Services\ClientAnaf;
 use App\Services\SettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,7 @@ class Anaf extends AbstractController
     /**
      * @Route("/api/anafValidation", name="apiAnafValidation", methods={"POST", "GET"})
      */
-    public function anafValidation(Request $request, TranslatorInterface $translator, SettingService $settings, GeneralRepository $general): JsonResponse
+    public function anafValidation(Request $request, TranslatorInterface $translator, SettingService $settings, GeneralRepository $general, UserRepository $user): JsonResponse
     {
         $errorMsg = "";
         $response = [];
@@ -52,14 +53,17 @@ class Anaf extends AbstractController
         }
 
         if ($confirmVatCode) {
+
+            // $checkVatCode = $user->findBy(['vatCode' => $vatCode]);
+            // if ($checkVatCode) {
+            //     return new JsonResponse(['content' => '', 'success' => true, "errorMsg" => $translator->trans('vatCode.exist', [], 'security')], Response::HTTP_OK);
+            // }
             $date = new \DateTime();
             $date = $date->format("Y-m-d");
 
             $anaf = new ClientAnaf();
             $anaf->addCif($vatCode, $date);
             $company = $anaf->first();
-            $t = $company->getCounty();
-            $s = $general->findByCountyName($company->getCounty());
             $countyCode = $general->findByCountyName($company->getCounty())[0]->getCode();
 
             $response = [

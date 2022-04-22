@@ -16,8 +16,8 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        'c2aad8997a98dfc4771bdbffea3d62b7' => __DIR__ . '/..' . '/laminas/laminas-code/polyfill/ReflectionEnumPolyfill.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
+        'c2aad8997a98dfc4771bdbffea3d62b7' => __DIR__ . '/..' . '/laminas/laminas-code/polyfill/ReflectionEnumPolyfill.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '53c7be3308b5aa229d03a4dfcf6ca18d' => __DIR__ . '/..' . '/symfony/intl/Resources/functions.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
@@ -81,6 +81,7 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
             'Symfony\\Component\\Messenger\\Bridge\\Doctrine\\' => 44,
             'Symfony\\Component\\Messenger\\Bridge\\Amqp\\' => 40,
             'Symfony\\Component\\Messenger\\' => 28,
+            'Symfony\\Component\\Mailer\\Bridge\\Google\\' => 39,
             'Symfony\\Component\\Mailer\\' => 25,
             'Symfony\\Component\\Intl\\' => 23,
             'Symfony\\Component\\HttpKernel\\' => 29,
@@ -352,6 +353,10 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         array (
             0 => __DIR__ . '/..' . '/symfony/messenger',
         ),
+        'Symfony\\Component\\Mailer\\Bridge\\Google\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/google-mailer',
+        ),
         'Symfony\\Component\\Mailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mailer',
@@ -598,6 +603,7 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
 
     public static $classMap = array (
         'App\\Controller\\API\\Anaf' => __DIR__ . '/../..' . '/src/Controller/API/Anaf.php',
+        'App\\Controller\\API\\LanguageController' => __DIR__ . '/../..' . '/src/Controller/API/LanguageController.php',
         'App\\Controller\\DashboardController' => __DIR__ . '/../..' . '/src/Controller/DashboardController.php',
         'App\\Controller\\JwtController' => __DIR__ . '/../..' . '/src/Controller/JwtController.php',
         'App\\Controller\\PolicyPageController' => __DIR__ . '/../..' . '/src/Controller/PolicyPageController.php',
@@ -607,6 +613,7 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'App\\Entity\\Email' => __DIR__ . '/../..' . '/src/Entity/Email.php',
         'App\\Entity\\FormField\\FormField' => __DIR__ . '/../..' . '/src/Entity/FormField/FormField.php',
         'App\\Entity\\FormField\\Settings' => __DIR__ . '/../..' . '/src/Entity/FormField/Settings.php',
+        'App\\Entity\\General' => __DIR__ . '/../..' . '/src/Entity/General.php',
         'App\\Entity\\Helpers\\EmailHelper' => __DIR__ . '/../..' . '/src/Entity/Helpers/EmailHelper.php',
         'App\\Entity\\Jwt' => __DIR__ . '/../..' . '/src/Entity/Jwt.php',
         'App\\Entity\\Multilanguage\\Descriptor' => __DIR__ . '/../..' . '/src/Entity/Multilanguage/Descriptor.php',
@@ -614,6 +621,7 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'App\\Entity\\Privacy' => __DIR__ . '/../..' . '/src/Entity/Privacy.php',
         'App\\Entity\\PrivacyFlag' => __DIR__ . '/../..' . '/src/Entity/PrivacyFlag.php',
         'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
+        'App\\EventSubscriber\\LocaleSubscriber' => __DIR__ . '/../..' . '/src/EventSubscriber/LocaleSubscriber.php',
         'App\\Form\\ForgottenPasswordForm' => __DIR__ . '/../..' . '/src/Form/ForgottenPasswordForm.php',
         'App\\Form\\LoginForm' => __DIR__ . '/../..' . '/src/Form/LoginForm.php',
         'App\\Form\\RegistrationForm' => __DIR__ . '/../..' . '/src/Form/RegistrationForm.php',
@@ -631,6 +639,7 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'App\\Models\\Response' => __DIR__ . '/../..' . '/src/Models/Response.php',
         'App\\Repository\\ApiTokenRepository' => __DIR__ . '/../..' . '/src/Repository/ApiTokenRepository.php',
         'App\\Repository\\EmailRepository' => __DIR__ . '/../..' . '/src/Repository/EmailRepository.php',
+        'App\\Repository\\GeneralRepository' => __DIR__ . '/../..' . '/src/Repository/GeneralRepository.php',
         'App\\Repository\\SettingsRepository' => __DIR__ . '/../..' . '/src/Repository/SettingsRepository.php',
         'App\\Repository\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/UserRepository.php',
         'App\\Security\\ApiTokenAuthenticator' => __DIR__ . '/../..' . '/src/Security/ApiTokenAuthenticator.php',
@@ -4082,6 +4091,8 @@ class ComposerStaticInit8c58908fb1e4d968d318ea6ec497ddcb
         'Symfony\\Component\\Intl\\Util\\IcuVersion' => __DIR__ . '/..' . '/symfony/intl/Util/IcuVersion.php',
         'Symfony\\Component\\Intl\\Util\\IntlTestHelper' => __DIR__ . '/..' . '/symfony/intl/Util/IntlTestHelper.php',
         'Symfony\\Component\\Intl\\Util\\Version' => __DIR__ . '/..' . '/symfony/intl/Util/Version.php',
+        'Symfony\\Component\\Mailer\\Bridge\\Google\\Transport\\GmailSmtpTransport' => __DIR__ . '/..' . '/symfony/google-mailer/Transport/GmailSmtpTransport.php',
+        'Symfony\\Component\\Mailer\\Bridge\\Google\\Transport\\GmailTransportFactory' => __DIR__ . '/..' . '/symfony/google-mailer/Transport/GmailTransportFactory.php',
         'Symfony\\Component\\Mailer\\DataCollector\\MessageDataCollector' => __DIR__ . '/..' . '/symfony/mailer/DataCollector/MessageDataCollector.php',
         'Symfony\\Component\\Mailer\\DelayedEnvelope' => __DIR__ . '/..' . '/symfony/mailer/DelayedEnvelope.php',
         'Symfony\\Component\\Mailer\\Envelope' => __DIR__ . '/..' . '/symfony/mailer/Envelope.php',
