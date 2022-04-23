@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a53863f2033c9c5bad80dd03f55838de73014dad',
+        'reference' => '0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a53863f2033c9c5bad80dd03f55838de73014dad',
+            'reference' => '0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
             'dev_requirement' => false,
         ),
         'components/font-awesome' => array(
@@ -1086,6 +1086,15 @@
             'install_path' => __DIR__ . '/../symfony/yaml',
             'aliases' => array(),
             'reference' => 'e80f87d2c9495966768310fc531b487ce64237a2',
+            'dev_requirement' => false,
+        ),
+        'symfonycasts/reset-password-bundle' => array(
+            'pretty_version' => 'v1.13.0',
+            'version' => '1.13.0.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfonycasts/reset-password-bundle',
+            'aliases' => array(),
+            'reference' => '6e926da7fb2031ef38a385a994ea3a52b436dc8c',
             'dev_requirement' => false,
         ),
         'symfonycasts/verify-email-bundle' => array(
