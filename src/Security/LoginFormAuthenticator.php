@@ -47,6 +47,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         $validRoutes = ['app_login', 'app_login_lang'];
         $validRegister = ['app_registration', 'app_registration_lang'];
+
         return (in_array($this->route, $validRoutes) ||
             (in_array($this->route, $validRegister) && !$request->request->get('registration_form')))
         && $request->isMethod('POST');
@@ -77,7 +78,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user) {
             throw new CustomUserMessageAuthenticationException('email.notFound');
-        }
+        } else {
+            if (!$user->getActive()) {
+                throw new CustomUserMessageAuthenticationException('email.notActive');
+            }}
         return $user;
     }
     public function checkCredentials($credentials, UserInterface $user)

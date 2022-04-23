@@ -4,7 +4,7 @@ namespace App\Services\Helpers;
 
 class IconHelper
 {
-    private const _PREFIX = 'fas fa-';
+    private const _PREFIX = 'fa-solid fa-';
     const EMAIL = self::_PREFIX . 'envelope';
     const USER = self::_PREFIX . 'user';
     const PASSWORD = self::_PREFIX . 'key';

@@ -22,45 +22,55 @@ class LoginForm extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                FormHelper::LABEL => 'Email',
+                FormHelper::LABEL => 'fields.email',
                 FormHelper::ATTR => [
                     'class' => 'form-control',
                     'autocomplete' => 'off',
-                    FormHelper::ICON => IconHelper::USER,
+                    FormHelper::ICON => IconHelper::EMAIL,
                 ],
                 FormHelper::CONSTRAINTS => [
                     new NotBlank([
-                        'message' => "email.empty",
+                        'message' => "errors.email.empty",
                     ]),
                     new Email([
                         'mode' => 'html5',
-                        'message' => "email.notValid",
+                        'message' => "errors.email.notValid",
                     ]),
                 ],
             ])
             ->add('password', PasswordType::class, [
-                FormHelper::LABEL => 'password',
+                FormHelper::LABEL => 'fields.password',
                 FormHelper::ATTR => [
                     'class' => 'form-control',
-                    FormHelper::ICON => IconHelper::PASSWORD],
+                    FormHelper::ICON => IconHelper::PASSWORD,
+                ],
                 FormHelper::CONSTRAINTS => [
                     new NotBlank([
-                        'message' => 'password.empty',
+                        'message' => 'errors.password.empty',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'password.length',
+                        'minMessage' => 'errors.password.length',
                         'max' => 255,
                     ]),
                 ],
-            ])->add('_remember_me' . ($options['box'] ? '_box' : ''), CheckboxType::class, [
-            FormHelper::LABEL => 'rememberMe',
-            FormHelper::REQUIRED => false,
-        ])->add('submit', SubmitType::class, [
-            FormHelper::LABEL => 'login.button',
-            FormHelper::ATTR => ['class' => 'btn btnCenter btnSecondary buttonMargin'],
-            FormHelper::ROW_ATTR => [FormHelper::RESPONSIVE => 'cl-both w-100'],
-        ]);
+            ])
+            ->add('_remember_me' . ($options['box'] ? '_box' : ''), CheckboxType::class, [
+                FormHelper::LABEL => 'login.rememberMe',
+                FormHelper::REQUIRED => false,
+                FormHelper::ROW_ATTR => [
+                    'class' => 'd-flex justify-content-center',
+                ],
+            ])
+            ->add('submit', SubmitType::class, [
+                FormHelper::LABEL => 'login.button',
+                FormHelper::ATTR => [
+                    'class' => 'btn btnCenter btnInfo buttonMargin',
+                ],
+                FormHelper::ROW_ATTR => [
+                    FormHelper::RESPONSIVE => 'cl-both w-100',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -71,7 +81,7 @@ class LoginForm extends AbstractType
             FormHelper::CSRF_PROTECTION => true,
             FormHelper::CSRF_NAME => 'csfr_login_token',
             FormHelper::CSRF_TOKEN_ID => 'login_authenticate_token_38d7f',
-            //'data_class' => User::class,
+            // 'data_class' => User::class,
         ]);
     }
 }

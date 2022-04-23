@@ -16,9 +16,6 @@ class JwtController extends AbstractController
     public function checkJwt($jwt, JwtService $jwtManager)
     {
         $jwt = $jwtManager->JwtHandler($jwt);
-        //TODO validation codice jwt, che sia di attivazione o di altro, capire se spostare la schermata
-        //come in reset-password
-        //altrimenti pagina di jwt scaduto
-        return $this->render('Administration/response.html.twig', ["response" => $jwt]);
+        return $this->render('Administration/response.html.twig', ["response" => $jwt['mess'], "error" => $jwt['err']]);
     }
 }

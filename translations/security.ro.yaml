@@ -1,0 +1,53 @@
+login:
+  logInTitle: Autentificare - Seller App
+  rememberMe: Pastreaza-ma autentificat
+  button: Autentificare
+  notSignUp: Nu aveti cont?
+  signInMessage: Aveti cont?
+  forgotPass: Ati uitat parola?
+  clickHere: Click aici
+signUp:
+  button: Inregistrare
+  signUpTitle: Inregistrare - Seller App
+  confirmAccount: Pentru autentificare va rugam sa confirmati apasand link-ul primit pe adresa de email.
+fields:
+  email: Email
+  emailNotValid: Adresa de email incorecta
+  emailEmpty: Adresa de email necompletata
+  password: Parola
+  repeat_password: Repeta parola
+  passwordEmpty: Parola necompletata
+  passwordLength: Parola trebuie sa contina minim 6 caractere
+  businessName: Denumire companie
+  vatCode: C.I.F
+  firstName: Prenume
+  lastName: Nume
+  phone: Telefon
+  readFullPolicy: Citeste TERMENII SI CONDITIILE
+  acceptPolicy: Accept Termenii si conditiile
+  agreeTerms: Pentru a continua trebuie sa acceptati Termenii si Conditiile
+vatCode:
+  fieldLength: CIF incorect
+  invalid: CIF invalid
+  exist: CIF existent in baza noastra de date. Va rugam incercati un altul.
+email:
+  notFound: Email negasit
+  notActive: Contul nu a fost activat. Va rugam sa verificati adresa de email.
+errors:
+  email:
+    empty: Adresa de email necompletata
+    notValid: Adresa de email este incorecta
+  password:
+    empty: Parola este necompletata
+    length: Parola trebuie sa contina minim 6 caractere
+    invalid_message: Parolele trebuie sa coincida
+resetPassTitle: Resetare parola
+resetPassword: Resetare parola
+resetPassInfo: Introduceti adresa de email si va vom trimtite un mesaj cu un link pentru resetarea parolei.
+resetPassBtn: Trimite email
+registrationEmailSubject: Confirmare inregistrare Seller App
+passwordChanging: Resetare parola Seller App
+user:
+  activated: Adresa de email a fost activata.
+  jwt:
+    expiredOrNotValidLink: Acest link este invalid sau este expirat

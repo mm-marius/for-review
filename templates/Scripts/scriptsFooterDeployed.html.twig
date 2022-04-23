@@ -1,5 +1,8 @@
 {{ include('Scripts/scriptRoutes.html.twig') }}
-<script src="{{ absolute_url(asset('public/Assets/LandingPage/Scripts/script.js?v=' ~ build_version)) }}"></script>
+<script src="{{ absolute_url(asset('Assets/General/fieldsHelper.js?v=' ~ build_version)) }}"></script>
+<script src="{{ absolute_url(asset('Assets/General/helper.js?v=' ~ build_version)) }}"></script>
+<script src="{{ absolute_url(asset('Assets/General/login.js?v=' ~ build_version)) }}"></script>
+<script src="{{ absolute_url(asset('Assets/General/registration.js?v=' ~ build_version)) }}"></script>
 
 <script src="{{ absolute_url(asset('public/Assets/Vendors/AnyPicker/src/anypicker.js?v=' ~ build_version)) }}"></script>
 <script src="{{ absolute_url(asset('public/Assets/Vendors/AnyPicker/src/i18n/anypicker-i18n.js?v=' ~ build_version)) }}"></script>

@@ -25,7 +25,9 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     * @Route("/login/{validateEmail}", name="app_login_validateEmail")
      * @Route("/{_locale<%supported_locales%>}/login", name="app_login_lang")
+     * @Route("/{_locale<%supported_locales%>}/login/{validateEmail}", name="app_login_lang_validateEmail")
      */
     public function login(AuthenticationUtils $authenticationUtils, TranslatorInterface $translator, Request $request): Response
     {
@@ -35,9 +37,16 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
         $data = ["email" => $lastUsername];
         $form = $this->createForm(LoginForm::class, $data);
+        if ($request->query->get('validateEmail')) {
+            $error[] = $translator->trans('signUp.confirmAccount', [], 'security');
+        }
         $returnUrl = $request->query->get("returnTo");
-        return $this->render('security/index.html.twig', ['form' => $form->createView(), 'error' => $error,
-            'returnUrl' => $returnUrl]);
+        return $this->render('Security/login.html.twig', [
+            'form' => $form->createView(),
+            'error' => $error,
+            'validateEmail' => $request->query->get('validateEmail') ?? '',
+            'returnUrl' => $returnUrl,
+        ]);
     }
 
     /**

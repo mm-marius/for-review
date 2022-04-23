@@ -1,0 +1,35 @@
+{% block check_box_update_row %}
+	<div class="col-lg-12 mt-3 custom-control overflow-checkbox">
+		{% set targetId = '' %}
+		{# <div class="labelStrong"> #}
+		{{ form_label(form) }}
+		{# </div> #}
+		{{ form_widget(form) }}
+		<span class="overflow-control-indicator"></span>
+	</div>
+	{# <div class="extraDataUpdate">extraDataRules!</div> #}
+	{% set id = '#' ~ form.vars["id"] %}
+	<script>
+		$j('{{ id }}').change(function () {
+var $form = $j(this).closest('form');
+var data = {};
+var name = $form.attr('name');
+data[$j(this).attr('name')] = $j(this).val();
+data['isFormUpdate'] = true;
+$j.ajax({
+url: $form.attr('action'),
+type: $form.attr('method'),
+data: data,
+dataType: 'json',
+success: function (html) {
+var target = $ (`form[name="${name}"] .extraData`);
+var data = $j(html).find(target);
+if (data) {
+target.html(data);
+return;
+}
+}
+});
+});
+	</script>
+{% endblock %}

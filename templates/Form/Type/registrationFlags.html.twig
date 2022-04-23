@@ -1,0 +1,7 @@
+<div class="flagContainer d-flex justify-content-end {{ login is defined and login ? '' : 'pr' }}">
+	{% for language in get_env_languages(env_languages) %}
+		<div class="languageBlock {{app.request.locale == language.code ? 'active' }} noSelect" onclick="helper.changeLanguage('{{language.code}}', '{{ app.request.attributes.get( '_route' ) }}')">
+			<img class="flag p-1" href="#" src="{{ absolute_url(asset('Img/Flags/' ~ language.code ~ '-flag.png')) }}" height="30" width="30">
+		</div>
+	{% endfor %}
+</div>

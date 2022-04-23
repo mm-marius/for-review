@@ -1,0 +1,36 @@
+{% if policyPage is defined and policyPage %}
+	{% set policyUrl = deployed_status ? absolute_url(asset(policyPage)) : asset(policyPage) %}
+{% endif %}
+
+{% for fieldName,child in form.children %}
+	{% if not child.rendered  %}
+		{% set class = child.vars['row_attr']['class'] is defined ? child.vars['row_attr']['class'] : '' %}
+		<div class="{{ child.vars['attr']['data-responsive'] ?? child.vars['row_attr']['data-responsive'] |default(class)}}">
+			{% block input %}
+				{% if ("checkbox" not in child.vars.block_prefixes and ("choice" not in child.vars.block_prefixes  or not child.vars.expanded)) and ("collection" not in child.vars.block_prefixes or (child.vars.attr["multilanguage"] is defined and child.vars.attr["multilanguage"]))  %}
+					{% if fieldName == "plainPassword" %}
+						{% for passFields in child.children %}
+							{{ include('Form/Type/inputFields.html.twig',{formVars: passFields}) }}
+						{% endfor %}
+					{% else %}
+						{{ include('Form/Type/inputFields.html.twig',{formVars: child, extraGroup: true}) }}
+					{% endif %}
+				{% else %}
+					{% if not form.vars.valid and child.vars.errors is defined %}
+						<div class="errorInput">
+						{% endif %}
+						{{ form_widget(child) }}
+						{{ form_label(child) }}
+						{{ form_errors(child) }}
+						{% if not form.vars.valid and child.vars.errors is defined %}
+						</div>
+					{% endif %}
+					{% if fieldName == "agreeTerms" %}
+						<a href="{{ policyUrl }}">({{ 'fields.readFullPolicy'|trans({}, 'security') }})</a>
+					{% endif %}
+				{% endif %}
+			{% endblock %}
+			{% block extra %}{% endblock %}
+		</div>
+	{% endif %}
+{% endfor %}

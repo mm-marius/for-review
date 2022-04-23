@@ -42,4 +42,16 @@ class SettingService
         $engineClientCode = $this->user ? $this->user->getClientCode($this) : $this->getSetting(Settings::NAME_VIP_DEFAULT_CLIENT);
         return empty($sessionClientCode) ? $engineClientCode : $sessionClientCode;
     }
+    public function getAvailableLanguages($globalLanguages, $getCodes = false): array
+    {
+        // $envLanguages = $this->getSetting(Settings::NAME_ENABLED_LANGUAGES);
+        // if (!$envLanguages) {return [];}
+        // $envLanguages = explode(',', $envLanguages);
+        // $langTmp = [];
+        // foreach ($globalLanguages as $language) {
+        //     in_array($language['code'], $envLanguages) && $langTmp[] = ($getCodes ? $language['code'] : $language);
+        // }
+        // return $langTmp;
+        return [["code" => 'ro', "label" => "Romanian"], ["code" => 'en', "label" => "English"]];
+    }
 }

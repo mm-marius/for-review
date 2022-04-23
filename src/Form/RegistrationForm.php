@@ -3,14 +3,15 @@
 namespace App\Form;
 
 use App\Entity\User;
-use App\Form\Type\PrivacyType;
 use App\Services\Helpers\FormHelper;
 use App\Services\Helpers\IconHelper;
+use App\Services\Helpers\TranslationHelper;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,218 +19,196 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationForm extends AbstractType
 {
-    const BUSINESS = 'isBusiness';
-    const AGENCY = 'isAgency';
-    const PLUGIN = 'isPlugin';
     const HAS_AGREE_TERMS = 'hasAgreeTerms';
     const PRIVACY_READ_TEXT = 'privacyReadText';
+
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
         $builder
-
             ->add('email', EmailType::class, [
-                FormHelper::LABEL => 'email',
+                FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+                FormHelper::LABEL => 'fields.email',
                 FormHelper::ATTR => [
                     'autocomplete' => 'off',
                     'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
+                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-12',
                     FormHelper::ICON => IconHelper::EMAIL],
                 FormHelper::CONSTRAINTS => [
                     new NotBlank([
-                        'message' => "email.empty",
+                        'message' => $this->translator->trans("fields.emailEmpty", [], 'security'),
                     ]),
                     new Email([
                         'mode' => 'html5',
-                        'message' => "email.notValid",
+                        'message' => $this->translator->trans("fields.emailNotValid", [], 'security'),
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                FormHelper::LABEL => 'password',
-                FormHelper::ATTR => [
-                    'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                    FormHelper::ICON => IconHelper::PASSWORD],
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+                'invalid_message' => 'errors.password.invalid_message',
+                'options' => [
+                    'attr' => [
+                        'class' => 'password-field form-control',
+                        FormHelper::RESPONSIVE => 'col-md-12 col-lg-12',
+                        FormHelper::ICON => IconHelper::PASSWORD,
+                    ],
+                ],
+                'required' => true,
+                'first_options' => ['label' => 'fields.password'],
+                'second_options' => ['label' => 'fields.repeat_password'],
+                FormHelper::ROW_ATTR => [
+                    'class' => 'col-md-12 col-lg-12'],
                 'mapped' => false,
                 FormHelper::CONSTRAINTS => [
                     new NotBlank([
-                        'message' => 'password.empty',
+                        'message' => $this->translator->trans('fields.passwordEmpty', [], 'security'),
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'password.length',
-                        // max length allowed by Symfony for security reasons
+                        'minMessage' => $this->translator->trans('fields.passwordLength', [], 'security'),
                         'max' => 255,
                     ]),
                 ],
-            ]);
-        // if (!$options[self::BUSINESS] && !$options[self::AGENCY]) {
-        //     $builder->add('firstName', TextType::class, [
-        //         FormHelper::LABEL => 'registration.fields.name',
-        //         FormHelper::ATTR => [
-        //             'class' => 'form-control',
-        //             FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-        //             FormHelper::ICON => IconHelper::USER],
-        //         FormHelper::CONSTRAINTS => [
-        //             new NotBlank(),
-        //         ],
-        //     ])
-        //         ->add('lastName', TextType::class, [
-        //             FormHelper::LABEL => 'registration.fields.lastName',
-        //             FormHelper::ATTR => [
-        //                 'class' => 'form-control',
-        //                 FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-        //                 FormHelper::ICON => IconHelper::USER],
-        //             FormHelper::CONSTRAINTS => [
-        //                 new NotBlank(),
-        //             ],
-        //         ])
-        //         ->add('taxCode', TextType::class, [
-        //             FormHelper::LABEL => 'registration.fields.taxCode',
-        //             FormHelper::ATTR => [
-        //                 'class' => 'form-control',
-        //                 FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-        //                 FormHelper::ICON => IconHelper::TAXCODE,
-        //             ],
-        //             FormHelper::CONSTRAINTS => [
-        //                 new Length([
-        //                     'max' => 16,
-        //                     'min' => 16,
-        //                     'maxMessage' => 'tax.length',
-        //                 ]),
-        //             ],
-        //         ]);
-
-        // } else {
-        $builder->add('businessName', TextType::class, [
-            FormHelper::LABEL => 'registration.fields.businessName',
-            FormHelper::ATTR => [
-                'class' => 'form-control',
-                FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                FormHelper::ICON => IconHelper::BUSINESS],
-            FormHelper::CONSTRAINTS => [
-                new NotBlank(),
-            ],
-        ]);
-        // ->add('taxCode', TextType::class, [
-        //     FormHelper::REQUIRED => false,
-        //     FormHelper::LABEL => 'registration.fields.taxCode',
-        //     FormHelper::ATTR => [
-        //         'class' => 'form-control',
-        //         FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-        //         FormHelper::ICON => IconHelper::TAXCODE],
-        //     FormHelper::CONSTRAINTS => [
-        //         new Length([
-        //             'max' => 16,
-        //             'min' => 16,
-        //             'maxMessage' => 'tax.length',
-        //         ]),
-        //     ],
-        // ])
-        // ->add('vatCode', TextType::class, [
-        //     FormHelper::REQUIRED => false,
-        //     FormHelper::LABEL => 'registration.fields.vatCode',
-        //     FormHelper::ATTR => [
-        //         'class' => 'form-control',
-        //         FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-        //         FormHelper::ICON => IconHelper::TAG],
-        // ])
-        // ->add('uniqueCode', TextType::class, [
-        //     FormHelper::REQUIRED => false,
-        //     FormHelper::LABEL => 'registration.fields.uniqueCode',
-        //     FormHelper::ATTR => [
-        //         'class' => 'form-control',
-        //         FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-        //         FormHelper::ICON => IconHelper::TAG,
-        //     ],
-        // ]);
-        // }
-        $builder->add('phone', TextType::class, [
-            FormHelper::LABEL => 'registration.fields.phone',
-            //FormHelper::REQUIRED => false,
-            FormHelper::ATTR => [
-                'class' => 'form-control',
-                FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                FormHelper::ICON => IconHelper::PHONE],
-            FormHelper::CONSTRAINTS => [
-                new NotBlank(),
-                new Length([
-                    'max' => 15,
-                    'maxMessage' => 'phone.length',
-                ]),
-            ],
-        ])
-
-            ->add('address', TextType::class, [
-                FormHelper::LABEL => 'registration.fields.address',
-                //FormHelper::REQUIRED => false,
+            ])
+            ->add('vatCode', TextType::class, [
+                FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+                FormHelper::LABEL => 'fields.vatCode',
                 FormHelper::ATTR => [
                     'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                    FormHelper::ICON => IconHelper::MARKER],
+                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-12',
+                    FormHelper::ICON => IconHelper::BUSINESS],
                 FormHelper::CONSTRAINTS => [
                     new NotBlank(),
                 ],
             ])
-            ->add('city', TextType::class, [
-                FormHelper::LABEL => 'registration.fields.city',
-                //FormHelper::REQUIRED => false,
+            ->add('businessName', TextType::class, [
+                FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+                FormHelper::LABEL => 'fields.businessName',
                 FormHelper::ATTR => [
                     'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                    FormHelper::ICON => IconHelper::MARKER],
+                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-12',
+                    FormHelper::ICON => IconHelper::BUSINESS],
                 FormHelper::CONSTRAINTS => [
                     new NotBlank(),
                 ],
             ])
-            ->add('zipCode', TextType::class, [
-                FormHelper::LABEL => 'registration.fields.zipCode',
-                //FormHelper::REQUIRED => false,
+            ->add('phone', TextType::class, [
+                FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+                FormHelper::LABEL => 'fields.phone',
+                FormHelper::REQUIRED => true,
                 FormHelper::ATTR => [
                     'class' => 'form-control',
-                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-6',
-                    FormHelper::ICON => IconHelper::MARKER],
+                    FormHelper::RESPONSIVE => 'col-md-12 col-lg-12',
+                    FormHelper::ICON => IconHelper::PHONE],
                 FormHelper::CONSTRAINTS => [
                     new NotBlank(),
+                    new Length([
+                        'max' => 15,
+                        'maxMessage' => 'phone.length',
+                    ]),
                 ],
+            ])
+            ->add('county', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('city', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('street', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('streetNumber', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('bloc', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('scara', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('etaj', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('apart', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('cam', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('sector', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('comuna', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('sat', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('other', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
+            ])
+            ->add('addressFull', HiddenType::class, [
+                FormHelper::LABEL => false,
+                FormHelper::REQUIRED => false,
             ]);
 
-        $builder->add('privacyFlags', CollectionType::class, [
-            FormHelper::LABEL => false,
-            'entry_type' => PrivacyType::class,
-            FormHelper::ATTR => [
-                FormHelper::RESPONSIVE => 'col-md-12',
-            ],
-        ]);
         if ($options[self::HAS_AGREE_TERMS]) {
             $builder->add('agreeTerms', CheckboxType::class, [
-                FormHelper::LABEL => 'readFullPolicy',
-                'mapped' => false,
+                FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+                FormHelper::LABEL => 'fields.acceptPolicy',
                 FormHelper::ATTR => [
                     FormHelper::RESPONSIVE => 'col-md-12 ml-3 text-center',
                     'class' => 'agreeTerms',
                 ],
+                FormHelper::CONSTRAINTS => [
+                    new IsTrue([
+                        "message" => $this->translator->trans('fields.agreeTerms', [], 'security')
+                    ])
+                ],
             ]);
         }
         $builder->add('submit', SubmitType::class, [
-            FormHelper::LABEL => 'signUp',
-            FormHelper::ATTR => ['class' => 'btn btnCenter btnSecondary',
-                FormHelper::RESPONSIVE => 'col-md-12'],
+            FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+            FormHelper::LABEL => 'signUp.button',
+            FormHelper::ATTR => ['class' => 'btn btnCenter btnInfo buttonMargin',
+                FormHelper::RESPONSIVE => 'cl-both w-100 pt-3'],
         ]);
 
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars[self::BUSINESS] = $options[self::BUSINESS];
-        $view->vars[self::AGENCY] = $options[self::AGENCY];
+        // $view->vars[self::BUSINESS] = $options[self::BUSINESS];
+        // $view->vars[self::AGENCY] = $options[self::AGENCY];
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -237,15 +216,11 @@ class RegistrationForm extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             self::HAS_AGREE_TERMS => false,
-            FormHelper::LOCALE => 'it',
-            // FormHelper::TRANSLATION_DOMAIN => TranslationHelper::LOGIN_DOMAIN,
+            FormHelper::LOCALE => 'ro',
             FormHelper::CSRF_PROTECTION => true,
             FormHelper::CSRF_NAME => 'csfr_registration_token',
             FormHelper::CSRF_TOKEN_ID => 'registration_token_90ab5',
-            self::BUSINESS => false,
-            self::AGENCY => false,
-            self::PLUGIN => false,
-            self::PRIVACY_READ_TEXT => 'read',
+            self::PRIVACY_READ_TEXT => 'fields.readFullPolicy',
         ]);
     }
 }

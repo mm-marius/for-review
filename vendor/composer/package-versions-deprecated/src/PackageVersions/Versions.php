@@ -53,6 +53,7 @@ final class Versions
   'doctrine/sql-formatter' => '1.1.2@20c39c2de286a9d3262cc8ed282a4ae60e265894',
   'egulias/email-validator' => '3.1.2@ee0db30118f661fb166bcffbf5d82032df484697',
   'friendsofphp/proxy-manager-lts' => 'v1.0.7@c828ced1f932094ab79e4120a106a666565e4d9c',
+  'itrack/anaf' => '3.0.4@36c13f3b21bff117f8698326eaf7066d647e7937',
   'laminas/laminas-code' => '4.5.1@6fd96d4d913571a2cd056a27b123fa28cb90ac4e',
   'monolog/monolog' => '2.5.0@4192345e260f1d51b365536199744b987e160edc',
   'phpdocumentor/reflection-common' => '2.2.0@1d01c49d4ed62f25aa84a747ad35d5a16924662b',
@@ -85,6 +86,7 @@ final class Versions
   'symfony/flex' => 'v1.18.6@130851b90c1ea615ac5be6fce827971f4f55afbf',
   'symfony/form' => 'v5.4.7@75267931833e98f82bc39fb20f54251b7516680b',
   'symfony/framework-bundle' => 'v5.4.7@7520f553c7a7721652c1b7ac95c09dae62a1676e',
+  'symfony/google-mailer' => 'v5.4.3@fc813be25a9a58311a43ce26f423a0b177fdfed1',
   'symfony/http-client' => 'v5.4.7@88b6909f74fd1f2147e068411f71870a3b27ac56',
   'symfony/http-client-contracts' => 'v2.5.1@1a4f708e4e87f335d1b1be6148060739152f0bd5',
   'symfony/http-foundation' => 'v5.4.6@34e89bc147633c0f9dd6caaaf56da3b806a21465',
@@ -133,6 +135,7 @@ final class Versions
   'symfony/webapp-meta' => 'v1.0.0@df062f539ed5203b8ba1e5cdd9b1745afa983d69',
   'symfony/webpack-encore-bundle' => 'v1.14.0@1729c314574f32e49f9660a0cee870f7e603864f',
   'symfony/yaml' => 'v5.4.3@e80f87d2c9495966768310fc531b487ce64237a2',
+  'symfonycasts/reset-password-bundle' => 'v1.13.0@6e926da7fb2031ef38a385a994ea3a52b436dc8c',
   'symfonycasts/verify-email-bundle' => 'v1.10.0@7b9b1f59093dd260afa91eb6b3a220906a0fe0e2',
   'twbs/bootstrap' => 'v4.0.0@8a628b943cf31ca0a002c08af661a95772480225',
   'twig/extra-bundle' => 'v3.3.8@2e58256b0e9fe52f30149347c0547e4633304765',
@@ -142,10 +145,10 @@ final class Versions
   'symfony/debug-bundle' => 'v5.4.3@6f508169752ed2c0d0d8a6641c4cca39a8f1dfcb',
   'symfony/maker-bundle' => 'v1.38.0@143024ab0e426285d3d9b7f6a3ce51e12a9d8ec5',
   'symfony/web-profiler-bundle' => 'v5.4.6@1497b1d22c2807a77563439f8ec489407a989d59',
-  'symfony/polyfill-ctype' => '*@45927a113d9a9239d9d9caecc17dc628cbec319c',
-  'symfony/polyfill-iconv' => '*@45927a113d9a9239d9d9caecc17dc628cbec319c',
-  'symfony/polyfill-php72' => '*@45927a113d9a9239d9d9caecc17dc628cbec319c',
-  '__root__' => 'dev-master@45927a113d9a9239d9d9caecc17dc628cbec319c',
+  'symfony/polyfill-ctype' => '*@0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
+  'symfony/polyfill-iconv' => '*@0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
+  'symfony/polyfill-php72' => '*@0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
+  '__root__' => 'dev-master@0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
 );
 
     private function __construct()

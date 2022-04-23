@@ -1,0 +1,10 @@
+.flagContainer {
+  &.pr {
+    padding-right: 15px;
+  }
+  .languageBlock {
+    &.active {
+      border: 1px solid;
+    }
+  }
+}

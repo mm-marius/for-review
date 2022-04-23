@@ -1,0 +1,27 @@
+{% set errorInput = formVars.vars.errors is defined and not formVars.vars.valid ? 'errorInput' : '' %}
+<div class="group {{ errorInput }}" data-icon="{{ formVars.vars['attr']['data-icon'] |default('')}}">
+	{% if formVars.vars['attr']['data-icon'] is defined %}
+		<i class="{{formVars.vars['attr']['data-icon']}}"></i>
+	{% endif %}
+	{% if "choice" in formVars.vars.block_prefixes %}
+		{{ form_label(formVars) }}
+		{{ form_widget(formVars) }}
+	{% else %}
+		{% if formVars.vars.name != "csfr_registration_token" and formVars.vars.name != "csfr_login_token" and formVars.vars.name != "_token" %}
+			{{ form_label(formVars) }}
+		{% endif %}
+		{{ form_widget(formVars) }}
+		{% if formVars.vars.help is defined %}
+			<small>
+				{{ form_help(formVars) }}
+			</small>
+		{% endif %}
+
+	{% endif %}
+	{% if formVars.vars.errors is defined and not formVars.vars.valid %}
+		{{ form_errors(formVars) }}
+	{% endif %}
+	{% if extraGroup is defined and extraGroup %}
+		{% block extraGroup %}{% endblock %}
+	{% endif %}
+</div>

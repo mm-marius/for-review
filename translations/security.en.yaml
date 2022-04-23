@@ -1,0 +1,54 @@
+login:
+  logInTitle: Log In - Seller App
+  rememberMe: Remember me
+  button: Log In
+  notSignUp: Don't have yet an account?
+  signInMessage: Do you have an account?  
+  forgotPass: Did you forgot the password?
+  clickHere: Click here
+signUp:
+  button: Sign Up
+  signUpTitle: Sign Up - Seller App
+  confirmAccount: Please confirm you account first. Check your email.
+fields:
+  email: Email
+  emailNotValid: Incorect email address
+  emailEmpty: Email address is empty
+  password: Password
+  repeat_password: Repeat passowrd
+  passwordEmpty: Password is empty
+  passwordLength: Password length must be at least 6 characters
+  businessName: Business name
+  vatCode: VAT Code
+  firstName: First name
+  lastName: Last name
+  phone: Phone
+  readFullPolicy: Read the full policy
+  acceptPolicy: Accept full policy
+  agreeTerms: Please accept the Terms and conditions to continue
+vatCode:
+  fieldLength: Vat code length is incorrect
+  invalid: Vat code is not valid
+  exist: Vat code is allready register in our platform. PLease try another
+email:
+  notFound: Email not found
+  notActive: First must validate your account. Check your email.
+errors:
+  email:
+    empty: Email doesen't have to be empty
+    notValid: Email it's not correct
+  password:
+    empty: Password it's empty
+    length: Password must contains at least 6 characters
+    invalid_message: The password fields must match
+resetPassTitle: Reset your password
+resetPassword: Reset password
+resetPassInfo: Enter your email address and we will send you a link to reset your password.
+resetPassBtn: Send password reset email
+registrationEmailSubject: Confirm registration Seller App
+passwordChanging: Change Seller App password
+user:
+  activated: The email was activated.
+  jwt:
+    expiredOrNotValidLink: This link is not valid or is expired
+

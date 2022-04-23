@@ -1,0 +1,456 @@
+.cardBox {
+  @include cardGeneral($card-background-color);
+}
+.cardExtra {
+  @include cardExtraGeneral($card-background-color);
+  // .extraMessage {
+  //   margin: 10px 20px;
+  //   text-align: center;
+  //   color: $white-color;
+  //   * {
+  //     display: inline-block;
+  //   }
+  //   a:link,
+  //   a:visited,
+  //   a:hover,
+  //   a:active {
+  //     font-weight: bold;
+  //     text-decoration: none;
+  //     color: $white-color;
+  //   }
+  // }
+  // &.service::before,
+  // &.mandatory::before,
+  // &.moreService::before {
+  //   content: "\f067";
+  //   font-family: "Font Awesome 5 Free";
+  //   color: white;
+  //   font-weight: 900;
+  //   width: 23px;
+  //   height: 23px;
+  //   border-radius: 50%;
+  //   display: inline-block;
+  //   margin: 0 6px;
+  //   position: absolute;
+  //   right: -12px;
+  //   top: -4px;
+  //   padding: 1px 0px 0px 1px;
+  // }
+  // &.service {
+  //   max-width: 250px;
+  //   min-width: 150px;
+  //   text-align: center;
+  //   position: relative;
+  //   color: white;
+  //   .cardBox {
+  //     color: black;
+  //   }
+
+  //   cursor: pointer;
+  //   &::before {
+  //     background-color: $primary-color;
+  //     color: $primary-text-color;
+  //   }
+  //   .cardBox {
+  //     border: 2px dashed $primary-color;
+  //   }
+  //   &.mandatory {
+  //     background-color: red;
+  //     /* color: white; */
+  //     &::before {
+  //       background: red;
+  //     }
+  //     .cardBox {
+  //       border: 2px dashed red;
+  //     }
+  //   }
+  //   &.moreService {
+  //     background-color: $secondary-color;
+  //     color: $secondary-text-color;
+  //     &::before {
+  //       content: "\f00c";
+  //       background: $secondary-color;
+  //       color: $secondary-text-color;
+  //     }
+  //     .cardBox {
+  //       border: 2px solid $secondary-color;
+  //     }
+  //   }
+  // }
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  border-radius: 20px;
+}
+.text-center {
+  text-align: center;
+}
+
+.cl-both {
+  clear: both;
+}
+.loadingInput {
+  background-size: 25px 25px;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-image: url("/Img/loading_input.gif");
+  background-origin: content-box;
+}
+// .mainContainer {
+//   overflow: auto;
+//   height: 89vh;
+//   position: relative;
+//   & > .container-fluid {
+//     min-height: 75vh;
+//   }
+// }
+// .maxContentW {
+//   width: max-content;
+// }
+
+// .justify-content-evenly {
+//   justify-content: space-evenly;
+// }
+// .fa-rotate-45 {
+//   transform: rotate(-45deg);
+// }
+// footer {
+//   background-color: $primary-color;
+//   color: $primary-text-color;
+//   border-top-left-radius: 20px;
+//   border-top-right-radius: 20px;
+//   margin-top: 3em;
+//   position: relative;
+//   z-index: 17;
+//   padding-top: 2em;
+//   padding-bottom: 2em;
+//   .footerAbove,
+//   .footerBelow {
+//     padding-left: 2em;
+//     padding-right: 2em;
+//   }
+//   .footerAbove {
+//     padding-bottom: 1em;
+//     border-bottom: 1px solid $primary-accent-color;
+//     .logo {
+//       display: inline-block;
+//       img {
+//         height: 32px;
+//       }
+//     }
+//   }
+//   .footerBelow {
+//     .copyrightText {
+//       margin-top: 3px;
+//       a {
+//         text-decoration: underline;
+//         color: $secondary-color;
+//       }
+//     }
+//     padding-top: 1em;
+//     .poweredBy {
+//       img {
+//         height: 20px;
+//       }
+//     }
+//   }
+// }
+// .moreButton {
+//   background-color: transparent !important;
+//   color: $primary-color;
+//   &.btn:hover {
+//     color: $secondary-color;
+//   }
+// }
+// .success-color {
+//   color: $success-color;
+// }
+// .warning-color {
+//   color: $warning-color;
+// }
+// .error-color {
+//   color: $error-color;
+// }
+// .separatorRight {
+//   border-right: 1px solid #e6e6e6;
+// }
+// .successText {
+//   color: $success-color;
+// }
+// .errorText {
+//   color: $error-color;
+// }
+// .noSelect,
+// .noSelect:focus {
+//   user-select: none !important ;
+//   outline-style: none !important;
+//   outline: none !important;
+// }
+// .noSelect::-moz-focus-inner {
+//   border: 0;
+// }
+
+// .roundIcon {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: $secondary-color;
+//   color: $secondary-text-color;
+//   width: 25px;
+//   height: 25px;
+//   border-radius: 50%;
+//   cursor: pointer;
+// }
+
+// .bottomPrimary {
+//   border-bottom: 2px solid $primary-color;
+//   margin-bottom: 1em;
+// }
+// .iconGeneral {
+//   @include roundIconGeneral();
+// }
+// .iconColorPrimary {
+//   color: $primary-color;
+// }
+// .iconColorSecondary {
+//   color: $secondary-color;
+// }
+// .bgColorPrimary {
+//   background-color: $primary-color !important;
+//   color: $primary-text-color !important;
+// }
+// .bgColorSecondary {
+//   background-color: $secondary-color !important;
+//   color: $secondary-text-color !important;
+// }
+// .colorPrimary {
+//   color: $primary-color !important;
+// }
+// .colorPrimaryAccent {
+//   color: $primary-accent-color !important;
+// }
+// .colorSecondary {
+//   color: $secondary-color !important;
+// }
+// .circleIcon {
+//   width: 10px;
+//   height: 10px;
+//   background-color: white;
+//   border-radius: 50%;
+//   &-center {
+//     @extend .circleIcon;
+//     margin: 0 auto;
+//   }
+// }
+// .iconInput {
+//   @include center-elements();
+// }
+
+// .labelStrong {
+//   @include fontSizeWeight();
+// }
+
+// .inputCustom {
+//   border-radius: 20px;
+// }
+.btnCenter {
+  margin: 0 auto;
+  display: block;
+}
+
+.btnInfo {
+  @include buttonGeneral($info-btn-primary-color);
+  &:hover {
+    @include buttonHover($info-btn-secondary-color);
+  }
+}
+
+// .btnPrimary {
+//   @include buttonPrimary();
+// }
+// .btnPrimary-outline-sm {
+//   cursor: pointer;
+//   border: 1px solid $primary-color;
+//   border-radius: 10px;
+//   margin-left: 0.5em;
+//   margin-right: 0.5em;
+//   padding: 0.2rem 1rem;
+//   font-weight: 700;
+//   transition: all 0.2s;
+//   &:hover {
+//     background-color: $primary-color;
+//     color: $primary-text-color;
+//   }
+// }
+// .btnTransparent {
+//   background-color: transparent !important;
+//   color: #161616 !important;
+// }
+// .btnSecondary {
+//   @include buttonGeneral();
+//   &:hover {
+//     @include buttonHover();
+//   }
+// }
+
+// .btnDelete {
+//   @include buttonDelete();
+// }
+
+// .btnDelete:hover {
+//   @include buttonHover();
+// }
+
+// .disabledElement {
+//   @include disable();
+// }
+
+// .dropdownLabel {
+//   @include dropdownLabel(130px);
+// }
+
+// .dropdownMenuItems {
+//   @include dropdownMenuItems(200px);
+//   .dropdownContainerItems {
+//     @include dropdownContainerItems(200px);
+//   }
+// }
+// .menuItem {
+//   display: flex;
+//   align-items: center;
+// }
+// .dropdownLabel-md {
+//   @include dropdownLabel(330px);
+// }
+// .dropdownMenuItems-md {
+//   @include dropdownMenuItems(250px);
+//   .dropdownContainerItems {
+//     @include dropdownContainerItems(250px);
+//   }
+// }
+
+// .dropdownLabel-lg {
+//   @include dropdownLabel(330px);
+// }
+// .dropdownMenuItems-lg {
+//   @include dropdownMenuItems(280px);
+//   .dropdownContainerItems {
+//     @include dropdownContainerItems(280px);
+//   }
+// }
+
+.buttonGeneral {
+  @include buttonGeneral();
+}
+
+// .filterCollapseAction {
+//   cursor: pointer;
+// }
+
+// input[type="radio"] {
+//   display: inline;
+//   width: 20px !important;
+//   margin: 0 2px 0 0;
+//   &:not(:first-child) {
+//     margin-left: 14px;
+//   }
+//   .cursor-pointer & {
+//     cursor: pointer;
+//   }
+// }
+// .cursor-pointer label {
+//   cursor: pointer;
+// }
+
+// .cursor-pointer {
+//   cursor: pointer;
+// }
+
+// .navbar-brand img {
+//   max-height: 35px;
+// }
+
+// .mainServicesContainer {
+//   display: flex;
+//   justify-content: start;
+//   a:link,
+//   a:visited,
+//   a:hover,
+//   a:active {
+//     font-weight: bold;
+//     text-decoration: none;
+//     color: initial;
+//   }
+// }
+
+// .featureItem {
+//   &::before {
+//     content: "\A";
+//     width: 10px;
+//     height: 10px;
+//     border-radius: 50%;
+//     background: $secondary-color;
+//     color: $secondary-text-color;
+//     display: inline-block;
+//     margin: 0 6px;
+//   }
+// }
+
+// .dateRangePickerInput.form-control[readonly] {
+//   background-color: #fff !important;
+//   opacity: 1;
+// }
+
+// .dividerLabel {
+//   color: #cfcfcf;
+//   font-size: 18px;
+//   font-weight: bold;
+//   margin-right: 22px;
+//   word-break: keep-all;
+// }
+// .sectionDivider {
+//   background-color: $primary-color;
+//   width: 100%;
+//   height: 4px;
+//   margin: 14px 4px auto auto;
+//   border-radius: 31px;
+// }
+/* 
+  @media only screen and(max-height: 1010px) {
+    .mainContainer {
+      height: 88vh;
+    }
+  }
+  @media only screen and(max-height: 880px) {
+    .mainContainer {
+      height: 87vh;
+    }
+  }
+  @media only screen and(max-height: 790px) {
+    .mainContainer {
+      height: 86vh;
+    }
+  }
+  @media only screen and(max-height: 740px) {
+    .mainContainer {
+      height: 85vh;
+    }
+  }
+  @media only screen and(max-height: 670px) {
+    .mainContainer {
+      height: 84vh;
+    }
+  }
+  @media only screen and(max-height: 620px) {
+    .mainContainer {
+      height: 83vh;
+    }
+  }
+  @media only screen and(max-height: 590px) {
+    .mainContainer {
+      height: 82vh;
+    }
+  }
+   */
