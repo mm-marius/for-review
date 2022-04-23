@@ -31,6 +31,14 @@ select {
   clear: both;
 }
 
+.loadingInput {
+  background-size: 25px 25px;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-image: url("/Img/loading_input.gif");
+  background-origin: content-box;
+}
+
 .btnCenter {
   margin: 0 auto;
   display: block;

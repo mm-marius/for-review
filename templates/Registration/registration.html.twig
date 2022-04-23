@@ -4,7 +4,10 @@
 {% endblock %}
 {% block body %}
 	{% set backgrounImage = deployed_status ? absolute_url(asset('Img/login.jpg')) : asset('Img/login.jpg') %}
+	{% set loading_input = deployed_status ? absolute_url(asset('Img/loading_input.gif')) : asset('Img/loading_input.gif') %}
+
 	<div class="bgImg" data-image="{{ backgrounImage }}"></div>
+	<div class="loadingInput" data-loading="{{ loading_input }}"></div>
 	<div class="mt-5 {{ is_mobile() ? 'p-3' : 'p-5 d-flex justify-content-center' }} registerContainer">
 		<div class="cardExtra {{ is_mobile() ? '' : 'col-9 pt-3' }}">
 			<div class="cardBox d-flex justify-content-center">
@@ -23,5 +26,6 @@
 				<a href="{{ absolute_url(path('app_login')) }}">{{ 'login.button'|trans({}, 'security') }}</a>
 			</div>
 		</div>
+
 	</div>
 {% endblock %}

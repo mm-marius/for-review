@@ -91,6 +91,13 @@ select {
 .cl-both {
   clear: both;
 }
+.loadingInput {
+  background-size: 25px 25px;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-image: url("/Img/loading_input.gif");
+  background-origin: content-box;
+}
 // .mainContainer {
 //   overflow: auto;
 //   height: 89vh;
