@@ -22,6 +22,11 @@
 				&nbsp;&nbsp;
 				<a href="{{ absolute_url(path('app_registration', { returnTo:returnUrl })) }}">{{ 'signUp.button'|trans({}, 'security') }}</a>
 			</div>
+			<div class="extraMessage d-flex justify-content-center pt-2">
+				{{ 'login.forgotPass'|trans({}, 'security') }}
+				&nbsp;&nbsp;
+				<a href="{{ absolute_url(path('app_forgot_password_request')) }}">{{ 'login.clickHere'|trans({}, 'security') }}</a>
+			</div>
 		</div>
 	</div>
 {% endblock %}

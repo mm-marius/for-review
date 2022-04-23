@@ -503,6 +503,10 @@ body.overflowHiddenBody {
   overflow: hidden;
 }
 
+body.backgroundColor {
+  background-color: #e2e2e2;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
