@@ -157,9 +157,13 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_check_email');
         }
 
-        SendEmail::send($twig, $translator, $user->getEmail(), [
-            'resetToken' => $resetToken,
-        ], 'reset_password/email.html.twig');
+        SendEmail::send($twig,
+            $translator,
+            $user->getEmail(),
+            $translator->trans('passwordChanging', [], 'security'),
+            ['resetToken' => $resetToken],
+            'reset_password/email.html.twig'
+        );
 
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);

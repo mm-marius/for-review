@@ -73,7 +73,9 @@ class JwtService
                     $this->em->persist($user);
                     $this->em->flush();
                     $this->useJwt($jwt);
-                    return $this->translator->trans('user.activated', ['{{ user }}' => $user->getEmail()], 'security');
+                    $result['mess'] = $this->translator->trans('user.activated', [], 'security');
+                    $result['err'] = false;
+                    return $result;
                 case JWT::TYPE_FORGOT:
                     return $jwt;
                 case JWT::TYPE_LOGIN:
@@ -83,7 +85,8 @@ class JwtService
                 default:
             }
         } else {
-            $result = $this->translator->trans('jwt.expiredOrNotValidLink', [], 'validators');
+            $result['mess'] = $this->translator->trans('user.jwt.expiredOrNotValidLink', [], 'security');
+            $result['err'] = true;
         }
         return $result;
     }
