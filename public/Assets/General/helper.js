@@ -132,6 +132,7 @@ const helper = {
       } else {
         helper.errorInput("[id$='_vatCode']", result.errorMsg);
       }
+      elem.toggleClass("loadingInput");
     });
   },
   errorInput: function (elem, message = "") {
