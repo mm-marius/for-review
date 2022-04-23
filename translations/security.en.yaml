@@ -45,4 +45,10 @@ resetPassTitle: Reset your password
 resetPassword: Reset password
 resetPassInfo: Enter your email address and we will send you a link to reset your password.
 resetPassBtn: Send password reset email
+registrationEmailSubject: Confirm registration Seller App
+passwordChanging: Change Seller App password
+user:
+  activated: The email was activated.
+  jwt:
+    expiredOrNotValidLink: This link is not valid or is expired
 

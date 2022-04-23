@@ -91,9 +91,13 @@ class RegistrationController extends AbstractController
             $activationUrl = $this->generateUrl('checkJwt', ['jwt' => $jwt->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
             if ($user && $user->getEmail()) {
-                SendEmail::send($twig, $translator, $user->getEmail(), [
-                    'url' => $activationUrl,
-                ], 'Email/registration.html.twig');
+                SendEmail::send($twig,
+                    $translator,
+                    $user->getEmail(),
+                    $translator->trans('registrationEmailSubject', [], 'security'),
+                    ['url' => $activationUrl],
+                    'Email/registration.html.twig'
+                );
                 // $transport = new GmailSmtpTransport('miclean.marius88@gmail.com', 'Apocaliptica1');
                 // $mailer = new Mailer($transport);
                 // $htmlContents = $twig->render('Email/registration.html.twig', [

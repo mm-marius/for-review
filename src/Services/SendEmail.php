@@ -11,7 +11,7 @@ use Twig\Environment;
 class SendEmail
 {
 
-    public static function send(Environment $twig, TranslatorInterface $translator, $to, $params = [], $template): JsonResponse
+    public static function send(Environment $twig, TranslatorInterface $translator, $to, $subject, $params = [], $template): JsonResponse
     {
         $success = true;
         $error = [];
@@ -21,7 +21,7 @@ class SendEmail
         $email = (new Email())
             ->from($_ENV['SMTP_EMAIL'])
             ->to($to)
-            ->subject("teste subiect")
+            ->subject($subject)
             ->html($htmlContents);
         try {
             $mailer->send($email);

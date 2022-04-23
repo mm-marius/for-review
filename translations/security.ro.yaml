@@ -45,3 +45,9 @@ resetPassTitle: Resetare parola
 resetPassword: Resetare parola
 resetPassInfo: Introduceti adresa de email si va vom trimtite un mesaj cu un link pentru resetarea parolei.
 resetPassBtn: Trimite email
+registrationEmailSubject: Confirmare inregistrare Seller App
+passwordChanging: Resetare parola Seller App
+user:
+  activated: Adresa de email a fost activata.
+  jwt:
+    expiredOrNotValidLink: Acest link este invalid sau este expirat

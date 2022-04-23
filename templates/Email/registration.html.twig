@@ -1,3 +1,12 @@
-<label>Intr-o ora expira</label>
-<br>
-<a href="{{ url|raw }}">Click aici</a>
+<h1>{{ 'greet'|trans({}, 'email') }}</h1>
+
+<p>{{ 'registrationMessage'|trans({}, 'email') }}</p>
+
+<a href="{{ url|raw }}">{{ url|raw }}</a>
+
+
+<p>{{ 'expireLinkTxt'|trans({}, 'email') }}
+	1
+	{{ 'hour'|trans({}, 'general') }}.</p>
+
+<p>{{ 'cheers'|trans({}, 'email') }}</p>
