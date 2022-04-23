@@ -5,8 +5,10 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
-			{% block title %}Welcome!
-			{% endblock %}
+			{% block title %}{% endblock %}
+			{% if block("title") is empty  %}
+				Seller App
+			{% endif %}
 		</title>
 		{# <link rel="icon" href="{{absolute_url(asset('Assets/General/images/websalesfav.png'))}}"> #}
 		{% if deployed_status %}

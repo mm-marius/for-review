@@ -22,6 +22,9 @@ body {
   &.overflowHiddenBody {
     overflow: hidden;
   }
+  &.backgroundColor {
+    background-color: $main-background-color;
+  }
 }
 
 ::-webkit-scrollbar {

@@ -4,6 +4,8 @@ login:
   button: Autentificare
   notSignUp: Nu aveti cont?
   signInMessage: Aveti cont?
+  forgotPass: Ati uitat parola?
+  clickHere: Click aici
 signUp:
   button: Inregistrare
   signUpTitle: Inregistrare - Seller App
@@ -39,3 +41,7 @@ errors:
     empty: Parola este necompletata
     length: Parola trebuie sa contina minim 6 caractere
     invalid_message: Parolele trebuie sa coincida
+resetPassTitle: Resetare parola
+resetPassword: Resetare parola
+resetPassInfo: Introduceti adresa de email si va vom trimtite un mesaj cu un link pentru resetarea parolei.
+resetPassBtn: Trimite email

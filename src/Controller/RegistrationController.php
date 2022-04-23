@@ -8,6 +8,7 @@ use App\Form\RegistrationForm;
 use App\Security\LoginFormAuthenticator;
 use App\Services\Helpers\FormHelper;
 use App\Services\JwtService;
+use App\Services\SendEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,24 +91,27 @@ class RegistrationController extends AbstractController
             $activationUrl = $this->generateUrl('checkJwt', ['jwt' => $jwt->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 
             if ($user && $user->getEmail()) {
-                $transport = new GmailSmtpTransport('miclean.marius88@gmail.com', 'Apocaliptica1');
-                $mailer = new Mailer($transport);
-                $htmlContents = $twig->render('Email/registration.html.twig', [
+                SendEmail::send($twig, $translator, $user->getEmail(), [
                     'url' => $activationUrl,
-                ]);
-                $email = (new Email())
-                    ->from($_ENV['SMTP_EMAIL'])
-                    ->to($user->getEmail())
-                    ->subject("teste subiect")
-                    ->html($htmlContents);
-                try {
-                    $mailer->send($email);
-                } catch (\Exception $ex) {
-                    // LogHelper::sendToChat("*REGISTRATION SEND EMAIL*:\nTo: " . $user->getEmail() . "\nerror: " . $ex->getMessage() . "\n", __FILE__, __LINE__, null, $settings);
-                    //TODO we need to handle the not a valid domain error
-                    //Error: Expected response code "250/251/252" but got code "550", with message "550 5.1.1 ewlcnXcQbFqeSewlcnchpx prato.it dominio non valido / invalid destination domain".
-                    $error[] = $translator->trans('NOT_A_VALID_EMAIL_ADDRESS', [], 'security');
-                }
+                ], 'Email/registration.html.twig');
+                // $transport = new GmailSmtpTransport('miclean.marius88@gmail.com', 'Apocaliptica1');
+                // $mailer = new Mailer($transport);
+                // $htmlContents = $twig->render('Email/registration.html.twig', [
+                //     'url' => $activationUrl,
+                // ]);
+                // $email = (new Email())
+                //     ->from($_ENV['SMTP_EMAIL'])
+                //     ->to($user->getEmail())
+                //     ->subject("teste subiect")
+                //     ->html($htmlContents);
+                // try {
+                //     $mailer->send($email);
+                // } catch (\Exception $ex) {
+                //     // LogHelper::sendToChat("*REGISTRATION SEND EMAIL*:\nTo: " . $user->getEmail() . "\nerror: " . $ex->getMessage() . "\n", __FILE__, __LINE__, null, $settings);
+                //     //TODO we need to handle the not a valid domain error
+                //     //Error: Expected response code "250/251/252" but got code "550", with message "550 5.1.1 ewlcnXcQbFqeSewlcnchpx prato.it dominio non valido / invalid destination domain".
+                //     $error[] = $translator->trans('NOT_A_VALID_EMAIL_ADDRESS', [], 'security');
+                // }
             }
             // return $guardHandler->authenticateUserAndHandleSuccess(
             //     $user,

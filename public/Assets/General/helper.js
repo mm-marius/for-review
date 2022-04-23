@@ -71,8 +71,20 @@ const helper = {
     $targetNumber.addClass("SAHelperSync");
     $target.addClass("SAHelperSync");
     helper.clearLabelsForm();
+    this.initImage();
     // if (typeof websalePrivacyHandler != "undefined")
     //   websalePrivacyHandler.init();
+  },
+  initImage: function () {
+    const imgUrl = $j(".bgImg").data("image");
+    if (typeof imgUrl !== typeof undefined) {
+      $j("body").css({
+        background: "url('" + imgUrl + "')  no-repeat center center fixed",
+        "background-size": "cover",
+      });
+    } else {
+      $j("body").addClass("backgroundColor");
+    }
   },
   formFocusClass: ($item) => {
     var $parent = $item.parents(".group");
