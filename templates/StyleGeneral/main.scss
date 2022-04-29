@@ -12,6 +12,10 @@
 // REGISTER
 @import "../Form/Type/Style/flagContainer";
 
+// DASHBOARD
+@import "../Dashboard/Style/custom";
+@import "../Dashboard/Style/general";
+
 html {
   scrollbar-width: thin;
   scrollbar-color: $scrollbar-color transparent;

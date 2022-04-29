@@ -20,13 +20,11 @@
 		{% endif %}
 
 	</head>
-	<body>
-		{% block body %}{% endblock %}
+	<body class="{% block bodyClass %}{% endblock %}"> {% block body %}{% endblock %}
 		{% if deployed_status %}
 			{{ include('Scripts/scriptsFooterDeployed.html.twig') }}
 		{% else %}
 			{{ include('Scripts/scriptsFooter.html.twig') }}
 		{% endif %}
-
 	</body>
 </html>

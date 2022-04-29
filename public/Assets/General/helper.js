@@ -6,6 +6,15 @@ $j(document).on("_page_ready _page_update", function () {
   // initLazy();
 });
 const helper = {
+  $BODY: $j("body"),
+  $MENU_TOGGLE: $j("#menu_toggle"),
+  $SIDEBAR_MENU: $j("#sidebar-menu"),
+  $SIDEBAR_FOOTER: $j(".sidebar-footer"),
+  $LEFT_COL: $j(".left_col"),
+  $RIGHT_COL: $j(".right_col"),
+  $NAV_MENU: $j(".nav_menu"),
+  $FOOTER: $j("footer"),
+  CURRENT_URL: null,
   tooltipInit: function () {
     $j(".services_element,.tooltipSeller").tooltip({
       show: { effect: "none", delay: 0 },
@@ -85,6 +94,116 @@ const helper = {
     } else {
       $j("body").addClass("backgroundColor");
     }
+  },
+  initSidebar: function () {
+    this.CURRENT_URL = window.location.href.split("#")[0].split("?")[0];
+    this.setContentHeight();
+    this.openUpMenu();
+    this.sidebarHandler();
+    this.checkActiveMenu();
+
+    // recompute content when resizing
+    $j(window).smartresize(function () {
+      helper.setContentHeight();
+    });
+    this.setContentHeight();
+
+    this.fixedSidebar();
+  },
+  fixedSidebar: function () {
+    if ($j.fn.mCustomScrollbar) {
+      $j(".menu_fixed").mCustomScrollbar({
+        autoHideScrollbar: true,
+        theme: "minimal",
+        mouseWheel: { preventDefault: true },
+      });
+    }
+  },
+  checkActiveMenu: function () {
+    this.$SIDEBAR_MENU
+      .find('a[href="' + this.CURRENT_URL + '"]')
+      .parent("li")
+      .addClass("current-page");
+
+    this.$SIDEBAR_MENU
+      .find("a")
+      .filter(function () {
+        return this.href == helper.CURRENT_URL;
+      })
+      .parent("li")
+      .addClass("current-page")
+      .parents("ul")
+      .slideDown(function () {
+        helper.setContentHeight();
+      })
+      .parent()
+      .addClass("active");
+  },
+  toggleMenu: function () {
+    if (this.$BODY.hasClass("nav-md")) {
+      this.$SIDEBAR_MENU.find("li.active ul").hide();
+      this.$SIDEBAR_MENU
+        .find("li.active")
+        .addClass("active-sm")
+        .removeClass("active");
+    } else {
+      this.$SIDEBAR_MENU.find("li.active-sm ul").show();
+      this.$SIDEBAR_MENU
+        .find("li.active-sm")
+        .addClass("active")
+        .removeClass("active-sm");
+    }
+
+    this.$BODY.toggleClass("nav-md nav-sm");
+
+    this.setContentHeight();
+
+    $j(".dataTable").each(function () {
+      $j(this).dataTable().fnDraw();
+    });
+  },
+  sidebarHandler: function () {
+    this.$SIDEBAR_MENU.find("a").on("click", function (ev) {
+      let $li = $j(this).parent();
+
+      if ($li.is(".active")) {
+        $li.removeClass("active active-sm");
+        $j("ul:first", $li).slideUp("fast", function () {
+          helper.setContentHeight();
+        });
+      } else {
+        if (!$li.parent().is(".child_menu")) {
+          helper.openUpMenu();
+        } else {
+          if ($BODY.is("nav-sm")) {
+            if (!$li.parent().is("child_menu")) {
+              helper.openUpMenu();
+            }
+          }
+        }
+        $li.addClass("active");
+        $j("ul:first", $li).slideDown("fast", function () {
+          helper.setContentHeight();
+        });
+      }
+    });
+  },
+  setContentHeight: function () {
+    // reset height
+    this.$RIGHT_COL.css("min-height", $j(window).height());
+    let bodyHeight = this.$BODY.outerHeight();
+    let footerHeight = this.$BODY.hasClass("footer_fixed")
+      ? -10
+      : this.$FOOTER.height();
+    let leftColHeight =
+      this.$LEFT_COL.eq(1).height() + this.$SIDEBAR_FOOTER.height();
+    let contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
+    contentHeight -= this.$NAV_MENU.height() + footerHeight;
+    this.$RIGHT_COL.css("min-height", contentHeight);
+  },
+  openUpMenu: function () {
+    this.$SIDEBAR_MENU.find("li").removeClass("active active-sm");
+    this.$SIDEBAR_MENU.find("li ul").slideUp();
   },
   formFocusClass: ($item) => {
     var $parent = $item.parents(".group");
