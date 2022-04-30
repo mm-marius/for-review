@@ -270,6 +270,7 @@ const helper = {
     }
   },
   changeLanguage: function (code, route) {
+    this.loading();
     const url = languageApiRoute;
     $j.post(url, { code, route }, function (result) {
       let currentUrl = window.location.href;
@@ -277,10 +278,22 @@ const helper = {
       currentUrl = currentUrl.replace("/ro/", "/");
       currentUrl = currentUrl.replace("#", "");
       window.location = window.location.href;
+      this.loading();
       return;
     }).fail(function (error) {
       console.log(error);
     });
+  },
+  loading: function () {
+    if (typeof NProgress != "undefined") {
+      $j(document).ready(function () {
+        NProgress.start();
+      });
+
+      $j(window).on("load", function () {
+        NProgress.done();
+      });
+    }
   },
 };
 

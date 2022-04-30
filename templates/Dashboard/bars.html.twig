@@ -106,6 +106,22 @@
 			<nav class="nav navbar-nav">
 				<ul class=" navbar-right">
 					<li class="nav-item dropdown open" style="padding-left: 15px;">
+						<a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="languageDropdown" data-toggle="dropdown" aria-expanded="false">
+							<img class="flag p-1" href="javascript:;" src="{{ absolute_url(asset('Img/Flags/' ~ app.request.locale ~ '-flag.png')) }}" height="30" width="30">
+						</a>
+						<div class="dropdown-menu dropdown-usermenu pull-left" aria-labelledby="languageDropdown">
+							{% for language in get_env_languages(env_languages) %}
+								<a class="dropdown-item" href="javascript:;">
+									<div class="languageBlock {{app.request.locale == language.code ? 'active' }} noSelect" onclick="helper.changeLanguage('{{language.code}}', '{{ app.request.attributes.get( '_route' ) }}')">
+										<img class="flag p-1" href="#" src="{{ absolute_url(asset('Img/Flags/' ~ language.code ~ '-flag.png')) }}" height="30" width="30">
+										<span>{{ language.code|trans({}, 'general') }}</span>
+									</div>
+								</a>
+							{% endfor %}
+						</div>
+					</li>
+
+					<li class="nav-item dropdown open" style="padding-left: 15px;">
 						<a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
 							<img src="{{ url_avatar }}" alt="">{{ userEmail }}
 						</a>

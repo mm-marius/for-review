@@ -268,14 +268,3 @@ $j(document).ready(function () {
     }
   });
 });
-
-// NProgress
-if (typeof NProgress != "undefined") {
-  $j(document).ready(function () {
-    NProgress.start();
-  });
-
-  $j(window).on("load", function () {
-    NProgress.done();
-  });
-}
