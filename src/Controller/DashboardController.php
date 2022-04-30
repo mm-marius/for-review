@@ -22,7 +22,7 @@ class DashboardController extends AbstractController
 
     /**
      * @Route("/dashboard", name="dashboard", methods={"GET", "POST"})
-     * @Security("is_granted('ROLE_ADMIN')", statusCode=404)
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function index(): Response
     {

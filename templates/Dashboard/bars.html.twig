@@ -1,3 +1,8 @@
+{% if deployed_status %}
+	<script src="{{ asset('Assets/Vendors/nprogress/nprogress.js')}}"></script>
+{% else %}
+	<script src="{{ absolute_url(asset('Assets/Vendors/nprogress/nprogress.js')) }}"></script>
+{% endif %}
 {% block bars %}
 	{% set url_avatar = avatarUrl ? avatarUrl : asset('Img/user_avatar.png') %}
 	<div class="col-md-3 left_col menu_fixed">
