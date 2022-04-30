@@ -36,24 +36,22 @@
 								{{ "home"|trans({}, "general") }}</a>
 						</li>
 						{# {% if is_granted("ROLE_SUPERUSER") %} #}
-						<li>
-							<a>
-								<i class="fa fa-user"></i>
-								{{ "users"|trans({}, 'general') }}
-								<span class="fa fa-chevron-down"></span>
-							</a>
-							<ul class="nav child_menu">
-								<li>
-									{# <a href="{{ path('app_admin_users') }}">{{ "backend.menu.manage"|trans }}</a> #}
-									<a href="#">{{ "userManagement"|trans({}, "general") }}</a>
-								</li>
-							</ul>
-						</li>
+						{# <li>
+																																																																			<a>
+																																																																				<i class="fa fa-user"></i>
+																																																																				{{ "users"|trans({}, 'general') }}
+																																																																				<span class="fa fa-chevron-down"></span>
+																																																																			</a>
+																																																																			<ul class="nav child_menu">
+																																																																				<li>
+																																																																					<a href="#">{{ "userManagement"|trans({}, "general") }}</a>
+																																																																				</li>
+																																																																			</ul>
+																																																																		</li> #}
 						{# {% endif %} #}
 						{# {% if is_granted("ROLE_WRITER") %} #}
-						<li>
-							<a>
-								<i class="fa fa-bookmark"></i>
+							<li>
+								<a><i class="fa fa-bookmark"> </i>
 								{{ "products.title"|trans({}, "general") }}
 								<span class="fa fa-chevron-down"></span>
 							</a>
@@ -122,16 +120,14 @@
 					</li>
 
 					<li class="nav-item dropdown open" style="padding-left: 15px;">
-						<a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+						<a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="settingsDropdown" data-toggle="dropdown" aria-expanded="false">
 							<img src="{{ url_avatar }}" alt="">{{ userEmail }}
 						</a>
-						<div
-							class="dropdown-menu dropdown-usermenu pull-left" aria-labelledby="navbarDropdown">
-							{# <a class="dropdown-item" href="{{ path('app_admin_changepswd') }}"> #}
+						<div class="dropdown-menu dropdown-usermenu pull-left" aria-labelledby="settingsDropdown">
 							<a class="dropdown-item" href="#">
 								<i class="fa fa-key pull-right"></i>
-								{{ "settings.title"|trans({}, "general") }}</a>
-							{# <a class="dropdown-item" href="{{ path('app_logout') }}"> #}
+								{{ "settings.title"|trans({}, "general") }}
+							</a>
 							<a class="dropdown-item" href="{{ path('app_logout') }}">
 								<i class="fa fa-sign-out pull-right"></i>
 								{{ "settings.logout"|trans({}, 'general') }}
