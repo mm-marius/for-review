@@ -1,0 +1,146 @@
+{% block bars %}
+	{% set url_avatar = avatarUrl ? avatarUrl : asset('Img/user_avatar.png') %}
+	<div class="col-md-3 left_col menu_fixed">
+		<div class="left_col scroll-view">
+			<div class="navbar nav_title" style="border: 0;">
+				<a href="{{ path('app_main') }}" class="site_title">
+					<i class="fa fa-paw"></i>
+					<span>{{ 'app_name'|trans({}, 'general') }}</span>
+				</a>
+			</div>
+			<div class="clearfix"></div>
+
+			<div class="profile clearfix">
+				<div class="profile_pic d-flex align-items-center">
+					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+						<img src="{{ url_avatar }}" alt="..." class="img-circle profile_img">
+						<span class="welcomeTitle">{{ "welcomeTitle"|trans({}, 'general') }},</span>
+					{% endif %}
+				</div>
+				<div class="profile_info">
+					<h2>{{ userEmail }}</h2>
+				</div>
+			</div>
+			<br/>
+			<div id="sidebar-menu" class="main_menu_side hidden-print main_menu ">
+				<div class="menu_section">
+					<ul class="nav side-menu">
+						<li>
+							<a href="{{ path('app_main') }}">
+								<i class="fa fa-home"></i>
+								{{ "home"|trans({}, "general") }}</a>
+						</li>
+						{# {% if is_granted("ROLE_SUPERUSER") %} #}
+						<li>
+							<a>
+								<i class="fa fa-user"></i>
+								{{ "users"|trans({}, 'general') }}
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									{# <a href="{{ path('app_admin_users') }}">{{ "backend.menu.manage"|trans }}</a> #}
+									<a href="#">{{ "userManagement"|trans({}, "general") }}</a>
+								</li>
+							</ul>
+						</li>
+						{# {% endif %} #}
+						{# {% if is_granted("ROLE_WRITER") %} #}
+						<li>
+							<a>
+								<i class="fa fa-bookmark"></i>
+								{{ "products.title"|trans({}, "general") }}
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									<a href="#">{{ "products.addProducts"|trans({}, 'general') }}</a>
+								</li>
+								<li>
+									{# <a href="{{ path('app_admin_categories') }}">{{ "backend.menu.manage"|trans }}</a> #}
+									<a href="#">{{ "products.productsList"|trans({}, 'general') }}</a>
+								</li>
+								<li>
+									<a href="#">{{ "products.importProducts"|trans({}, 'general') }}</a>
+								</li>
+								<li>
+									<a href="#">{{ "products.exportProducts"|trans({}, 'general') }}</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a>
+								<i class="fa fa-clipboard"></i>
+								{{ "categories.title"|trans({}, "general") }}
+								<span class="fa fa-chevron-down"></span>
+							</a>
+							<ul class="nav child_menu">
+								<li>
+									{# <a href="{{ path('app_admin_blogPosts') }}">{{ "backend.menu.manage"|trans }}</a> #}
+									<a href="#">{{ "categories.manageCategories"|trans({}, "general") }}</a>
+								</li>
+								<li>
+									<a href="#">{{ "categories.manageSubcategories"|trans({}, "general") }}</a>
+								</li>
+							</ul>
+						</li>
+						{# {% endif %} #}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="top_nav">
+		<div class="nav_menu">
+			<div class="nav toggle">
+				<a id="menu_toggle" onclick="helper.toggleMenu()">
+					<i class="fa fa-bars"></i>
+				</a>
+			</div>
+			<nav class="nav navbar-nav">
+				<ul class=" navbar-right">
+					<li class="nav-item dropdown open" style="padding-left: 15px;">
+						<a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+							<img src="{{ url_avatar }}" alt="">{{ userEmail }}
+						</a>
+						<div
+							class="dropdown-menu dropdown-usermenu pull-left" aria-labelledby="navbarDropdown">
+							{# <a class="dropdown-item" href="{{ path('app_admin_changepswd') }}"> #}
+							<a class="dropdown-item" href="#">
+								<i class="fa fa-key pull-right"></i>
+								{{ "settings.title"|trans({}, "general") }}</a>
+							{# <a class="dropdown-item" href="{{ path('app_logout') }}"> #}
+							<a class="dropdown-item" href="{{ path('app_logout') }}">
+								<i class="fa fa-sign-out pull-right"></i>
+								{{ "settings.logout"|trans({}, 'general') }}
+							</a>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="right_col" role="main">
+		{% for message in app.flashes("error") %}
+			<div class="alert alert-danger alert-dismissible " role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<strong>{{ "backend.global.error"|trans }}</strong>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.flashes("success") %}
+			<div class="alert alert-success alert-dismissible " role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<strong>{{ "backend.global.success"|trans }}</strong>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% block contenpage %}{% endblock %}
+	</div>
+{% endblock %}

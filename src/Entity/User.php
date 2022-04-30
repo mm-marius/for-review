@@ -172,6 +172,11 @@ class User implements UserInterface
      */
     private $agreeTerms = false;
 
+    /**
+     * @ORM\Column(type="string", length=225, nullable=true)
+     */
+    private $avatarUrl;
+
     public static function fromWP($request, $isData = false)
     {
         $user = new User();
@@ -656,6 +661,21 @@ class User implements UserInterface
     public function setOther($other): self
     {
         $this->other = $other;
+
+        return $this;
+    }
+
+    public function getAvatarUrl()
+    {
+        return $this->avatarUrl;
+    }
+
+    /**
+     * Set the value of other
+     */
+    public function setAvatarUrl($avatarUrl): self
+    {
+        $this->avatarUrl = $avatarUrl;
 
         return $this;
     }
