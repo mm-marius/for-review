@@ -19,3 +19,6 @@ settings:
   logout: Logout
 ro: Romana
 en: English
+paths:
+  home: Home
+  settings: Settings

@@ -1,9 +1,10 @@
-{% if deployed_status %}
-	<script src="{{ asset('Assets/Vendors/nprogress/nprogress.js')}}"></script>
-{% else %}
-	<script src="{{ absolute_url(asset('Assets/Vendors/nprogress/nprogress.js')) }}"></script>
-{% endif %}
+{% extends "Dashboard/main.html.twig" %}
 {% block bars %}
+	{% if deployed_status %}
+		<script src="{{ asset('Assets/Vendors/nprogress/nprogress.js')}}"></script>
+	{% else %}
+		<script src="{{ absolute_url(asset('Assets/Vendors/nprogress/nprogress.js')) }}"></script>
+	{% endif %}
 	{% set url_avatar = avatarUrl ? avatarUrl : asset('Img/user_avatar.png') %}
 	<div class="col-md-3 left_col menu_fixed">
 		<div class="left_col scroll-view">
@@ -37,17 +38,17 @@
 						</li>
 						{# {% if is_granted("ROLE_SUPERUSER") %} #}
 						{# <li>
-																																																																			<a>
-																																																																				<i class="fa fa-user"></i>
-																																																																				{{ "users"|trans({}, 'general') }}
-																																																																				<span class="fa fa-chevron-down"></span>
-																																																																			</a>
-																																																																			<ul class="nav child_menu">
-																																																																				<li>
-																																																																					<a href="#">{{ "userManagement"|trans({}, "general") }}</a>
-																																																																				</li>
-																																																																			</ul>
-																																																																		</li> #}
+																																																																																																																																																																																					<a>
+																																																																																																																																																																																						<i class="fa fa-user"></i>
+																																																																																																																																																																																						{{ "users"|trans({}, 'general') }}
+																																																																																																																																																																																						<span class="fa fa-chevron-down"></span>
+																																																																																																																																																																																					</a>
+																																																																																																																																																																																					<ul class="nav child_menu">
+																																																																																																																																																																																						<li>
+																																																																																																																																																																																							<a href="#">{{ "userManagement"|trans({}, "general") }}</a>
+																																																																																																																																																																																						</li>
+																																																																																																																																																																																					</ul>
+																																																																																																																																																																																				</li> #}
 						{# {% endif %} #}
 						{# {% if is_granted("ROLE_WRITER") %} #}
 							<li>
@@ -124,7 +125,7 @@
 							<img src="{{ url_avatar }}" alt="">{{ userEmail }}
 						</a>
 						<div class="dropdown-menu dropdown-usermenu pull-left" aria-labelledby="settingsDropdown">
-							<a class="dropdown-item" href="#">
+							<a class="dropdown-item" href="{{ path('settings') }}">
 								<i class="fa fa-key pull-right"></i>
 								{{ "settings.title"|trans({}, "general") }}
 							</a>
@@ -137,7 +138,11 @@
 				</ul>
 			</nav>
 		</div>
+		<div class="spanMap">
+			{{ wo_render_breadcrumbs() }}
+		</div>
 	</div>
+
 
 	<div class="right_col" role="main">
 		{% for message in app.flashes("error") %}
@@ -158,6 +163,7 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-		{% block contenpage %}{% endblock %}
+
+		{% block contentPage %}{% endblock %}
 	</div>
 {% endblock %}

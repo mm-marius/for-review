@@ -19,3 +19,6 @@ settings:
   logout: Iesire
 ro: Romana
 en: English
+paths:
+  home: Acasa
+  settings: Setari

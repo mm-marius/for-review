@@ -16,6 +16,9 @@
 @import "../Dashboard/Style/custom";
 @import "../Dashboard/Style/general";
 
+// SETTINGS
+@import "../Settings/Style/settings";
+
 html {
   scrollbar-width: thin;
   scrollbar-color: $scrollbar-color transparent;

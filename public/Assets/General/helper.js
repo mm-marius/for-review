@@ -15,6 +15,7 @@ const helper = {
   $NAV_MENU: $j(".nav_menu"),
   $FOOTER: $j("footer"),
   CURRENT_URL: null,
+  initDashboard: function () {},
   tooltipInit: function () {
     $j(".services_element,.tooltipSeller").tooltip({
       show: { effect: "none", delay: 0 },
