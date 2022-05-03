@@ -24,7 +24,7 @@ class DashboardController extends AbstractController
      * @Route("/dashboard", name="dashboard", methods={"GET", "POST"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
-    public function index(): Response
+    public function dashboard(): Response
     {
         $user = $this->getUser();
         $avatarUrl = $user->getAvatarUrl();

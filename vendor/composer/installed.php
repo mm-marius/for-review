@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
+        'reference' => '18bb84af5a18a42f95fcf043e96dc4f330008b05',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '0ee72f8c9f4042d4ca1772eb82653ccd22a08579',
+            'reference' => '18bb84af5a18a42f95fcf043e96dc4f330008b05',
             'dev_requirement' => false,
         ),
         'components/font-awesome' => array(
@@ -215,6 +215,15 @@
             'install_path' => __DIR__ . '/../laminas/laminas-code',
             'aliases' => array(),
             'reference' => '6fd96d4d913571a2cd056a27b123fa28cb90ac4e',
+            'dev_requirement' => false,
+        ),
+        'mhujer/breadcrumbs-bundle' => array(
+            'pretty_version' => '1.5.8',
+            'version' => '1.5.8.0',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../mhujer/breadcrumbs-bundle',
+            'aliases' => array(),
+            'reference' => '2a262e182d7baead37e64408081bd17e53938c06',
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(

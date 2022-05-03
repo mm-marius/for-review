@@ -109,6 +109,14 @@ select {
     }
   }
    */
+.top_nav .spanMap {
+  font-size: 17px;
+}
+
+.top_nav .spanMap .breadcrumb {
+  margin-bottom: 0px;
+}
+
 .seller-form-group {
   /* CHECKBOX */
   /* hover style just for information */
@@ -1761,7 +1769,6 @@ select {
   float: left;
   background: #ededed;
   border-bottom: 1px solid #d9dee4;
-  margin-bottom: 10px;
   width: 100%;
   position: relative;
 }
@@ -1807,7 +1814,7 @@ body .container.body .right_col {
 
 .nav-md .container.body .right_col {
   padding: 10px 20px 0;
-  margin-left: 230px;
+  margin-left: 223px;
 }
 
 .nav_title {
@@ -6616,6 +6623,20 @@ ul.notifications {
 
 .navbar-nav .open .dropdown-menu.msg_list {
   width: 300px !important;
+}
+
+.tab-pane {
+  padding: 2rem 0;
+}
+
+.nav-link {
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(rgba(3, 3, 37, 0.1)));
+  background: linear-gradient(180deg, white 0%, rgba(3, 3, 37, 0.1) 100%);
+}
+
+.nav-link.active {
+  font-weight: bold;
+  background: #fff;
 }
 
 html {

@@ -1,15 +1,2 @@
-{% extends 'base.html.twig' %}
-
-{% block bodyClass 'nav-md' %}
-{% block body %}
-	<div class="container body ">
-		<div class="main_container">
-			{{include('/Dashboard/bars.html.twig')}}
-		</div>
-	</div>
-	<script>
-		$j(document).on("_page_ready", function () {
-helper.initSidebar();
-});
-	</script>
-{% endblock %}
+{% extends 'Dashboard/bars.html.twig' %}
+{% block contentPage %}{% endblock %}

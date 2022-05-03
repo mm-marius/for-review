@@ -6,6 +6,7 @@ use App\Services\RoutingService;
 use App\Services\SettingService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\RuntimeExtensionInterface;
 
@@ -58,5 +59,10 @@ class TemplateRuntime implements RuntimeExtensionInterface
     public function getEnvLanguages($languages)
     {
         return $this->settings->getAvailableLanguages($languages);
+    }
+
+    public function generateId()
+    {
+        return md5(uniqid(time()));
     }
 }
