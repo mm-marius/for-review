@@ -1,1 +1,24 @@
 hour: hour
+app_name: Seller App
+welcomeTitle: Welcome
+home: Home
+users: Users
+userManagement: User management
+products:
+  title: Products
+  addProducts: Add products
+  productsList: Products list
+  importProducts: Import products
+  exportProducts: Export products
+categories:
+  title: Categories
+  manageCategories: Manage categories
+  manageSubcategories: Manage subcategories
+settings:
+  title: Settings
+  logout: Logout
+ro: Romana
+en: English
+paths:
+  home: Home
+  settings: Settings

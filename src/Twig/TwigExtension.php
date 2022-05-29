@@ -15,6 +15,7 @@ class TwigExtension extends AbstractExtension
             new TwigFunction('get_url', [TemplateRuntime::class, 'getUrl']),
             new TwigFunction('get_main_css', [TemplateRuntime::class, 'getMainCss']),
             new TwigFunction('get_env_languages', [TemplateRuntime::class, 'getEnvLanguages']),
+            new TwigFunction('generate_id', [TemplateRuntime::class, 'generateId']),
         ];
     }
 }

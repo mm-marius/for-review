@@ -14,20 +14,24 @@ class DashboardController extends AbstractController
      */
     public function main(): Response
     {
-        if ($this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('app_login');
         }
         return $this->redirectToRoute('dashboard');
     }
 
     /**
-     * @Route("/dashboard", name="dashboard")
-     * @Security("is_granted('ROLE_ADMIN')", statusCode=404)
+     * @Route("/dashboard", name="dashboard", methods={"GET", "POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
-    public function index(): Response
+    public function dashboard(): Response
     {
-        return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashboardController',
+        $user = $this->getUser();
+        $avatarUrl = $user->getAvatarUrl();
+        $userEmail = $user->getEmail();
+        return $this->render('Dashboard/dashboard.html.twig', [
+            'avatarUrl' => $avatarUrl,
+            'userEmail' => $userEmail,
         ]);
     }
 }

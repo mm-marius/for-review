@@ -1,1 +1,24 @@
 hour: ora
+app_name: Seller App
+welcomeTitle: Bine ai venit
+home: Acasa
+users: Utilizatori
+userManagement: Management utilizatori
+products:
+  title: Produse
+  addProducts: Adauga produs
+  productsList: Lista produse
+  importProducts: Importa produse
+  exportProducts: Exporta produse
+categories:
+  title: Categorii
+  manageCategories: Management categorii
+  manageSubcategories: Management subcategorii
+settings:
+  title: Setari
+  logout: Iesire
+ro: Romana
+en: English
+paths:
+  home: Acasa
+  settings: Setari
